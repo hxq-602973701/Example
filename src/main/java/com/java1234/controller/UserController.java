@@ -45,7 +45,7 @@ public class UserController {
         PageInfo<Book> pageInfo = new PageInfo<Book>(bookList);
 
         //int total = (int)pageInfo.getTotal();
-       // String pageCode = PageUtil.getPagation("/book.html",total,1,Integer.parseInt(PropertiesUtil.getValue("pageSize")));
+        //String pageCode = PageUtil.getPagation("/book.html",total,1,Integer.parseInt(PropertiesUtil.getValue("pageSize")));
         //model.addAttribute("pageCode",pageCode);
         objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(bookList);

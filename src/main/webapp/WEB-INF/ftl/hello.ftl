@@ -11,12 +11,15 @@
 <script src="\layer\layer.js"></script>
 <script src="\laytpl-v1.1\laytpl\laytpl.js"></script>
 <script src="\laytpl-v1.1\laytpl\common-v2.js"></script>
+<script src="\tableexport\tableExport.js"></script>
+<script src="\tableexport\FileSaver.js"></script>
 <script src="\laypage\skin\laypage.css"></script>
+<script src="\tableexport\jquery.base64.js"></script>
 <script src="\laypage\laypage.js"></script>
 <link rel="stylesheet" href="//res.layui.com/layui/build/css/layui.css"  media="all">
 
 <body>
-<button id="test1">${username}' </button>
+<button id="test1">${username}</button>
 <script>
 
     $('#test1').on('click', function(){
@@ -24,7 +27,7 @@
     });
 
 </script>
-<a type="button" id="save" class="">添加</a>&nbsp;
+<button id="save" type="button" class="btn btn-sm btn-danger">添加</button>
 <button id="del" type="button" class="btn btn-sm btn-danger">删除</button>
 <button id="export" type="button" class="btn btn-sm btn-danger">导出</button>
 <script id="bookTemp" type="text/html">
@@ -188,32 +191,36 @@
         //导出
         $("#export").click(function () {
             // 调用导出Excel
-            exportEvent('view', 'bookTemp', '0,5', '/book.html',"");
-        });
-
-
-        // 导出事件
-        function exportEvent(tableId, tableTempId, igCol, exportUrl, exportParams) {
-            var opsCol = "";
-            if (typeof(igCol) != "undefined" && igCol != null && "" != igCol) {
-                opsCol = "[" + igCol + "]";
-            }
-            // 获取所有数据
-            $.getJSON(exportUrl, exportParams, function (resdata) {
-                    //渲染
-                    var griddata = resdata.response.list;
-                    var gettpl = document.getElementById(tableTempId).innerHTML;
-                    laytpl(gettpl).render(griddata, function (html) {
-                        var theadHtml = $("#" + tableId).find("thead").html();
-                        var allHtml = "<table><thead>" + theadHtml + "</thead><tbody>" + html + "</tbody></table>";
-                        var exportFileName = $('.custom-font-localmenu').text();
-                        var subhead = (new Date()).toLocaleString();
-                        $(allHtml).tableExport({type: 'excel', escape: 'false', ignoreColumn: opsCol, fileName: exportFileName,subhead:subhead});
-                    });
-
+            $.getJSON('/book.html', '0,5', function (data) {
+                var subhead = (new Date().toLocaleString());
+                laytpl($('#tplExport').html()).render(data, function (html) {
+                    $(html).tableExport({type: 'excel', escape: 'false', fileName: '图书列表',subhead:subhead});
+                });
             });
-        }
+        });
     })
+</script>
+
+<!-- 导出Excel模版 -->
+<script id="tplExport" type="text/html">
+    <table>
+        <thead>
+        <tr>
+            <th style="width: 40px;">No.</th>
+            <th style="width: 150px">书名</th>
+            <th>作者</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{# for(var i = 0, len = d.length; i < len; i++){ }}
+        <tr>
+            <td>{{=i+1}}</td>
+            <td>{{=d[i].bookName}}</td>
+            <td>{{=d[i].bookAuthor}}</td>
+        </tr>
+        {{# } }}
+        </tbody>
+    </table>
 </script>
 </body>
 </html>
