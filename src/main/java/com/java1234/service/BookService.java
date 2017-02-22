@@ -13,4 +13,6 @@ public interface BookService {
     void updateByPK(Book book);
 
     void save(Book book);
+
+    void delete(Book book);
 }

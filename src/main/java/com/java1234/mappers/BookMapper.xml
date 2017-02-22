@@ -26,4 +26,9 @@
 	<insert id="save" useGeneratedKeys="true">
 		INSERT INTO t_book (book_name,book_author) VALUES (#{bookName},#{bookAuthor})
 	</insert>
+
+	<delete id="delete" parameterType="int">
+			DELETE  FROM t_book where book_id = #{bookId}
+
+	</delete>
 </mapper> 

@@ -14,4 +14,6 @@ public interface BookDao {
     void updateByPK(Book book);
 
     void save(Book book);
+
+    void delete(Book book);
 }

@@ -1,8 +1,12 @@
 package com.java1234.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.java1234.entity.Book;
 import com.java1234.service.BookService;
+import com.java1234.util.PageUtil;
+import com.java1234.util.PropertiesUtil;
 import com.java1234.util.ResponseUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,51 +24,69 @@ public class UserController {
     @Resource
     private BookService bookService;
 
-        private static  ObjectMapper objectMapper;
+    private static ObjectMapper objectMapper;
+
     @RequestMapping("/hello")
-    public String hello(Model model){
+    public String hello(Model model) {
         model.addAttribute("username", "张三");
         return "hello";
     }
 
     @RequestMapping("/world")
     public String helloWorld(Model model) {
-        model.addAttribute("username","李四");
+        model.addAttribute("username", "李四");
         return "world";
     }
 
-    @RequestMapping(value = "/book",method = RequestMethod.GET)
-    public void bookList(Book book, HttpServletResponse response) throws Exception{
+    @RequestMapping(value = "/book", method = RequestMethod.GET)
+    public void bookList(final Model model,Book book, HttpServletResponse response) throws Exception {
+        PageHelper.startPage(Integer.parseInt(PropertiesUtil.getValue("pageNum")),Integer.parseInt(PropertiesUtil.getValue("pageSize")));
         List<Book> bookList = bookService.selectAll(book);
-        objectMapper= new ObjectMapper();
+        PageInfo<Book> pageInfo = new PageInfo<Book>(bookList);
+
+        //int total = (int)pageInfo.getTotal();
+       // String pageCode = PageUtil.getPagation("/book.html",total,1,Integer.parseInt(PropertiesUtil.getValue("pageSize")));
+        //model.addAttribute("pageCode",pageCode);
+        objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(bookList);
         //String json = JSON.toJSONString(bookList);
-        ResponseUtil.write(json,response);
+        ResponseUtil.write(json, response);
     }
 
-    @RequestMapping(value = "/book/show",method = RequestMethod.GET)
-    public String bookShow(final Model model,Book book) throws Exception{
-        if(book.getBookId()!=null){
+    @RequestMapping(value = "/book/show", method = RequestMethod.GET)
+    public String bookShow(final Model model, Book book) throws Exception {
+        if (book.getBookId() != null) {
             List<Book> bookList = bookService.selectAll(book);
             book = bookList.get(0);
-            model.addAttribute("book",book);
+            model.addAttribute("book", book);
         }
 
         return "/book/show";
     }
 
-    @RequestMapping(value = "/book/saveOrUpdate",method = RequestMethod.POST)
+    @RequestMapping(value = "/book/saveOrUpdate", method = RequestMethod.POST)
     @ResponseBody
-    public String bookSaveOrUpdate(final Model model,String peopleBaseStr) throws Exception{
-        Book book = objectMapper.readValue(peopleBaseStr,Book.class);
-        if(book.getBookId()!=null){
+    public String bookSaveOrUpdate(final Model model, String peopleBaseStr) throws Exception {
+        Book book = objectMapper.readValue(peopleBaseStr, Book.class);
+        if (book.getBookId() != null) {
             bookService.updateByPK(book);
-        }else{
+        } else {
             bookService.save(book);
         }
 
         return null;
        /* return objectMapper.writeValueAsString(book);*/
+    }
+
+    @RequestMapping(value = "/book/book_del", method = RequestMethod.GET)
+    @ResponseBody
+    public void bookDel(final Model model, String ids) throws Exception {
+        String[] idAry = ids.split(",");
+        for (String id : idAry) {
+            Book book = new Book();
+            book.setBookId(Integer.valueOf(id));
+            bookService.delete(book);
+        }
     }
 
 

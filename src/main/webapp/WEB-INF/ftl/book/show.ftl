@@ -18,7 +18,8 @@
     <table >
         <tr>
             <th class="required-input">书名</th>
-            <td><input placeholder="请输入书名" type="text" class="" id="bookName" name="bookName" value="${book.bookName?default("")}">
+            <td>
+                <input placeholder="请输入书名" type="text" class="" id="bookName" name="bookName" value="${book.bookName?default("")}">
             </td>
         </tr>
         <tr>
@@ -33,6 +34,7 @@
 <script>
     $(function(){
 
+        var thisindex = parent.layer.getFrameIndex(window.name); //获取窗口索引
         /**
          * 保存
          */
@@ -59,10 +61,12 @@
                         success:function(data,textStatus,jqXHR){
                            layer.alert("保存成功!",function (index2) {
                                layer.close(index2);
+                               refreshParent();
+                               parent.layer.close(thisindex);
                            })
+
                         },
                         error : function(XMLHttpRequest, textStatus, errorThrown,data) {
-                                        //���error��������ʱ�ǳ����ã������������ȷ�����ᵯ�������
                             console.log(XMLHttpRequest.responseText);
                             console.log(XMLHttpRequest.status);
                             console.log(XMLHttpRequest.readyState);
@@ -71,8 +75,11 @@
                         }
                     })
                 });
-
         });
+        function refreshParent() {
+            parent.location.reload();
+            window.close();
+        }
     })
 </script>
 </body>
