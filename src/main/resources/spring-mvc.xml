@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<!-- 使用注解的包，包括子集 -->
-	<context:component-scan base-package="com.java1234.controller" />
+	<context:component-scan base-package="com.java1234.web.controller" />
 	<mvc:annotation-driven/>
 	<!--&lt;!&ndash; 视图解析器 &ndash;&gt;
 	<bean id="viewResolver"
@@ -75,11 +75,21 @@
 		</property>
 	</bean>-->
 
+	<!-- FreeMarker静态方法与变量 -->
+	<bean id="freemarkerStaticModelsProps" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location" value="classpath:freemarker_static.properties"/>
+	</bean>
+
+	<bean id="freemarkerStaticModels" class="com.java1234.util.FreemarkerStaticModels" factory-method="getInstance">
+		<property name="staticModels" ref="freemarkerStaticModelsProps"/>
+	</bean>
+
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="cache" value="true"/>
-		<property name="prefix" value=""/>
+		<property name="prefix" value="/"/>
 		<property name="suffix" value=".ftl"/>
 		<property name="contentType" value="text/html; charset=UTF-8"/>
+		<property name="attributesMap" ref="freemarkerStaticModels"/>
 		<property name="order" value="0"/>
 	</bean>
 

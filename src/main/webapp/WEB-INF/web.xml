@@ -28,16 +28,6 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
-<!--  &lt;!&ndash; 支持显示指定提交方式。如（PUT） &ndash;&gt;
-  <filter>
-    <filter-name>HiddenHttpMethodFilter</filter-name>
-    <filter-class>com.java1234.util.HiddenHttpMethodFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>HiddenHttpMethodFilter</filter-name>
-    <url-pattern>*.json</url-pattern>
-    <url-pattern>*.jsonp</url-pattern>
-  </filter-mapping>-->
 
   <!-- 添加对springmvc的支持 -->
   <servlet>

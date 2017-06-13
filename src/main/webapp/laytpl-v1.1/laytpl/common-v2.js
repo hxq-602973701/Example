@@ -346,7 +346,6 @@
             }
         });
     }
-
     /**
      * JQuery的封装版本(判断返回参数http与meta的值如果不为200则提示错误信息)
      * serialize 参数用来序列化页面输入等。如需要以set方式把选择的加起来 可以在元素上加 data-set="true"
@@ -642,6 +641,7 @@
 
         return new PageingConstructor(options, pageing);
     };
+
 
     /**
      * 渲染表格

@@ -14,18 +14,18 @@
 </script>
 
 <form>
-    <input type="hidden" id="bookId" name="bookId" value="${book.bookId?default("")}">
+    <input type="hidden" id="bookId" name="bookId" value="${book.bookId!}">
     <table >
         <tr>
             <th class="required-input">书名</th>
             <td>
-                <input placeholder="请输入书名" type="text" class="" id="bookName" name="bookName" value="${book.bookName?default("")}">
+                <input placeholder="请输入书名" type="text" class="" id="bookName" name="bookName" value="${book.bookName!}">
             </td>
         </tr>
         <tr>
             <th>作者</th>
             <td>
-                <input placeholder="请输入作者" type="text" class="" id="bookAuthor" name="bookAuthor" value="${book.bookAuthor?default("")}">
+                <input placeholder="请输入作者" type="text" class="" id="bookAuthor" name="bookAuthor" value="${book.bookAuthor!}">
             </td>
         </tr>
         <a type="button" id="save" class="">保存</a>

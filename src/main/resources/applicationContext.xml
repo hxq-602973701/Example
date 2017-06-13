@@ -11,9 +11,12 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">    
         
 	<!-- 自动扫描 -->
-	<context:component-scan base-package="com.java1234.dao" />
+	<context:component-scan base-package="com.java1234.dal.dao" />
+
 	<context:component-scan base-package="com.java1234.service" />
-	
+    <context:component-scan base-package="com.java1234.util" />
+
+
 	<!-- 配置数据源 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -21,21 +24,24 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/db_book?characterEncoding=utf-8"/>
 		<property name="username" value="root"/>
 		<property name="password" value="1234"/>
-
     </bean>
+
+
+
+    <bean id="springUtil" class="com.java1234.util.SpringUtil"/>
 
 	<!-- 配置mybatis的sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mappers.xml文件 -->
-		<property name="mapperLocations" value="classpath:com/java1234/mappers/*.xml"></property>
+		<property name="mapperLocations" value="classpath:com/java1234/dal/mapper/main/*/*.xml"></property>
 		<!-- mybatis配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 	</bean>
 
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.java1234.dao" />
+	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.java1234.dal.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 
