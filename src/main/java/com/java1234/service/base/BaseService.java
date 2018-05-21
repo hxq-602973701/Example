@@ -1,6 +1,7 @@
 package com.java1234.service.base;
 
 import com.github.pagehelper.PageInfo;
+import com.java1234.dal.entity.base.BaseEntity;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @version 1.0.0
  * @category 杭州尤拉夫科技有限公司
  */
-public interface BaseService<T> {
+public interface BaseService<T extends BaseEntity> {
 
     /**
      * 只获取一条数据，当查询的结果多于一条数据是抛出异常。

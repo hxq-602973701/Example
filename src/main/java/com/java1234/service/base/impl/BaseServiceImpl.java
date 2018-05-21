@@ -1,9 +1,10 @@
 package com.java1234.service.base.impl;
+
 import com.github.pagehelper.PageInfo;
 import com.java1234.dal.dao.base.BaseDAO;
+import com.java1234.dal.entity.base.BaseEntity;
 import com.java1234.service.base.BaseService;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @version 1.0.0
  * @category 杭州尤拉夫科技有限公司
  */
-public abstract class BaseServiceImpl<T> implements BaseService<T> {
+public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseService<T> {
 
 
     /**

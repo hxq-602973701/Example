@@ -10,6 +10,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<!-- 配置分页插件 -->
 	<plugins>
+		<!-- 记录SQL执行时间拦截器 -->
+		<plugin interceptor="com.java1234.util.MySqlCostInterceptor">
+			<!-- 慢查询阈值（毫秒） -->
+			<property name="slowThreshold" value="1000"/>
+		</plugin>
 		<plugin interceptor="com.github.pagehelper.PageHelper">
 			<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
 			<property name="dialect" value="mysql"/>

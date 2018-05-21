@@ -1,15 +1,29 @@
 package com.java1234.dal.dao.base.impl;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Maps;
 import com.java1234.dal.dao.base.BaseDAO;
+import com.java1234.dal.entity.base.BaseEntity;
+import com.java1234.dal.mapper.common.CommonMapper;
+import com.java1234.util.DataSourceEnum;
+import com.java1234.util.Ids;
+import com.java1234.util.MultipleDataSource;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.EntityColumn;
+import tk.mybatis.mapper.entity.EntityTable;
+import tk.mybatis.mapper.mapperhelper.EntityHelper;
 
+import javax.annotation.Resource;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
+import java.util.*;
 
 /**
  * 通用DAO基类,其他DAO继承该基类即可
@@ -17,13 +31,16 @@ import java.util.List;
  * @author carrot on 2015/2/3.
  * @version 1.0.0
  */
-public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
+public abstract class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
 
     /**
      * 日志记录器
      */
     protected static final Logger logger = LoggerFactory.getLogger(BaseDAOImpl.class);
 
+
+    @Resource
+    private CommonMapper commonMapper;
 
     /**
      * 获取Mapper
@@ -65,7 +82,94 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
         }
     }
 
+    @Override
+    public PageInfo<T> selectPage(T record) {
+        final Set<EntityColumn> pkSet = EntityHelper.getPKColumns(record.getClass());
+        final Optional<EntityColumn> firstPk = pkSet.stream().findFirst();
+        // 根据主键名排序,如果存在的话。
+        if (firstPk.isPresent()) {
+            final String pkName = firstPk.get().getColumn();
+            if (StringUtils.isNotBlank(pkName)) {
+                PageHelper.orderBy(pkName);
+            }
+        }
 
+        // 启用分页
+        PageHelper.startPage(record.getPageNum(), record.getPageSize(), true);
+        return new PageInfo(getMapper().select(record));
+    }
+
+    @Override
+    public int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid) {
+        return _deleteWithLogicByPrimaryKeys(ids, modifiedUid);
+    }
+
+    @Override
+    public int insertListSelective(List<T> recordList) {
+        if (Ids.isNotEmpty(recordList)) {
+            for (T record : recordList) {
+                getMapper().insertSelective(record);
+            }
+        }
+        return 1;
+    }
+
+    /**
+     * 根据关键字逻辑删除记录（批量）(只支持主数据源)
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     */
+    @Override
+    public int deleteWithLogicByPrimaryKeys(Integer[] ids, Long modifiedUid) {
+        return _deleteWithLogicByPrimaryKeys(ids, modifiedUid);
+    }
+
+    /**
+     * 根据关键字逻辑删除记录（批量）(只支持主数据源、且必需只有一个关键字)
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     */
+    private int _deleteWithLogicByPrimaryKeys(Number[] ids, Long modifiedUid) {
+        Assert.notNull(ids, "ids can not be null");
+        Assert.notNull(modifiedUid, "modifiedUid can not be null");
+
+        // 设定数据源
+        MultipleDataSource.setDataSourceKey(DataSourceEnum.MAIN);
+
+        // 获取泛型类Class
+        final Class<T> clazz = genericType();
+        final EntityTable entityTable = EntityHelper.getEntityTable(clazz);
+
+        // 获取泛型主键与PK
+        final String table = entityTable.getName();
+        final Set<EntityColumn> pkSet = entityTable.getEntityClassPKColumns();
+        final int pkCount = pkSet.size();
+
+        // 只支持单个主键的实体
+        if (pkCount == 0) {
+            throw new RuntimeException(String.format("实体[%s]中不存在主键字段。", clazz.getName()));
+        } else if (pkCount != 1) {
+            throw new RuntimeException(String.format("实体[%s]中存在多个主键字段。", clazz.getName()));
+        }
+
+        // 主键名
+        final String pkName = pkSet.stream().findFirst().get().getColumn();
+
+        // 更新字段
+        final Map updateMap = Maps.newHashMap();
+        updateMap.put("DEL_FLAG", true);
+        updateMap.put("MODIFIED_UID", modifiedUid);
+        updateMap.put("MODIFIED_TIME", new Date());
+
+        // 条件字段
+        final Map conditionMap = Maps.newHashMap();
+        conditionMap.put(pkName, ids);
+
+        // 更新
+        return commonMapper.updateWithInByCondition(table, updateMap, conditionMap);
+    }
 
     /**
      * 根据条件查询返回数据列表

@@ -1,5 +1,6 @@
 package com.java1234.dal.dao.base;
 import com.github.pagehelper.PageInfo;
+import com.java1234.dal.entity.base.BaseEntity;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author xinfeng.hu on 2015/2/3.
  * @version 1.0.0
  */
-public interface BaseDAO<T> {
+public interface BaseDAO<T extends BaseEntity> {
 
     /**
      * 只获取一条数据，当查询的结果多于一条数据时抛出异常。如果只想获取检索结果的第一条数据请一部 @see selectFirst
@@ -33,7 +34,7 @@ public interface BaseDAO<T> {
      * @param record
      * @return
      */
-    PageInfo<T> selectPage(T record);
+    PageInfo<T> selectPage(T record);  //没有实现
 
     /**
      * 根据条件查询返回数据列表
@@ -81,7 +82,7 @@ public interface BaseDAO<T> {
      * @param recordList
      * @return
      */
-    int insertListSelective(List<T> recordList);
+    int insertListSelective(List<T> recordList); //乜有实现
 
     /**
      * 根据条件删除
