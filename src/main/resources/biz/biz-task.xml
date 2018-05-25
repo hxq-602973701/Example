@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-4.1.xsd">
+
+
+    <!--每隔3秒执行一次【获取天气】 -->
+    <bean id="getWeather" class="com.java1234.service.task.impl.GetWeatherTaskServiceImpl"/>
+    <bean id="commonTest" class="com.java1234.service.task.impl.CommonTestTaskServiceImpl"/>
+    <!-- 任务调度 -->
+    <task:scheduled-tasks>
+        <!--每隔3秒执行一次【获取天气】  cron="0 0 0 1/1 * ? " cron="0/3 * * * * ?" -->
+        <!--<task:scheduled ref="getWeather" method="run" cron="0/3 * * * * ?"/>-->
+        <task:scheduled ref="commonTest" method="run" cron="0/3 * * * * ?"/>
+    </task:scheduled-tasks>
+</beans>

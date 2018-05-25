@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+    <!-- 获取JDBC连接属性 -->
+    <context:property-placeholder location="classpath:config/jdbc.properties"/>
+
+    <!-- 数据源基类 -->
+    <bean id="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="filters" value="stat"/>
+        <property name="maxActive" value="20"/>
+        <property name="initialSize" value="1"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="1"/>
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="select 1 from dual"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+    </bean>
+
+    <!-- 系统主数据源(MySQL) -->
+    <bean id="mainDataSource" parent="parentDataSource">
+        <property name="url" value="${jdbc.main.url}"/>
+        <property name="username" value="${jdbc.main.userName}"/>
+        <property name="password" value="${jdbc.main.password}"/>
+    </bean>
+
+    <bean id="sdDataSource" parent="parentDataSource">
+        <property name="url" value="${jdbc.sd.url}"/>
+        <property name="username" value="${jdbc.sd.userName}"/>
+        <property name="password" value="${jdbc.sd.password}"/>
+    </bean>
+
+    <!-- 多数据源 -->
+    <bean id="multipleDataSource" class="com.java1234.util.MultipleDataSource">
+        <property name="defaultTargetDataSource" ref="mainDataSource"/>
+        <property name="targetDataSources">
+            <map>
+                <entry key="MAIN" value-ref="mainDataSource"/>
+                <entry key="SD" value-ref="sdDataSource"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 切入Mapper自动适配到不同的数据源 -->
+    <bean id="multipleDataSourceAspectAdvice" class="com.java1234.util.MultipleDataSourceAspectAdvice"/>
+    <aop:config>
+        <aop:aspect id="multipleDataSourceAspectAdvice" ref="multipleDataSourceAspectAdvice">
+            <aop:around method="doAround" pointcut="execution(* com.java1234.dal.mapper..*(..))"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!-- MyBatis在spring中Bean的配置，都是固定的 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--dataSource属性指定要用到的连接池 -->
+        <property name="dataSource" ref="multipleDataSource"/>
+        <!--configLocation属性指定mybatis的核心配置文件 -->
+        <property name="configLocation" value="classpath:dal/mybatis-config.xml"/>
+    </bean>
+
+    <!-- sqlSession bean 可以直接注入到 DAO bean 中 -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!-- mapperScannerConfigurer配置 -->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- 指定要扫描的包，在此包之下的映射器都会被搜索到。可指定多个包，包与包之间用逗号或分号分隔. -->
+        <property name="basePackage" value="com.java1234.dal.mapper"/>
+    </bean>
+
+
+    <!-- 事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="multipleDataSource"/>
+    </bean>
+
+    <!-- 全注解方式   需加上@Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 配置事务通知属性 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!-- 定义事务传播属性 -->
+        <tx:attributes>
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="edit*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="new*" propagation="REQUIRED" />
+            <tx:method name="set*" propagation="REQUIRED" />
+            <tx:method name="remove*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="change*" propagation="REQUIRED" />
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="load*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="*" propagation="REQUIRED" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置事务切面 -->
+    <aop:config>
+        <aop:pointcut id="serviceOperation"
+                      expression="execution(* com.java1234.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
+    </aop:config>
+
+</beans>
