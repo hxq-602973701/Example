@@ -12,14 +12,14 @@
 
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 请求映射 -->
     <mvc:annotation-driven/>
-    <mvc:interceptors>
-        <!-- 页面权限拦截器 -->
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/assets/**"/>
-            <bean class="com.java1234.web.interceptor.HandlerInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash; 页面权限拦截器 &ndash;&gt;-->
+        <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
+            <!--&lt;!&ndash;<mvc:mapping path="/**"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<mvc:exclude-mapping path="/assets/**"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<bean class="com.java1234.web.interceptor.HandlerInterceptor"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</mvc:interceptor>&ndash;&gt;-->
+    <!--</mvc:interceptors>-->
 
     <!-- FreeMarker静态方法与变量 -->
     <bean id="freemarkerStaticModelsProps" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
@@ -57,7 +57,6 @@
 
                 <!-- 在没有扩展名时即: "/param" 时的默认展现形式 -->
                 <property name="defaultContentType" value="text/html"/>
-
             </bean>
         </property>
 
@@ -67,7 +66,6 @@
                 <!--支持ftl-->
                 <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
                     <property name="cache" value="true"/>
-                    <property name="prefix" value="/"/>
                     <property name="suffix" value=".ftl"/>
                     <property name="contentType" value="text/html; charset=UTF-8"/>
                     <property name="attributesMap" ref="freemarkerStaticModels"/>
@@ -98,8 +96,25 @@
                 <bean class="com.java1234.web.resolver.MappingReportExcelView"/>
             </list>
         </property>
-
     </bean>
+
+    <bean id="freeMarkerConfigurer" name="freeMarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath">
+            <value>/WEB-INF/view/ftl/</value>
+        </property>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="number_format">#.####</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">ignore</prop>
+            </props>
+        </property>
+    </bean>
+
     <!-- 静态资源 -->
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:resources mapping="/statics/**" location="/statics/"/>

@@ -49,19 +49,24 @@ public class BookController {
      * @param model
      * @return
      */
-    @RequestMapping("/hello")
+    @RequestMapping(value = "/hello",method = RequestMethod.GET)
     public String showFtl(Model model) {
         model.addAttribute("username", "ftl");
         return "/book/book_list";
     }
 
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    public String testFtl(Model model) {
+        model.addAttribute("username", "ftl");
+        return "test";
+    }
     /**
      * 同样支持jsp
      *
      * @param model
      * @return
      */
-    @RequestMapping("/world")
+    @RequestMapping(value = "/world",method = RequestMethod.GET)
     public String showJsp(Model model) {
         model.addAttribute("username", "jsp");
         return "world";

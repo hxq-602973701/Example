@@ -18,7 +18,7 @@ public final class HandlerInterceptor extends BaseInterceptor {
     /**
      * 权限验证Service
      */
-    @Resource
+//    @Resource
 //    private AuthService authService;
 
     /**
