@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Title</title>
 </head>
-<script src="/jquery/jquery.js"></script>
+<script src="/assets/js/jquery/jquery.js"></script>
 
-<script src="/layer/layer.js"></script>
-<script src="/laytpl-v1.1/laytpl/laytpl.js"></script>
-<script src="/laytpl-v1.1/laytpl/common-v2.js"></script>
-<script src="/tableexport/tableExport.js"></script>
-<script src="/tableexport/FileSaver.js"></script>
-<script src="/tableexport/jquery.base64.js"></script>
-<script src="/laypage/laypage.js"></script>
-<script src="/echarts/echarts.js"></script>
+<script src="/assets/js/layer/layer.js"></script>
+<script src="/assets/js/laytpl-v1.1/laytpl/laytpl.js"></script>
+<script src="/assets/js/laytpl-v1.1/laytpl/common-v2.js"></script>
+<script src="/assets/js/tableexport/tableExport.js"></script>
+<script src="/assets/js/tableexport/FileSaver.js"></script>
+<script src="/assets/js/tableexport/jquery.base64.js"></script>
+<script src="/assets/js/laypage/laypage.js"></script>
+<script src="/assets/js/echarts/echarts.js"></script>
 <body>
 <#assign user = utils.getBook()>
 <button id="freeMakerUtil">${user.bookName!}${username}</button>

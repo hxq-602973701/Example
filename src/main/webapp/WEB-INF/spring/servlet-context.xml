@@ -12,6 +12,10 @@
 
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 请求映射 -->
     <mvc:annotation-driven/>
+
+    <!-- 静态资源 -->
+    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <mvc:resources mapping="/statics/**" location="/statics/"/>
     <!--<mvc:interceptors>-->
         <!--&lt;!&ndash; 页面权限拦截器 &ndash;&gt;-->
         <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
@@ -113,11 +117,26 @@
                 <prop key="template_exception_handler">ignore</prop>
             </props>
         </property>
-    </bean>
+        <property name="freemarkerVariables">
+        <map>
+            <entry key="xml_escape" value-ref="fmXmlEscape" />
+            <!--下面四个是在下面定义的-->
+            <entry key="extends" value-ref="extendsDirective"/>
+            <entry key="override" value-ref="overrideDirective"/>
+            <entry key="block" value-ref="blockDirective"/>
+            <entry key="super" value-ref="superDirective"/>
+        </map>
+    </property>
+</bean>
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+    <!-- freemaker  Directive-->
 
-    <!-- 静态资源 -->
-    <mvc:resources mapping="/assets/**" location="/assets/"/>
-    <mvc:resources mapping="/statics/**" location="/statics/"/>
+    <bean id="blockDirective" class="cn.org.rapid_framework.freemarker.directive.BlockDirective"/>
+    <bean id="extendsDirective" class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/>
+    <bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/>
+    <bean id="superDirective" class="cn.org.rapid_framework.freemarker.directive.SuperDirective"/>
+
+
 
     <bean id="springUtil" class="com.java1234.util.SpringUtil"/>
 

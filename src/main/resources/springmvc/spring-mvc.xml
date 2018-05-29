@@ -47,6 +47,4 @@
 	<!--<bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/>-->
 	<!--<bean id="superDirective" class="cn.org.rapid_framework.freemarker.directive.SuperDirective"/>-->
 
-
-
 </beans>  

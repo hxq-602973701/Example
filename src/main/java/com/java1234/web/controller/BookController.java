@@ -58,8 +58,16 @@ public class BookController {
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String testFtl(Model model) {
         model.addAttribute("username", "ftl");
-        return "test";
+        return "base";
     }
+
+    @RequestMapping(value = "/test1",method = RequestMethod.GET)
+    public String testFtl1(Model model) {
+        model.addAttribute("username", "ftl");
+        return "base1";
+    }
+
+
     /**
      * 同样支持jsp
      *

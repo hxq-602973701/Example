@@ -3,10 +3,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Title</title>
 </head>
-<script src="\jquery\jquery.js"></script>
-<script src="\layer\layer.js"></script>
-<script src="\laytpl-v1.1\laytpl\laytpl.js"></script>
-<script src="/laytpl-v1.1/laytpl/common-v2.js"></script>
+<script src="/assets/js/jquery/jquery.js"></script>
+<script src="/assets/js/layer/layer.js"></script>
+<script src="/assets/js/laytpl-v1.1/laytpl/laytpl.js"></script>
+<script src="/assets/js/laytpl-v1.1/laytpl/common-v2.js"></script>
 <body>
 
 <form>

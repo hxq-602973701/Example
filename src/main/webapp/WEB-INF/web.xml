@@ -11,6 +11,7 @@
     <param-name>logbackConfigLocation</param-name>
     <param-value>logback.xml</param-value>
   </context-param>
+
   <!-- 自动注册logback日志组件监听器 -->
   <listener>
     <listener-class>com.java1234.web.controller.LogbackConfigListener</listener-class>
@@ -47,7 +48,7 @@
   </filter>
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
 
   <!-- 支持显示指定提交方式。如（PUT） -->

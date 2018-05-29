@@ -10,7 +10,7 @@ import com.java1234.dal.mapper.common.CommonMapper;
 import com.java1234.util.DataSourceEnum;
 import com.java1234.util.Ids;
 import com.java1234.util.MultipleDataSource;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
