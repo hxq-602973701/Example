@@ -16,14 +16,14 @@
     <!-- 静态资源 -->
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:resources mapping="/statics/**" location="/statics/"/>
-    <!--<mvc:interceptors>-->
-        <!--&lt;!&ndash; 页面权限拦截器 &ndash;&gt;-->
-        <!--&lt;!&ndash;<mvc:interceptor>&ndash;&gt;-->
-            <!--&lt;!&ndash;<mvc:mapping path="/**"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;<mvc:exclude-mapping path="/assets/**"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;<bean class="com.java1234.web.interceptor.HandlerInterceptor"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;</mvc:interceptor>&ndash;&gt;-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <!-- 页面权限拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/assets/**"/>
+            <bean class="com.java1234.web.interceptor.HandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!-- FreeMarker静态方法与变量 -->
     <bean id="freemarkerStaticModelsProps" class="org.springframework.beans.factory.config.PropertiesFactoryBean">

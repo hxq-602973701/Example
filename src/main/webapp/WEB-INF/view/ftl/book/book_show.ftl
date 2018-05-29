@@ -1,14 +1,12 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Title</title>
-</head>
-<script src="/assets/js/jquery/jquery.js"></script>
-<script src="/assets/js/layer/layer.js"></script>
-<script src="/assets/js/laytpl-v1.1/laytpl/laytpl.js"></script>
-<script src="/assets/js/laytpl-v1.1/laytpl/common-v2.js"></script>
-<body>
+<#--
+ 所属模块：基础模块
+ 页面名称：图书列表页面
+ 创建时间：2018/05/29
+ 创建人员：lt
+ -->
 
+<#-- 主体部分 -->
+<@override name="main">
 <form>
     <input type="hidden" id="bookId" name="bookId" value="${book.bookId!}">
     <table>
@@ -28,6 +26,10 @@
         <a type="button" id="save" class="">保存</a>
     </table>
 </form>
+</@override>
+
+<#--脚本部分-->
+<@override name="script">
 <script>
     $(function () {
 
@@ -79,5 +81,6 @@
         }
     })
 </script>
-</body>
-</html>
+</@override>
+
+<@extends name="/common/layout/common.ftl"/>

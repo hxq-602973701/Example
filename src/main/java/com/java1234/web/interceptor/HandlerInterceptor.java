@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 /**
  * 页面权限控制
  *
- * @author xinfeng.hu 2013-3-14下午1:44:07
+ * @author lt 2018-5-29
  * @version 1.0.0
  */
 public final class HandlerInterceptor extends BaseInterceptor {

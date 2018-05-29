@@ -1,50 +1,18 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Title</title>
-</head>
-<script src="/assets/js/jquery/jquery.js"></script>
+<#--
+ 所属模块：基础模块
+ 页面名称：图书列表页面
+ 创建时间：2018/05/29
+ 创建人员：lt
+ -->
 
-<script src="/assets/js/layer/layer.js"></script>
-<script src="/assets/js/laytpl-v1.1/laytpl/laytpl.js"></script>
-<script src="/assets/js/laytpl-v1.1/laytpl/common-v2.js"></script>
-<script src="/assets/js/tableexport/tableExport.js"></script>
-<script src="/assets/js/tableexport/FileSaver.js"></script>
-<script src="/assets/js/tableexport/jquery.base64.js"></script>
-<script src="/assets/js/laypage/laypage.js"></script>
-<script src="/assets/js/echarts/echarts.js"></script>
-<body>
-<#assign user = utils.getBook()>
+<#-- 主体部分 -->
+<@override name="main">
+    <#assign user = utils.getBook()>
 <button id="freeMakerUtil">${user.bookName!}${username}</button>
-
-<script>
-
-    $('#freeMakerUtil').on('click', function () {
-        layer.msg('Hello layer', {icon: 0});
-    });
-
-</script>
 <button id="add" type="button" class="btn btn-sm btn-danger">添加</button>
 <button id="del" type="button" class="btn btn-sm btn-danger">删除</button>
 <button id="export" type="button" class="btn btn-sm btn-danger">导出</button>
 <button id="assign" type="button" class="btn btn-sm btn-danger">shareData</button>
-<script id="bookTemp" type="text/html">
-    {{# for(var i = 0, len = d.length; i < len; i++){ }}
-    <tr>
-        <td><input type="checkbox" class="i-checks" name="checkrow" value="{{ d[i].bookId }}"></td>
-        <td>{{=i+1}}</td>
-        <td>{{=d[i].bookName}}</td>
-        <td>{{=d[i].bookAuthor}}</td>
-        <td>
-            <button type="button" class="btn-look" data-book-id="{{=d[i].bookId}}">查看
-            </button>
-        </td>
-    </tr>
-    {{# } }}
-</script>
 <table id="tableView">
     <thead>
     <tr>
@@ -62,9 +30,30 @@
     <div id="page-info" class="pull-left"></div>
     <div id="page-bar" class="pull-right"></div>
 </div>
+</@override>
+
+<#--脚本部分-->
+<@override name="script">
+<script id="bookTemp" type="text/html">
+    {{# for(var i = 0, len = d.length; i < len; i++){ }}
+    <tr>
+        <td><input type="checkbox" class="i-checks" name="checkrow" value="{{ d[i].bookId }}"></td>
+        <td>{{=i+1}}</td>
+        <td>{{=d[i].bookName}}</td>
+        <td>{{=d[i].bookAuthor}}</td>
+        <td>
+            <button type="button" class="btn-look" data-book-id="{{=d[i].bookId}}">查看
+            </button>
+        </td>
+    </tr>
+    {{# } }}
+</script>
 <script>
     $(function () {
 
+        $('#freeMakerUtil').on('click', function () {
+            layer.msg('Hello layer', {icon: 0});
+        });
         //渲染页面
         var pageing = kirin.pageing(
                 {
@@ -248,7 +237,6 @@
         }
     })
 </script>
-
 <!-- 导出Excel模版 -->
 <script id="tplExport" type="text/html">
     <table>
@@ -270,8 +258,9 @@
         </tbody>
     </table>
 </script>
-</body>
-</html>
+</@override>
+
+<@extends name="/common/layout/common.ftl"/>
 
 
 
