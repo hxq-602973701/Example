@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 通用Service基类,其他Service继承该基类即可
  *
- * @author xinfeng.hu on 2015/2/3.
+ * @author lt on 2015/2/3.
  * @version 1.0.0
  * @category 南阳理工学院
  */

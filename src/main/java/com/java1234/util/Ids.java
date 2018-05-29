@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author xinfeng.hu 2013-6-19下午7:46:21
+ * @author lt 2013-6-19下午7:46:21
  * @version 1.0.0
  */
 public class Ids {

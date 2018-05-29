@@ -68,9 +68,6 @@
     <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
   <!--</listener>-->
 
-
-
-
   <!--为DispatcherServlet核心控制器建立映射 -->
   <servlet-mapping>
     <servlet-name>controller</servlet-name>

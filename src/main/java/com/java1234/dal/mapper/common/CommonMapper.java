@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 通用Mapper
  *
- * @author xinfeng.hu 2015-6-1下午1:36:09
+ * @author lt 2015-6-1下午1:36:09
  * @version 1.0.0
  * @category 南阳理工学院
  */

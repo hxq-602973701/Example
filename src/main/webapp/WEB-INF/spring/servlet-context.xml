@@ -13,9 +13,10 @@
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 请求映射 -->
     <mvc:annotation-driven/>
 
-    <!-- 静态资源 -->
+    <!-- web.xml配置了/ 所以要对静态资源进行处理 -->
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:resources mapping="/statics/**" location="/statics/"/>
+
     <mvc:interceptors>
         <!-- 页面权限拦截器 -->
         <mvc:interceptor>
@@ -44,7 +45,6 @@
         <!-- 配置 -->
         <property name="contentNegotiationManager">
             <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-
                 <!-- 扩展名至mimeType的映射,即 /param.json => application/json -->
                 <property name="mediaTypes">
                     <map>
@@ -102,6 +102,7 @@
         </property>
     </bean>
 
+    <!--freemaker路径重要的是templateLoaderPath-->
     <bean id="freeMarkerConfigurer" name="freeMarkerConfig"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath">
@@ -115,6 +116,11 @@
                 <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
                 <prop key="classic_compatible">true</prop>
                 <prop key="template_exception_handler">ignore</prop>
+                <!--这个是定义一些共用页面 可以引入到别的页面中-->
+                <!--<prop key="auto_import">-->
+                    <!--common/macro/common.ftl as common_macro,-->
+                    <!--common/macro/needs-common.ftl as needs_macro-->
+                <!--</prop>-->
             </props>
         </property>
         <property name="freemarkerVariables">
@@ -128,22 +134,20 @@
         </map>
     </property>
 </bean>
+
+    <!--freemaker继承 覆盖指令-->
     <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
     <!-- freemaker  Directive-->
-
     <bean id="blockDirective" class="cn.org.rapid_framework.freemarker.directive.BlockDirective"/>
     <bean id="extendsDirective" class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/>
     <bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/>
     <bean id="superDirective" class="cn.org.rapid_framework.freemarker.directive.SuperDirective"/>
 
-
-
+    <!--获取Spring-->
     <bean id="springUtil" class="com.java1234.util.SpringUtil"/>
-
     <!-- 文件上传 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 最大可允许上传文件大小(10M) -->
         <property name="maxUploadSize" value="1000000000"/>
     </bean>
-
 </beans>

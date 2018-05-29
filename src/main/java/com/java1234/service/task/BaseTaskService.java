@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 任务Service<br> 所有子任务必须继承此基类
  *
- * @author xinfeng.hu 2013-3-25上午10:10:46
+ * @author lt 2013-3-25上午10:10:46
  * @version 1.0.0
  */
 public abstract class BaseTaskService {

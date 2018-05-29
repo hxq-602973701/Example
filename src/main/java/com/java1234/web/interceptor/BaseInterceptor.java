@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 /**
  * 权限控制拦截器
  *
- * @author xinfeng.hu 2013-3-14下午1:44:07
+ * @author lt 2013-3-14下午1:44:07
  * @version 1.0.0
  */
 public class BaseInterceptor extends HandlerInterceptorAdapter {

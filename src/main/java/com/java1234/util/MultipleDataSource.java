@@ -5,7 +5,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 /**
  * 多路数据源
  *
- * @author xinfeng.hu on 2015/4/11.
+ * @author lt on 2015/4/11.
  * @version 1.0.0
  */
 public class MultipleDataSource extends AbstractRoutingDataSource {
