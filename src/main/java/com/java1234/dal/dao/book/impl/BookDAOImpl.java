@@ -12,9 +12,9 @@ import javax.annotation.Resource;
 /**
  * BookDAO
  *
- * @author carrot 2017/9/1
+ * @author lt 2017/9/1
  * @version 1.0.0
- * @category 杭州尤拉夫科技有限公司
+ * @category 南阳理工学院
  */
 @Service
 public class BookDAOImpl extends BaseDAOImpl<Book> implements BookDAO {

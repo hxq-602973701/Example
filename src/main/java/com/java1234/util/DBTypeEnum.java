@@ -3,7 +3,7 @@ package com.java1234.util;
 /**
  * 数据库类型
  *
- * @author carrot on 2016/6/2.
+ * @author lt on 2016/6/2.
  * @version 1.0.0
  */
 public enum DBTypeEnum {

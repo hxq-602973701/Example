@@ -28,7 +28,7 @@ import java.util.*;
 /**
  * 通用DAO基类,其他DAO继承该基类即可
  *
- * @author carrot on 2015/2/3.
+ * @author lt on 2015/2/3.
  * @version 1.0.0
  */
 public abstract class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {

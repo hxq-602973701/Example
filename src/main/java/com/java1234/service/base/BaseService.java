@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author xinfeng.hu on 2015/2/3.
  * @version 1.0.0
- * @category 杭州尤拉夫科技有限公司
+ * @category 南阳理工学院
  */
 public interface BaseService<T extends BaseEntity> {
 

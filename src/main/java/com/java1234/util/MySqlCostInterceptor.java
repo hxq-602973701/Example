@@ -19,7 +19,7 @@ import java.util.Properties;
 /**
  * 记录SQL执行时间拦截器
  *
- * @author carrot on 2017/11/28.
+ * @author lt on 2017/11/28.
  * @version 1.0.0
  */
 @Intercepts({

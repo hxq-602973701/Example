@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @author xinfeng.hu 2015-6-1下午1:36:09
  * @version 1.0.0
- * @category 杭州尤拉夫科技有限公司
+ * @category 南阳理工学院
  */
 public interface CommonMapper {
 

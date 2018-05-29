@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 通用DAO
  *
- * @author carrot on 2016/6/3.
+ * @author lt on 2016/6/3.
  * @version 1.0.0
  */
 public interface CommonDAO {
