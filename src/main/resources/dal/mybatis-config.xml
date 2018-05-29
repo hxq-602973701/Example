@@ -10,6 +10,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<!-- 配置分页插件 -->
 	<plugins>
+		<!-- 主键生成策略 -->
+		<plugin interceptor="com.java1234.dal.utils.MySequenceGenerator"/>
 		<!-- 记录SQL执行时间拦截器 -->
 		<plugin interceptor="com.java1234.util.MySqlCostInterceptor">
 			<!-- 慢查询阈值（毫秒） -->

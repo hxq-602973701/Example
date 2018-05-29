@@ -1,9 +1,12 @@
 package com.java1234.dal.entity.main.book;
 
 import com.java1234.dal.entity.base.BaseEntity;
+import com.java1234.dal.utils.SequenceRule;
+
 import javax.persistence.*;
 
 @Table(name = "t_book")
+@SequenceRule
 public class Book extends BaseEntity {
     @Id
     @Column(name = "book_id")

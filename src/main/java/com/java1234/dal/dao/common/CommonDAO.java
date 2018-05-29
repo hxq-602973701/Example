@@ -1,6 +1,7 @@
 package com.java1234.dal.dao.common;
 
 
+import com.java1234.dal.entity.base.BaseEntity;
 import com.java1234.util.DataSourceEnum;
 
 import java.util.HashMap;
@@ -14,6 +15,13 @@ import java.util.Map;
  * @version 1.0.0
  */
 public interface CommonDAO {
+
+    /**
+     * 填充序列值
+     *
+     * @param entity 实体对象
+     */
+    void fillSequence(final BaseEntity entity);
 
     /**
      * 根据条件获取指定表的数据

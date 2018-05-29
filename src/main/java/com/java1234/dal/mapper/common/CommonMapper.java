@@ -43,4 +43,11 @@ public interface CommonMapper {
      */
     int updateWithInByCondition(@Param("tableName") String tableName, @Param("updateMap") Map updateMap, @Param("conditionMap") Map conditionMap);
 
+    /**
+     * 根据表名获取序列
+     *
+     * @param tableName 表名
+     * @return
+     */
+    long sequenceNextval(@Param("tableName") String tableName);
 }
