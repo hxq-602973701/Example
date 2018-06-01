@@ -14,7 +14,7 @@
 
   <!-- 自动注册logback日志组件监听器 -->
   <listener>
-    <listener-class>com.java1234.web.controller.LogbackConfigListener</listener-class>
+    <listener-class>com.java1234.web.listener.LogbackConfigListener</listener-class>
   </listener>
   <!-- Web系统路径(webapp.root、webapp.resource) -->
   <listener>

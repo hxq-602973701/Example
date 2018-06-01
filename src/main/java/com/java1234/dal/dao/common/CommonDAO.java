@@ -2,7 +2,7 @@ package com.java1234.dal.dao.common;
 
 
 import com.java1234.dal.entity.base.BaseEntity;
-import com.java1234.util.DataSourceEnum;
+import com.java1234.dal.enums.DataSourceEnum;
 
 import java.util.HashMap;
 import java.util.List;

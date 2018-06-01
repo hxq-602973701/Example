@@ -38,21 +38,21 @@
 		<!--</javaTypeResolver>-->
 
 		<!-- 生成通用DAO插件 -->
-		<plugin type="cn.com.youlove.component.generator.DaoPlugin">
+		<plugin type="com.java1234.generator.DaoPlugin">
 			<property name="targetPackage" value="${targetDaoPackage}.${table.dataSourceDir}"/>
 			<property name="targetProject" value="${targetDaoProject}"/>
 			<property name="isCreate" value="${dao.isCreate}"/>
 		</plugin>
 
 		<!-- 生成通用Service插件 -->
-		<plugin type="cn.com.youlove.component.generator.ServicePlugin">
+		<plugin type="com.java1234.generator.ServicePlugin">
 			<property name="targetPackage" value="${targetServicePackage}.${table.dataSourceDir}"/>
 			<property name="targetProject" value="${targetServiceProject}"/>
 			<property name="isCreate" value="${service.isCreate}"/>
 		</plugin>
 
 		<!-- 生成Controller插件 -->
-		<plugin type="cn.com.youlove.component.generator.ControllerPlugin">
+		<plugin type="com.java1234.generator.ControllerPlugin">
 			<property name="targetPackage" value="${targetControllerPackage}.${table.dataSourceDir}"/>
 			<property name="targetProject" value="${targetControllerProject}"/>
 		</plugin>
@@ -79,7 +79,10 @@
 		<sqlMapGenerator targetPackage="${targetMapperPackage}.${table.dataSourceDir}"
 						 targetProject="${targetJavaProject}"/>
 		<!-- 映射java类-->
-		<javaClientGenerator targetPackage="${targetMapperPackage}.${table.dataSourceDir}" targetProject="${targetJavaProject}" type="XMLMAPPER" />
+		<javaClientGenerator targetPackage="${targetMapperPackage}.${table.dataSourceDir}" targetProject="${targetJavaProject}" type="XMLMAPPER">
+		<!--是否允许建立子包（对应MySql的scheme）-->
+			<property name="enableSubPackages" value="true"/>
+		</javaClientGenerator>
 		<!-- 要生成的那些表 -->
 		<table tableName="${table.tableName}" domainObjectName="${table.entityName}" >
 			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->

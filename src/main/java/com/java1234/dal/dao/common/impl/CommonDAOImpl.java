@@ -5,7 +5,7 @@ import com.java1234.dal.dao.common.CommonDAO;
 import com.java1234.dal.entity.base.BaseEntity;
 import com.java1234.dal.mapper.common.CommonMapper;
 import com.java1234.dal.utils.SequenceRule;
-import com.java1234.util.DataSourceEnum;
+import com.java1234.dal.enums.DataSourceEnum;
 import com.java1234.util.DateUtil;
 import com.java1234.util.MultipleDataSource;
 import org.apache.commons.lang.StringUtils;

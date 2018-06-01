@@ -308,6 +308,28 @@
     <build>
         <finalName>cityInfo</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.baidu.app</groupId>
+                            <artifactId>bdpush</artifactId>
+                            <version>3.0.1</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/SpringMVCFreeMarker.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
             <!--jetty 插件，mvn jetty:run -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -360,15 +382,20 @@
                         <version>1.3.2</version>
                     </dependency>
                     <!--<dependency>-->
-                    <!--<groupId>cn.com.youlove.component</groupId>-->
-                    <!--<artifactId>component-entity</artifactId>-->
-                    <!--<version>1.2.0-SNAPSHOT</version>-->
+                        <!--<groupId>net.sf.javailp</groupId>-->
+                        <!--<artifactId>javalib</artifactId>-->
+                        <!--<version>1.2a</version>-->
+                        <!--<type>jar</type>-->
+                        <!--<scope>compile</scope>-->
                     <!--</dependency>-->
-                    <!--<dependency>-->
-                    <!--<groupId>cn.com.youlove.component</groupId>-->
-                    <!--<artifactId>component-generator</artifactId>-->
-                    <!--<version>1.2.0-SNAPSHOT</version>-->
-                    <!--</dependency>-->
+
+                    <dependency>
+                        <groupId>net.sf.javailp</groupId>
+                        <artifactId>javalib</artifactId>
+                        <version>1.2a</version>
+                        <scope>system</scope>
+                        <systemPath>${basedir}/lib/javailp-1.2a.jar</systemPath>
+                    </dependency>
                     <dependency>
                         <groupId>tk.mybatis</groupId>
                         <artifactId>mapper</artifactId>

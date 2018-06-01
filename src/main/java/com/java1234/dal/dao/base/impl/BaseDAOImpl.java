@@ -7,7 +7,7 @@ import com.google.common.collect.Maps;
 import com.java1234.dal.dao.base.BaseDAO;
 import com.java1234.dal.entity.base.BaseEntity;
 import com.java1234.dal.mapper.common.CommonMapper;
-import com.java1234.util.DataSourceEnum;
+import com.java1234.dal.enums.DataSourceEnum;
 import com.java1234.util.Ids;
 import com.java1234.util.MultipleDataSource;
 import org.apache.commons.lang.StringUtils;

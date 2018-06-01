@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Class-Path: cxf-rt-core-2.3.1.jar fastjson-1.2.23.jar commons-codec-1.
+ 6.jar solr-solrj-4.10.3.jar spring-context-4.1.3.RELEASE.jar jaxb-imp
+ l-2.1.13.jar commons-pool2-2.3.jar joda-time-2.5.jar spring-jdbc-4.1.
+ 3.RELEASE.jar cxf-tools-common-2.3.1.jar spring-aspects-4.1.3.RELEASE
+ .jar httpmime-4.3.1.jar cxf-rt-frontend-simple-2.3.1.jar mybatis-3.2.
+ 8.jar cxf-rt-transports-http-2.3.1.jar woodstox-core-asl-4.0.8.jar sp
+ ring-webmvc-4.1.3.RELEASE.jar wsdl4j-1.6.2.jar spring-context-support
+ -4.1.3.RELEASE.jar jsoup-1.9.2.jar spring-beans-4.1.3.RELEASE.jar jsq
+ lparser-0.9.4.jar logback-core-1.1.3.jar jstl-1.2.jar wstx-asl-3.2.7.
+ jar xmlsec-1.4.4.jar noggit-0.5.jar mysql-connector-java-5.1.32.jar j
+ ackson-core-asl-1.9.4.jar cxf-rt-bindings-xml-2.3.1.jar jackson-annot
+ ations-2.1.4.jar logback-classic-1.1.3.jar cxf-common-utilities-2.3.1
+ .jar jackson-databind-2.1.4.jar spring-expression-4.1.3.RELEASE.jar X
+ mlSchema-1.4.7.jar commons-net-3.3.jar mybatis-spring-1.2.2.jar seria
+ lizer-2.7.1.jar cxf-rt-bindings-soap-2.3.1.jar slf4j-api-1.7.7.jar to
+ ols.jar httpcore-4.3.2.jar spring-tx-4.1.3.RELEASE.jar jackson-mapper
+ -asl-1.9.4.jar jedis-2.7.2.jar mapper-3.3.7.jar google-collect-snapsh
+ ot-20080530.jar rapid-core-4.0.5.jar asm-3.3.jar spring-aop-4.1.3.REL
+ EASE.jar aopalliance-1.0.jar stax2-api-3.0.2.jar cxf-rt-ws-security-2
+ .3.1.jar cxf-rt-databinding-jaxb-2.3.1.jar xml-resolver-1.2.jar mybat
+ is-paginator-1.2.15.jar logback-access-1.1.3.jar xalan-2.7.1.jar jstl
+ -1.2.jar bcprov-jdk15-1.45.jar spring-web-4.1.3.RELEASE.jar javassist
+ -3.22.0-GA.jar freemarker-2.3.20.jar cxf-rt-frontend-jaxws-2.3.1.jar 
+ activation-1.1.1.jar cxf-common-schemas-2.3.1.jar commons-logging-1.1
+ .3.jar mybatis-generator-core-1.3.2.jar druid-1.0.9.jar commons-fileu
+ pload-1.3.1.jar guava-19.0.jar neethi-2.0.4.jar aspectjweaver-1.8.4.j
+ ar pagehelper-4.1.2.jar wss4j-1.5.10.jar httpclient-4.3.5.jar spring-
+ core-4.1.3.RELEASE.jar jconsole.jar commons-lang-2.6.jar SpringMVCFre
+ eMarker.jar persistence-api-1.0.jar geronimo-javamail_1.4_spec-1.7.1.
+ jar cxf-api-2.3.1.jar zookeeper-3.4.6.jar commons-io-1.3.2.jar cxf-rt
+ -ws-addr-2.3.1.jar jackson-core-2.1.4.jar
+Main-Class: com.java1234.generator.BasePluginAdapter
+

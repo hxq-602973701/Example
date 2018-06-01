@@ -1,7 +1,7 @@
 package com.java1234.dal.annotation;
 
 
-import com.java1234.util.DataSourceEnum;
+import com.java1234.dal.enums.DataSourceEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

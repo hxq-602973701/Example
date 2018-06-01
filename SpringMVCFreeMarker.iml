@@ -22,6 +22,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/out/artifacts/SpringMVCFreeMarker_jar/SpringMVCFreeMarker.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/out/artifacts/SpringMVCFreeMarker_jar/SpringMVCFreeMarker.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="SpringMVCFreeMarker" level="project" />
     <orderEntry type="library" name="Maven: tk.mybatis:mapper:3.3.7" level="project" />
     <orderEntry type="library" name="Maven: javax.persistence:persistence-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:4.1.2" level="project" />

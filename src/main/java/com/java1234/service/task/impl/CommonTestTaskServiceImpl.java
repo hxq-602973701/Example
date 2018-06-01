@@ -4,7 +4,7 @@ package com.java1234.service.task.impl;
 import com.google.common.collect.Maps;
 import com.java1234.dal.dao.common.CommonDAO;
 import com.java1234.service.task.BaseTaskService;
-import com.java1234.util.DataSourceEnum;
+import com.java1234.dal.enums.DataSourceEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
