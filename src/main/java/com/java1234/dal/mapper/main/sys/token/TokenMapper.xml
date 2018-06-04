@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java1234.dal.mapper.main.sys.token.TokenMapper">
+    <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.token.Token">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <result column="user_id" property="userId"/>
+        <result column="token" property="token"/>
+        <result column="device_type" property="deviceType" typeHandler="DeviceTypeEnumHandler"/>
+        <result column="push_token" property="pushToken"/>
+    </resultMap>
+
+    <sql id="tokenColumns">
+    SELECT
+    T.USER_ID,
+    T.TOKEN,
+    T.DEVICE_TYPE,
+    T.PUSH_TOKEN
+    FROM S_TOKEN T
+    </sql>
+
+    <!-- 根据userId获取Token实体 -->
+    <select id="selectTokenByUserId" parameterType="Long" resultMap="BaseResultMap">
+        <include refid="tokenColumns"/>
+        <where>
+            T.USER_ID = #{userId} AND T.DEVICE_TYPE = #{deviceType,typeHandler=DeviceTypeEnumHandler}
+        </where>
+    </select>
+
+    <!-- 保存Token实体到数据库 -->
+    <insert id="insertToken" parameterType="Token">
+        INSERT INTO s_token
+        (
+        user_id,
+        token,
+        device_type,
+        push_token
+        )
+        VALUES
+        (
+        #{userId},
+        #{token},
+        #{deviceType,typeHandler=DeviceTypeEnumHandler},
+        #{pushToken}
+        )
+    </insert>
+
+    <!-- 更新Token -->
+    <update id="updateToken" parameterType="Token">
+        UPDATE s_token
+        <set>
+            <if test="token != null">
+                token = #{token},
+            </if>
+            <if test="pushToken != null">
+                push_token = #{pushToken},
+            </if>
+            modified_time = CURRENT_TIMESTAMP
+        </set>
+        WHERE user_id = #{userId} AND DEVICE_TYPE = #{deviceType,typeHandler=DeviceTypeEnumHandler}
+    </update>
+
+    <!-- 根据Token获取Token实体 -->
+    <select id="selectToken" parameterType="String" resultMap="BaseResultMap">
+        <include refid="tokenColumns"/>
+        <where>
+            t.token = #{token}
+        </where>
+    </select>
+</mapper>

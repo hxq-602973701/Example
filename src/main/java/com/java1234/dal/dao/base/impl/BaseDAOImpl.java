@@ -99,6 +99,12 @@ public abstract class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
         return new PageInfo(getMapper().select(record));
     }
 
+    /**
+     * 根据关键字逻辑删除记录（批量）
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     */
     @Override
     public int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid) {
         return _deleteWithLogicByPrimaryKeys(ids, modifiedUid);

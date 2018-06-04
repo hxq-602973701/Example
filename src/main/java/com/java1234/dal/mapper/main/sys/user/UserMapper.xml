@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java1234.dal.mapper.main.sys.user.UserMapper">
+    <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.user.User">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="id_card_num" property="idCardNum" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="signature" property="signature" jdbcType="VARCHAR"/>
+        <result column="auth_type" property="authType" jdbcType="VARCHAR"/>
+        <result column="dept_id" property="deptId" jdbcType="BIGINT"/>
+        <result column="login_way" property="loginWay" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="device_type" property="deviceType" jdbcType="INTEGER"/>
+        <result column="push_token" property="pushToken" jdbcType="VARCHAR"/>
+        <result column="device_name" property="deviceName" jdbcType="VARCHAR"/>
+        <result column="mac" property="mac" jdbcType="VARCHAR"/>
+        <result column="reg_ip" property="regIp" jdbcType="VARCHAR"/>
+        <result column="last_ip" property="lastIp" jdbcType="VARCHAR"/>
+        <result column="login_sum" property="loginSum" jdbcType="BIGINT"/>
+        <result column="branch_id" property="branchId" jdbcType="BIGINT"/>
+        <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
+        <result column="create_uid" property="createUid" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT"/>
+        <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="userColumns">
+    SELECT
+    t.user_id,
+    t.account,
+    t.user_name,
+    t.phone,
+    t.id_card_num,
+    t.email,
+    t.avatar,
+    t.signature,
+    t.auth_type,
+    t.dept_id,
+    t.login_way,
+    t.title,
+    t.pwd,
+    t.device_type,
+    t.push_token,
+    t.device_name,
+    t.mac,
+    t.reg_ip,
+    t.last_ip,
+    t.login_sum,
+    t.branch_id,
+    t.del_flag,
+    t.create_time,
+    t.create_uid,
+    t.modified_time,
+    t.modified_uid
+
+    FROM s_user t
+    </sql>
+
+    <!-- 根据用户账户获取用户信息 -->
+    <select id="selectUserByAccount" resultMap="BaseResultMap">
+        <include refid="userColumns"/>
+        <where>
+            t.account=#{account} AND t.del_flag = 0
+        </where>
+    </select>
+
+    <!-- 更新登录次数 -->
+    <update id="incrLoginCount">
+        UPDATE s_user t
+        <set>
+            t.login_sum = t.login_sum + 1,
+            t.last_ip = #{lastIp}
+        </set>
+        <where>
+            t.user_id = #{userId}
+        </where>
+    </update>
+
+    <!-- 根据uid获取用户信息 -->
+    <select id="selectUserById" resultMap="BaseResultMap">
+        <include refid="userColumns"/>
+        <where>
+            t.user_id = #{userId}
+        </where>
+    </select>
+</mapper>

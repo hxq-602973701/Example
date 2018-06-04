@@ -1,10 +1,16 @@
 package com.java1234.util;
 
 import com.java1234.dal.entity.main.book.Book;
+import com.java1234.dal.entity.main.sys.menu.Menu;
+import com.java1234.dal.utils.LoginContext;
 import com.java1234.service.book.BookService;
+import com.java1234.service.sys.menu.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import java.util.List;
 
 /**
  * Freemarker工具类
@@ -33,4 +39,52 @@ public class FreemarkerUtil {
         return bookService.selectOne(book);
     }
 
+    /**
+     * 获取模块化的子系统列表
+     *
+     * @return
+     */
+    public static List<Menu> subSystem() {
+        final MenuService menuService = SpringUtils.getBean(MenuService.class);
+        return menuService.selectSubSystem(LoginContext.getAuthType());
+    }
+
+    /**
+     * 获取头部导航条
+     *
+     * @param pageId 页面ID
+     * @return
+     */
+    public static List<Menu> navbar(String pageId) {
+        Assert.notNull(pageId, "pageId can not be null");
+
+        final MenuService menuService = SpringUtil.getBean(MenuService.class);
+        return menuService.selectNavbarList(LoginContext.getAuthType(), pageId);
+    }
+
+    /**
+     * 获取左侧导航条
+     *
+     * @param pageId 页面ID
+     * @return
+     */
+    public static List<Menu> sidebar(String pageId) {
+        Assert.notNull(pageId, "pageId can not be null");
+
+        final MenuService menuService = SpringUtil.getBean(MenuService.class);
+        return menuService.selectSidebarList(LoginContext.getAuthType(), pageId);
+    }
+
+    /**
+     * 面包屑导航条
+     *
+     * @param pageId 页面ID
+     * @return
+     */
+    public static List<Menu> breadcrumbBar(String pageId) {
+        Assert.notNull(pageId, "pageId can not be null");
+
+        final MenuService menuService = SpringUtil.getBean(MenuService.class);
+        return menuService.selectBreadcrumbBarList(LoginContext.getAuthType(), pageId);
+    }
 }

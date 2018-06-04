@@ -1,8 +1,8 @@
 <#--
  所属模块：框架模块
  页面名称：系统模版
- 创建时间：2016/05/29
- 创建人员：xinfeng.hu
+ 创建时间：2018/06/01
+ 创建人员：lt
  -->
 <!DOCTYPE html>
 <html>
@@ -103,9 +103,12 @@
 </head>
 <#assign userProfile = utils.getUserProfile()>
 <body class="fixed-nav fixed-sidebar">
-<div <#if ____navbar____ == "true">id="wrapper"</#if>>
+<div
+        id="wrapper"
+>
     <!-- top nav start -->
-<#if ____navbar____ == "true">
+
+
     <div class="row">
         <nav class="navbar navbar-fixed-top custom-bgcolor" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -156,10 +159,12 @@
             </ul>
         </nav>
     </div>
-</#if>
+
+
     <!-- top nav end -->
     <!-- left sider nav start -->
-<#if ____sidebar____ == "true">
+
+
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: calc(100% - 56px);">
             <div class="sidebar-collapse" style="overflow: hidden; width: auto; height: calc(100% - 56px);">
@@ -175,12 +180,13 @@
             </div>
         </div>
     </nav>
-</#if>
+
+
     <!-- left sider nav end -->
 
-    <div id="page-wrapper" class="gray-bg dashbard-1" <#if ____sidebar____ != "true">style="margin-left: 0;"</#if>>
+    <div id="page-wrapper" class="gray-bg dashbard-1" style="margin-left: 0;">
         <!-- path nav start -->
-    <#if ____breadcrumbBar____ == "true">
+
         <div class="row wrapper border-bottom white-bg page-location">
             <div class="col-lg-10">
                 <ol class="breadcrumb"><span class="custom-font-grey">当前位置：</span>
@@ -206,7 +212,7 @@
                 </ol>
             </div>
         </div>
-    </#if>
+
         <!-- path nav end-->
         <!-- main content start -->
         <div class="wrapper wrapper-content">
@@ -234,8 +240,8 @@
 <script type="text/javascript">
     $(function () {
 
-        var msg_val = $.cookie('msg');
-        console.log("cookies",msg_val);
+//        var msg_val = $.cookie('msg');
+//        console.log("cookies",msg_val);
 
         //10秒钟ping一次，获取铃铛消息
 			  getMsgCount();

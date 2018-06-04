@@ -9,7 +9,7 @@
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
 </head>
 <body>
-<#assign userProfile = utils.getUserProfile()>
+<#--<#assign userProfile = utils.getUserProfile()>-->
 <div class="hd-bg"></div>
 <div class="nav">
     <div class="logo">

@@ -1,21 +1,30 @@
 package com.java1234.web.interceptor;
 
 import com.alibaba.fastjson.JSON;
+import com.java1234.dal.annotation.AuthCheck;
+import com.java1234.dal.utils.CookieUtil;
+import com.java1234.dal.utils.DataPipe;
+import com.java1234.dal.utils.LoginContext;
+import com.java1234.util.RequestUtil;
+import com.java1234.util.ResponseCode;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * 权限控制拦截器
  *
- * @author lt 2013-3-14下午1:44:07
+ * @author lt 2018-06-01
  * @version 1.0.0
  */
 public class BaseInterceptor extends HandlerInterceptorAdapter {
@@ -80,43 +89,43 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
         final Method method = handlerMethod.getMethod();
 
         // 取得请求Controller方法的权限注释
-//        final AuthCheck authCheck = method.getAnnotation(AuthCheck.class);
+        final AuthCheck authCheck = method.getAnnotation(AuthCheck.class);
 
         // 权限验证
-//        if (authCheck != null) {
-//            mv.addObject("pageId", authCheck.page());
-//        }
+        if (authCheck != null) {
+            mv.addObject("pageId", authCheck.page());
+        }
 
         if (mv != null) {
 
-//            final String token = LoginContext.getToken();
+            final String token = LoginContext.getToken();
 
-//            List<Cookie> cookies = DataPipe.in(mv).meta(ResponseCode.SC_OK).cookies();
+            List<Cookie> cookies = DataPipe.in(mv).meta(ResponseCode.SC_OK).cookies();
 
             // 保持Cookie到客户端
-//            if (cookies != null) {
-//                cookies.forEach(cookie->response.addCookie(cookie));
-//            } else if (StringUtils.isNotBlank(token)) {
+            if (cookies != null) {
+                cookies.forEach(cookie -> response.addCookie(cookie));
+            } else if (StringUtils.isNotBlank(token)) {
 
                 //将cookie的过期时间设置为浏览器关闭时间
-//                Cookie cookie = CookieUtil.getSessionCookie(token);
-//                cookie.setMaxAge(-1);
-//                // 延长Session时间
-//                response.addCookie(cookie);
+                Cookie cookie = CookieUtil.getSessionCookie(token);
+                cookie.setMaxAge(-1);
+                // 延长Session时间
+                response.addCookie(cookie);
             }
 
             // 记录请求返回数据
             if (responseLogger.isDebugEnabled()) {
-//                final Long uid = LoginContext.getUserId();
+                final Long uid = LoginContext.getUserId();
                 final String requestURI = request.getRequestURI();
                 String queryString = request.getQueryString();
-//                if (StringUtils.isBlank(queryString)) {
-//                    queryString = JSON.toJSONString(request.getParameterMap());
-//                }
+                if (StringUtils.isBlank(queryString)) {
+                    queryString = JSON.toJSONString(request.getParameterMap());
+                }
                 String json = JSON.toJSONString(mv.getModel());
-//                responseLogger.debug("query url[{}],query[{}],login_id[{}],response:\n{}\n", requestURI, queryString, uid, json);
+                responseLogger.debug("query url[{}],query[{}],login_id[{}],response:\n{}\n", requestURI, queryString, uid, json);
             }
-//        }
+        }
     }
 
     /**
@@ -151,15 +160,14 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             if (runtime > 3000) {
                 String requestURI = request.getRequestURI();
                 String queryString = request.getQueryString();
-//                Long loginId = LoginContext.getUserId();
-//                slowLogger.error("query url[{}],query[{}],login_id[{}],runtime[{}ms]", requestURI, queryString, loginId, runtime);
+                Long loginId = LoginContext.getUserId();
+                slowLogger.error("query url[{}],query[{}],login_id[{}],runtime[{}ms]", requestURI, queryString, loginId, runtime);
             }
 
         } finally {
             // 清除本地线程缓存(最后的机会了)
             SLOW_REQUEST_THREAD_LOCAL.remove();
-//            LoginContext.remove();
-//            LoginContext.removeOpenThirdIn();
+            LoginContext.remove();
         }
 
     }
@@ -184,17 +192,17 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
      * @throws IOException
      */
     protected void noLogin(HttpServletResponse response) throws IOException {
-//        if (RequestUtil.isJsonRequest()) {
-//            response.setCharacterEncoding("UTF-8");
-//            response.getOutputStream().println(JSON.toJSONString(new Object() {
-//                public Object meta = new Object() {
-//                    public int code = HttpServletResponse.SC_UNAUTHORIZED;
-//                    public String message = "您未登录系统，或您在其他地方登录了帐号。";
-//                };
-//            }));
-//        } else {
-//            response.sendRedirect("/login");
-//        }
+        if (RequestUtil.isJsonRequest()) {
+            response.setCharacterEncoding("UTF-8");
+            response.getOutputStream().println(JSON.toJSONString(new Object() {
+                public Object meta = new Object() {
+                    public int code = HttpServletResponse.SC_UNAUTHORIZED;
+                    public String message = "您未登录系统，或您在其他地方登录了帐号。";
+                };
+            }));
+        } else {
+            response.sendRedirect("/login");
+        }
     }
 
     /**
@@ -204,17 +212,17 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
      * @throws IOException
      */
     protected void noAuth(HttpServletResponse response) throws IOException {
-//        if (RequestUtil.isJsonRequest()) {
-//            response.setCharacterEncoding("UTF-8");
-//            response.getOutputStream().println(JSON.toJSONString(new Object() {
-//                public Object meta = new Object() {
-//                    public int code = HttpServletResponse.SC_FORBIDDEN;
-//                    public String message = "您没有权限访问该页面。";
-//                };
-//            }));
-//        } else {
-//            response.sendRedirect("/401");
-//        }
+        if (RequestUtil.isJsonRequest()) {
+            response.setCharacterEncoding("UTF-8");
+            response.getOutputStream().println(JSON.toJSONString(new Object() {
+                public Object meta = new Object() {
+                    public int code = HttpServletResponse.SC_FORBIDDEN;
+                    public String message = "您没有权限访问该页面。";
+                };
+            }));
+        } else {
+            response.sendRedirect("/401");
+        }
     }
 
 }

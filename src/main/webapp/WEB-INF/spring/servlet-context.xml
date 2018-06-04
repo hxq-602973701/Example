@@ -118,8 +118,8 @@
                 <prop key="template_exception_handler">ignore</prop>
                 <!--这个是定义一些共用页面 可以引入到别的页面中-->
                 <!--<prop key="auto_import">-->
-                    <!--common/macro/common.ftl as common_macro,-->
-                    <!--common/macro/needs-common.ftl as needs_macro-->
+                    <!--common/macro/book-base.ftl as common_macro,-->
+                    <!--common/macro/needs-book-base.ftl as needs_macro-->
                 <!--</prop>-->
             </props>
         </property>

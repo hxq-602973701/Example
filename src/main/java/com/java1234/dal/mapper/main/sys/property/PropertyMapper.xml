@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java1234.dal.mapper.main.sys.property.PropertyMapper" >
+  <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.property.Property" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="prop_id" property="propId" jdbcType="INTEGER" />
+    <result column="prop_parent_id" property="propParentId" jdbcType="INTEGER" />
+    <result column="prop_type" property="propType" jdbcType="INTEGER" />
+    <result column="prop_key" property="propKey" jdbcType="VARCHAR" />
+    <result column="prop_value" property="propValue" jdbcType="VARCHAR" />
+    <result column="prop_icon" property="propIcon" jdbcType="VARCHAR" />
+    <result column="prop_memo" property="propMemo" jdbcType="VARCHAR" />
+    <result column="ranking" property="ranking" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
+    <result column="create_uid" property="createUid" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT" />
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>

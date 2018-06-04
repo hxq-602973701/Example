@@ -1,0 +1,2 @@
+user表 auth_type 不可以为空
+menu 表 menu_roles 不可以为空  menu_show菜单展示

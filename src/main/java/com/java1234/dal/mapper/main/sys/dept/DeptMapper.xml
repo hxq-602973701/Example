@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java1234.dal.mapper.main.sys.dept.DeptMapper" >
+  <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.dept.Dept" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="dept_id" property="deptId" jdbcType="BIGINT" />
+    <result column="dept_parent_id" property="deptParentId" jdbcType="BIGINT" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="dept_short_name" property="deptShortName" jdbcType="VARCHAR" />
+    <result column="dept_type" property="deptType" jdbcType="BIGINT" />
+    <result column="ranking" property="ranking" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
+    <result column="create_uid" property="createUid" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT" />
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
+    <result column="dept_area" property="deptArea" jdbcType="LONGVARCHAR" />
+  </resultMap>
+</mapper>

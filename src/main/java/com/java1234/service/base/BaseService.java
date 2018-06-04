@@ -32,7 +32,7 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 根据条件查询返回数据列表
-     * 
+     *
      * @param record
      * @return
      */
@@ -40,7 +40,7 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 根据条件查询返回数据条数
-     * 
+     *
      * @param record
      * @return
      */
@@ -56,7 +56,7 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 插入，空属性也会插入
-     * 
+     *
      * @param record
      * @return
      */
@@ -64,7 +64,7 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 插入，空属性不会插入
-     * 
+     *
      * @param record
      * @return
      */
@@ -72,7 +72,7 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 插入列表，空属性不会插入
-     * 
+     *
      * @param recordList
      * @return
      */
@@ -80,7 +80,7 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 根据条件删除
-     * 
+     *
      * @param key
      * @return
      */
@@ -88,7 +88,7 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 根据主键删除
-     * 
+     *
      * @param pk
      * @return
      */
@@ -96,7 +96,7 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 根据主键修改，空值条件会修改成null
-     * 
+     *
      * @param record
      * @return
      */
@@ -104,9 +104,17 @@ public interface BaseService<T extends BaseEntity> {
 
     /**
      * 根据主键修改，空值条件不会修改成null
-     * 
+     *
      * @param record
      * @return
      */
     public int updateByPrimaryKeySelective(T record);
+
+    /**
+     * 根据关键字逻辑删除记录（批量）
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     */
+    int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid);
 }

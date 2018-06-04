@@ -227,7 +227,7 @@
             $.ajax(opts).done(function (data) {
 
                 var meta = data.meta, response = data.response;
-
+                console.log(meta);
                 // 服务器成功返回
                 if (meta.code === 200) {
                     defer.resolve(response);

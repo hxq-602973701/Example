@@ -260,7 +260,7 @@
 </script>
 </@override>
 
-<@extends name="/common/layout/common.ftl"/>
+<@extends name="/common/layout/book-base.ftl"/>
 
 
 

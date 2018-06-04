@@ -5,7 +5,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<!-- 别名 -->
 	<typeAliases>
+		<!--实体包-->
 		<package name="com.java1234.dal.entity"/>
+		<!-- 自定义类型转换包 -->
+		<package name="com.java1234.dal.handler"/>
 	</typeAliases>
 
 	<!-- 配置分页插件 -->

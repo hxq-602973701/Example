@@ -4,11 +4,7 @@
 
 <generatorConfiguration>
 
-	<properties resource="generatorConfig.properties"/>
-
-	<!-- 数据库驱动包位置 -->
-	<classPathEntry
-			location="E:\BaiDuYunDownLoad\[www.java1234.com]《Jsp屌炸天新闻发布系统》第十六讲源码及文档\News\WebContent\WEB-INF\lib\mysql-connector-java-3.1.12-bin.jar" />
+	<properties resource="myGeneratorConfig.properties"/>
 
 	<context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
 		<!-- TKmybatis配置 -->
@@ -32,7 +28,7 @@
 			<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
 		</plugin>
 
-		<!--&lt;!&ndash; 类型解析器 &ndash;&gt;-->
+		<!--&lt;!&ndash;&lt;!&ndash; 类型解析器 &ndash;&gt;&ndash;&gt;-->
 		<!--<javaTypeResolver type="cn.com.youlove.component.generator.MyJavaTypeResolver">-->
 			<!--<property name="forceBigDecimals" value="false" />-->
 		<!--</javaTypeResolver>-->
