@@ -19,6 +19,12 @@ public class BaseEntity implements Serializable {
     @Transient
     private int pageSize = 10;
 
+    /**
+     * 查询条件
+     */
+    @Transient
+    private String query;
+
     public int getPageSize() {
         return pageSize;
     }
@@ -33,5 +39,13 @@ public class BaseEntity implements Serializable {
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 }

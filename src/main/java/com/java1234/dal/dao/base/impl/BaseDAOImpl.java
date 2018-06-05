@@ -82,6 +82,12 @@ public abstract class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
         }
     }
 
+    /**
+     * 分页查询
+     *
+     * @param record
+     * @return
+     */
     @Override
     public PageInfo<T> selectPage(T record) {
         final Set<EntityColumn> pkSet = EntityHelper.getPKColumns(record.getClass());

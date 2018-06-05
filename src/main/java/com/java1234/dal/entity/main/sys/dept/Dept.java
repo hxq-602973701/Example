@@ -4,6 +4,7 @@ import com.java1234.dal.entity.base.BaseEntity;
 import com.java1234.dal.utils.SequenceRule;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 @Table(name = "s_dept")
@@ -11,10 +12,10 @@ import javax.persistence.*;
 public class Dept extends BaseEntity {
     @Id
     @Column(name = "dept_id")
-    private Long deptId;
+    private Integer deptId;
 
     @Column(name = "dept_parent_id")
-    private Long deptParentId;
+    private Integer deptParentId;
 
     @Column(name = "dept_code")
     private String deptCode;
@@ -34,7 +35,7 @@ public class Dept extends BaseEntity {
      * 删除标志
      */
     @Column(name = "del_flag")
-    private Byte delFlag;
+    private Boolean delFlag;
 
     /**
      * 创建人
@@ -63,31 +64,54 @@ public class Dept extends BaseEntity {
     @Column(name = "dept_area")
     private String deptArea;
 
+    //=============================================
+
+    /**
+     * 子单位列表
+     */
+    @Transient
+    private List<Dept> deptList;
+
+    //================================================
+
+    public Dept() {
+        //Nothing
+    }
+
+    /**
+     * 以单位Code初始化
+     *
+     * @param deptCode
+     */
+    public Dept(String deptCode) {
+        this.deptCode = deptCode;
+    }
+
     /**
      * @return dept_id
      */
-    public Long getDeptId() {
+    public Integer getDeptId() {
         return deptId;
     }
 
     /**
      * @param deptId
      */
-    public void setDeptId(Long deptId) {
+    public void setDeptId(Integer deptId) {
         this.deptId = deptId;
     }
 
     /**
      * @return dept_parent_id
      */
-    public Long getDeptParentId() {
+    public Integer getDeptParentId() {
         return deptParentId;
     }
 
     /**
      * @param deptParentId
      */
-    public void setDeptParentId(Long deptParentId) {
+    public void setDeptParentId(Integer deptParentId) {
         this.deptParentId = deptParentId;
     }
 
@@ -166,7 +190,7 @@ public class Dept extends BaseEntity {
      *
      * @return del_flag - 删除标志
      */
-    public Byte getDelFlag() {
+    public Boolean getDelFlag() {
         return delFlag;
     }
 
@@ -175,7 +199,7 @@ public class Dept extends BaseEntity {
      *
      * @param delFlag 删除标志
      */
-    public void setDelFlag(Byte delFlag) {
+    public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
     }
 
@@ -263,5 +287,13 @@ public class Dept extends BaseEntity {
      */
     public void setDeptArea(String deptArea) {
         this.deptArea = deptArea;
+    }
+
+    public List<Dept> getDeptList() {
+        return deptList;
+    }
+
+    public void setDeptList(List<Dept> deptList) {
+        this.deptList = deptList;
     }
 }

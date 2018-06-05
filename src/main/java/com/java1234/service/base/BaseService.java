@@ -117,4 +117,12 @@ public interface BaseService<T extends BaseEntity> {
      * @param modifiedUid 修改者用户ID
      */
     int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid);
+
+    /**
+     * 根据关键字逻辑删除记录（批量）
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     */
+    int deleteWithLogicByPrimaryKeys(Integer[] ids, Long modifiedUid);
 }

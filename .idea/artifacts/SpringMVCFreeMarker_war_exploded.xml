@@ -7,10 +7,10 @@
           <element id="module-output" name="SpringMVCFreeMarker" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: tk.mybatis:mapper:3.3.7" />
+          <element id="library" level="project" name="Maven: tk.mybatis:mapper:3.3.9" />
           <element id="library" level="project" name="Maven: javax.persistence:persistence-api:1.0" />
-          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:4.1.2" />
-          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.4" />
+          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:4.1.6" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.5" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.4" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.4" />
           <element id="library" level="project" name="Maven: joda-time:joda-time:2.5" />
