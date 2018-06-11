@@ -19,4 +19,38 @@
     <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT" />
     <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <sql id="BaseColumns">
+    select
+    t.prop_id,
+    t.prop_parent_id,
+    t.prop_type,
+    t.prop_key,
+    t.prop_value,
+    t.prop_icon,
+    t.ranking,
+    t.del_flag,
+    t.create_time,
+    t.create_uid,
+    t.modified_time,
+    t.modified_uid
+    from s_property t
+  </sql>
+
+  <!--根据param获取出所有的分页列表-->
+  <select id="selectBySetMemberVariable" resultMap="BaseResultMap">
+    <include refid="BaseColumns" />
+    <where>
+      t.del_flag = 0
+      <if test="propKey != null">
+        and t.prop_key = #{propKey}
+      </if>
+      <if test="propParentId != null">
+        and t.prop_parent_id = #{propParentId}
+      </if>
+      <if test="query != null">
+        and t.prop_key LIKE '%' || #{query} || '%'
+      </if>
+    </where>
+  </select>
 </mapper>

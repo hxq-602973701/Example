@@ -94,4 +94,21 @@ public class TokenDAOImpl implements TokenDAO {
         return entity;
     }
 
+    /**
+     * 删除Token
+     *
+     * @param token
+     */
+    @Override
+    public void deleteToken(String token) {
+        Assert.notNull(token, "token can not be null");
+
+        // 删除数据，失效缓存数据
+        int result = tokenMapper.deleteToken(token);
+        // cache.delete(token);
+        if (result != 1) {
+            logger.error("delete token error! token={}", token);
+        }
+    }
+
 }

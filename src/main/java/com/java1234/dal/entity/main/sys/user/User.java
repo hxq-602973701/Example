@@ -42,7 +42,7 @@ public class User extends BaseEntity {
     private Long authType;
 
     @Column(name = "dept_id")
-    private Long deptId;
+    private Integer deptId;
 
     @Column(name = "login_way")
     private Integer loginWay;
@@ -244,14 +244,14 @@ public class User extends BaseEntity {
     /**
      * @return dept_id
      */
-    public Long getDeptId() {
+    public Integer getDeptId() {
         return deptId;
     }
 
     /**
      * @param deptId
      */
-    public void setDeptId(Long deptId) {
+    public void setDeptId(Integer deptId) {
         this.deptId = deptId;
     }
 

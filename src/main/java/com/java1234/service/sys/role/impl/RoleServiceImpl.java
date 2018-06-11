@@ -3,14 +3,16 @@ package com.java1234.service.sys.role.impl;
 import com.github.pagehelper.PageHelper;
 import com.java1234.dal.dao.base.BaseDAO;
 import com.java1234.dal.dao.sys.role.RoleDAO;
-import com.java1234.dal.entity.main.sys.menu.Menu;
 import com.java1234.dal.entity.main.sys.role.Role;
 import com.java1234.service.base.impl.BaseServiceImpl;
 import com.java1234.service.sys.role.RoleService;
-import javax.annotation.Resource;
+import com.java1234.util.Ids;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.OptionalLong;
 
 /**
  * RoleService
@@ -21,7 +23,7 @@ import java.util.List;
  */
 @Service
 public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleService {
-    
+
     /**
      * RoleDAO
      */
@@ -40,6 +42,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
     /**
      * 获取所有权限
+     *
      * @return
      */
     @Override
@@ -50,5 +53,47 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         //按照 RANKING 排序
         PageHelper.orderBy("ranking");
         return roleDAO.select(param);
+    }
+
+    /**
+     * 保存角色
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public void saveRole(Role param) {
+        Assert.notNull(param, "param can not be null");
+
+        final Integer roleId = param.getRoleId();
+
+        if (Ids.verifyId(roleId)) {
+            roleDAO.updateByPrimaryKeySelective(param);
+        } else {
+            insertRole(param);
+        }
+    }
+
+    /**
+     * 添加角色
+     *
+     * @param entity
+     */
+    public void insertRole(final Role entity) {
+        Assert.notNull(entity, "entity can not be null");
+        Assert.notNull(entity.getRoleName(), "roleName can not be null");
+
+        //获取最大的AuthType
+        final OptionalLong maxAuthType = selectAll().stream().mapToLong(r -> r.getAuthType()).max();
+
+        //存在则：最大值 * 2， 不存在则：为1
+        if (maxAuthType.isPresent()) {
+            entity.setAuthType(maxAuthType.getAsLong() * 2);
+        } else {
+            entity.setAuthType(1L);
+        }
+
+        entity.setDelFlag(false);
+        roleDAO.insertSelective(entity);
     }
 }

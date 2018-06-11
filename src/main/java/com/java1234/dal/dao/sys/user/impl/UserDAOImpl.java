@@ -1,5 +1,7 @@
 package com.java1234.dal.dao.sys.user.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.java1234.dal.dao.base.impl.BaseDAOImpl;
 import com.java1234.dal.dao.sys.user.UserDAO;
 import com.java1234.dal.entity.main.sys.user.User;
@@ -10,6 +12,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 /**
  * UserDAO
@@ -81,5 +85,32 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
         }
 
         return userMapper.selectUserById(userId);
+    }
+
+    /**
+     * 根据参数以分页的方式获取用户列表
+     *
+     * @param param 用户列表查询参数
+     * @return 用户列表（分页）
+     */
+    @Override
+    public PageInfo<User> selectUserListByPaging(User param) {
+        Assert.notNull(param, "param can not be null");
+
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), true);
+        List<User> userList = userMapper.selectUserListByParam(param);
+        return new PageInfo(userList);
+    }
+
+    /**
+     * 验证用户账户、手机等是否存在
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public boolean selectUserDuplicate(User param){
+        int count = userMapper.selectUserDuplicate(param);
+        return count == 0;
     }
 }

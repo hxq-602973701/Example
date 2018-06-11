@@ -184,11 +184,41 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
      *
      * @return
      */
-
+    @Override
     public List<Dept> selectAll() {
         final Dept param = new Dept();
         param.setDelFlag(false);
         //TODO 后面上缓存
         return deptDAO.select(param);
+    }
+
+    /**
+     * 根据单位ID获取单位信息
+     *
+     * @param deptId 单位ID
+     * @return
+     */
+    @Override
+    public Dept selectDeptById(Integer deptId) {
+        Assert.notNull(deptId, "deptId can not be null");
+
+        return deptDAO.selectByPrimaryKey(deptId);
+    }
+
+    /**
+     * 获取最顶层单位
+     *
+     * @param dept
+     * @return
+     */
+    @Override
+    public Dept selectTopDept(Dept dept) {
+
+        //如果传入是科所队单位
+        if (dept.getDeptType() != DeptTypeEnum.DISTRICT_BUREAU.getValue() && dept.getDeptType() != DeptTypeEnum.COUNTY_BUREAU.getValue()&&dept.getDeptType() != DeptTypeEnum.CITY_BUREAU.getValue()){
+            dept = deptDAO.selectByPrimaryKey(dept.getDeptParentId());
+            selectTopDept(dept);
+        }
+        return dept;
     }
 }

@@ -1,12 +1,18 @@
 package com.java1234.dal.dao.sys.property.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.java1234.dal.dao.base.impl.BaseDAOImpl;
 import com.java1234.dal.dao.sys.property.PropertyDAO;
 import com.java1234.dal.entity.main.sys.property.Property;
 import com.java1234.dal.mapper.main.sys.property.PropertyMapper;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 /**
  * PropertyDAO
@@ -17,7 +23,7 @@ import tk.mybatis.mapper.common.Mapper;
  */
 @Service
 public class PropertyDAOImpl extends BaseDAOImpl<Property> implements PropertyDAO {
-    
+
     /**
      * PropertyMapper
      */
@@ -32,5 +38,20 @@ public class PropertyDAOImpl extends BaseDAOImpl<Property> implements PropertyDA
     @Override
     protected Mapper<Property> getMapper() {
         return propertyMapper;
+    }
+
+    /**
+     * 根据param获取出所有的分页列表
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public PageInfo<Property> selectPageByProperty(Property param) {
+        PageHelper.startPage(param.getPageNum(), param.getPageSize(), true);
+        param.setQuery("".equals(param.getQuery()) ? null : param.getQuery());
+        List<Property> propertyList = propertyMapper.selectBySetMemberVariable(param);
+        PageInfo<Property> pageInfo = new PageInfo<>(propertyList);
+        return pageInfo;
     }
 }

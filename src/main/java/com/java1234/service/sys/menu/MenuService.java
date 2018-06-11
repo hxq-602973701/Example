@@ -78,4 +78,12 @@ public interface MenuService extends BaseService<Menu> {
      * @param menu
      */
     void saveMenu(Menu menu);
+
+    /**
+     * 根据页面编号获取菜单信息
+     *
+     * @param pageId 页面ID
+     * @return
+     */
+    Menu selectMenuByPageId(String pageId);
 }

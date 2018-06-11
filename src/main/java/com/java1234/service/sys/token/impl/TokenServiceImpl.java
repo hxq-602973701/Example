@@ -76,6 +76,18 @@ public class TokenServiceImpl implements TokenService {
     }
 
     /**
+     * 失效指定Token
+     *
+     * @param token
+     */
+    @Override
+    public void invalidToken(String token) {
+        Assert.notNull(token, "token can not be null");
+
+        tokenDAO.deleteToken(token);
+    }
+
+    /**
      * 生成令牌
      *
      * @param uid 用户id

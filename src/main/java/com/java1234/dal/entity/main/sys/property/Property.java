@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Property extends BaseEntity {
     @Id
     @Column(name = "prop_id")
-    private Integer propId;
+    private Long propId;
 
     @Column(name = "prop_parent_id")
     private Integer propParentId;
@@ -37,7 +37,7 @@ public class Property extends BaseEntity {
      * 删除标志
      */
     @Column(name = "del_flag")
-    private Byte delFlag;
+    private Boolean delFlag;
 
     /**
      * 创建人
@@ -66,14 +66,14 @@ public class Property extends BaseEntity {
     /**
      * @return prop_id
      */
-    public Integer getPropId() {
+    public Long getPropId() {
         return propId;
     }
 
     /**
      * @param propId
      */
-    public void setPropId(Integer propId) {
+    public void setPropId(Long propId) {
         this.propId = propId;
     }
 
@@ -180,7 +180,7 @@ public class Property extends BaseEntity {
      *
      * @return del_flag - 删除标志
      */
-    public Byte getDelFlag() {
+    public Boolean getDelFlag() {
         return delFlag;
     }
 
@@ -189,7 +189,7 @@ public class Property extends BaseEntity {
      *
      * @param delFlag 删除标志
      */
-    public void setDelFlag(Byte delFlag) {
+    public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
     }
 

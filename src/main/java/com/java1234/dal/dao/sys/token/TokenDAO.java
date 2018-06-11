@@ -41,4 +41,11 @@ public interface TokenDAO {
      * @return
      */
     Token selectToken(String token);
+
+    /**
+     * 删除Token
+     *
+     * @param token
+     */
+    void deleteToken(String token);
 }

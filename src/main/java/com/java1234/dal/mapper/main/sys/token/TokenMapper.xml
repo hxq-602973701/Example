@@ -68,4 +68,9 @@
             t.token = #{token}
         </where>
     </select>
+
+    <!-- 失效指定Token -->
+    <delete id="deleteToken">
+        DELETE FROM S_TOKEN WHERE TOKEN = #{token}
+    </delete>
 </mapper>

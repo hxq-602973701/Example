@@ -1,2 +1,4 @@
 user表 auth_type 不可以为空
 menu 表 menu_roles 不可以为空  menu_show菜单展示
+
+单位查询的时候 默认查询没有带del_flag  还有query是什么意思怎么实现的

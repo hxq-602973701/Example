@@ -30,4 +30,11 @@ public interface TokenService {
      * @return
      */
     Token selectToken(String token);
+
+    /**
+     * 失效指定Token
+     *
+     * @param token
+     */
+    void invalidToken(String token);
 }

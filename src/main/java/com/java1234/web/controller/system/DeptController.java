@@ -68,7 +68,7 @@ public class DeptController {
      * @param model
      * @return
      */
-//    @AuthCheck(page = SystemPageID.DEPT_LIST)
+    @AuthCheck(page = SystemPageID.DEPT_LIST)
     @RequestMapping(value = "/system/dept-page", method = RequestMethod.GET)
     public void deptPageApi(final Model model, Dept param) {
 

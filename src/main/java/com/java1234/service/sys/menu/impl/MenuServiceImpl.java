@@ -334,6 +334,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
      * @param pageId 页面ID
      * @return
      */
+    @Override
     public Menu selectMenuByPageId(String pageId) {
         Assert.notNull(pageId, "pageId can not be null");
 

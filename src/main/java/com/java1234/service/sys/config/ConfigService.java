@@ -11,4 +11,12 @@ import com.java1234.service.base.BaseService;
  * @category 南阳理工学院
  */
 public interface ConfigService extends BaseService<Config> {
+
+    /**
+     * 保存系统参数
+     *
+     * @param param
+     * @return
+     */
+    void saveConfig(Config param);
 }

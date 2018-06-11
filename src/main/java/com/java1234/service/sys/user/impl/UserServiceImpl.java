@@ -1,5 +1,7 @@
 package com.java1234.service.sys.user.impl;
 
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.java1234.dal.dao.base.BaseDAO;
 import com.java1234.dal.dao.sys.user.UserDAO;
 import com.java1234.dal.entity.main.sys.dept.Dept;
@@ -12,15 +14,19 @@ import com.java1234.dal.vo.sys.UserVO;
 import com.java1234.exception.DataErrorException;
 import com.java1234.exception.message.UserMessage;
 import com.java1234.service.base.impl.BaseServiceImpl;
+import com.java1234.service.sys.dept.DeptService;
 import com.java1234.service.sys.token.TokenService;
 import com.java1234.service.sys.user.UserService;
-
-import javax.annotation.Resource;
-
-import com.java1234.util.ResponseCode;
+import com.java1234.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * UserService
@@ -39,10 +45,21 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     private UserDAO userDAO;
 
     /**
+     * 系统单位Service
+     */
+    @Resource
+    private DeptService deptService;
+
+    /**
      * 令牌Service
      */
     @Resource
     private TokenService tokenService;
+
+    /**
+     * 默认头像
+     */
+    private static final String DEFAULT_AVATAR = Config.getString("config.default_avatar");
 
     /**
      * Mapper初始化
@@ -112,13 +129,177 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     /**
+     * 根据查询条件，以分页的方式获取用户列表
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public PageInfo<User> selectUserListByPaging(final User param) {
+
+        final Map<Integer, Dept> deptMap = deptService.selectAll().parallelStream().collect(Collectors.toMap(Dept::getDeptId, Function.identity()));
+
+        // 获取分页数据
+        PageInfo<User> pageInfo = userDAO.selectUserListByPaging(param);
+
+        List<User> profileList = Lists.newArrayList();
+        pageInfo.getList().forEach(
+                (user) -> profileList.add(initProfile(user, deptMap.get(user.getDeptId())))
+        );
+        pageInfo.getList().clear();
+        pageInfo.getList().addAll(profileList);
+
+        return pageInfo;
+    }
+
+    /**
+     * 验证用户账户、手机等是否存在
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public boolean selectUserDuplicate(User param) {
+        Assert.notNull(param, "param can not be null");
+
+        return userDAO.selectUserDuplicate(param);
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param param
+     */
+    @Override
+    public User updateProfile(User param) {
+        Assert.notNull(param, "param can not be null");
+        Assert.notNull(param.getUserId(), "userId can not be null");
+
+        // 修改密码
+        if (StringUtils.isNotBlank(param.getPwd())) {
+            param.setPwd(MD5.md5(param.getPwd().trim()));
+        }
+
+        userDAO.updateByPrimaryKeySelective(param);
+
+        return initProfile(userDAO.selectUserById(param.getUserId()), null);
+    }
+
+    /**
+     * 保存用户
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public User saveUser(User param) {
+        Assert.notNull(param, "param can not be null");
+
+        final Long userId = param.getUserId();
+
+        final User user;
+        if (Ids.verifyId(userId)) {
+            user = updateProfile(param);
+        } else {
+            user = insertUser(param);
+        }
+
+        return user;
+    }
+
+    /**
+     * 批量逻辑删除用户,当传进来的用户数组下都无信息员的时候，则删除成功
+     * 有信息员的则返回有信息员列表
+     *
+     * @param userIds 要删除的用户集合
+     * @param userId  当前登录用户
+     */
+    @Override
+    public void deleteUsers(Long[] userIds, Long userId) {
+        Assert.notNull(userIds, "policeIds not be null");
+
+        //如果所选的用户都没有信息员，则进行删除
+        userDAO.deleteWithLogicByPrimaryKeys(userIds, userId);
+    }
+
+    /**
+     * 添加用户
+     */
+    public User insertUser(User param) {
+        Assert.notNull(param, "param can not be null");
+        Assert.notNull(param.getAccount(), "account can not be null");
+        Assert.notNull(param.getUserName(), "userName can not be null");
+        Assert.notNull(param.getAuthType(), "authType can not be null");
+        Assert.notNull(param.getDeptId(), "deptId can not be null");
+
+        // 用户账户
+        final String account = StringUtils.trim(param.getAccount());
+        if (StringUtils.isNotBlank(account)) {
+            // 检查用户账户在用户表中是否存在
+            final User userNick = userDAO.selectUserByAccount(account);
+            if (userNick != null) {
+                throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, UserMessage.ACCOUNT_REPEAT);
+            }
+            param.setAccount(account);
+
+        } else {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, CommonMessage.REQUEST_PARAM_REQUIRED, "用户账户");
+        }
+
+        // 用户姓名
+        final String userName = StringUtils.trim(param.getUserName());
+        if (StringUtils.isNotBlank(userName)) {
+            param.setUserName(userName);
+        } else {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, CommonMessage.REQUEST_PARAM_REQUIRED, "用户姓名");
+        }
+
+        // 手机号码
+        final String phone = StringUtils.trim(param.getPhone());
+        if (StringUtil.isMobileNumber(phone)) {
+            param.setPhone(phone);
+        } else {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, CommonMessage.ILLEGAL_PARAM_REQUIRED, "手机号码");
+        }
+
+
+        // 用户头像(为空则使用默认头像)
+        final String avatar = StringUtils.trim(StringUtils.defaultIfBlank(param.getAvatar(), DEFAULT_AVATAR));
+        param.setAvatar(avatar);
+
+        // 个性签名(允许设置为空)
+        if (param.getSignature() != null) {
+            param.setSignature(param.getSignature().trim());
+        }
+
+        // 所属单位
+        if (param.getDeptId() != null) {
+            param.setDeptId(param.getDeptId());
+        } else {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, CommonMessage.REQUEST_PARAM_REQUIRED, "所属单位");
+        }
+
+        // 用户密码(为空则使用默认密码：123456)
+        final String pwd = StringUtils.trim(StringUtils.defaultIfBlank(param.getPwd(), "123456"));
+        param.setPwd(MD5.md5(pwd));
+
+        // 设备类型
+        param.setDeviceType(DeviceTypeEnum.WIN_DESK_TOP.getValue());
+        param.setLoginSum(0L);
+
+        userDAO.insertSelective(param);
+
+        return initProfile(userDAO.selectUserById(param.getUserId()), null);
+    }
+
+    /**
      * 初始化用户基本信息
      *
      * @param user
      * @param dept
      * @return
      */
-    private User initProfile(User user, Dept dept) {
+    public static User initProfile(User user, Dept dept) {
         if (user == null) {
             return null;
         }

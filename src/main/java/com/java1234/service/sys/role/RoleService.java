@@ -20,4 +20,12 @@ public interface RoleService extends BaseService<Role> {
      * @return
      */
     List<Role> selectAll();
+
+    /**
+     * 保存角色
+     *
+     * @param param
+     * @return
+     */
+    void saveRole(Role param);
 }

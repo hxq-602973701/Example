@@ -1,4 +1,5 @@
 package com.java1234.dal.dao.base;
+
 import com.github.pagehelper.PageInfo;
 import com.java1234.dal.entity.base.BaseEntity;
 
@@ -105,6 +106,7 @@ public interface BaseDAO<T extends BaseEntity> {
      *
      * @param ids         关键字ID数组
      * @param modifiedUid 修改者用户ID
+     * @return
      */
     int deleteWithLogicByPrimaryKeys(Integer[] ids, Long modifiedUid);
 
@@ -113,6 +115,7 @@ public interface BaseDAO<T extends BaseEntity> {
      *
      * @param ids         关键字ID数组
      * @param modifiedUid 修改者用户ID
+     * @return
      */
     int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid);
 

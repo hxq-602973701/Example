@@ -34,7 +34,7 @@ public class Config extends BaseEntity {
      * 删除标志
      */
     @Column(name = "del_flag")
-    private Byte delFlag;
+    private Boolean delFlag;
 
     /**
      * 创建人
@@ -163,7 +163,7 @@ public class Config extends BaseEntity {
      *
      * @return del_flag - 删除标志
      */
-    public Byte getDelFlag() {
+    public Boolean getDelFlag() {
         return delFlag;
     }
 
@@ -172,7 +172,7 @@ public class Config extends BaseEntity {
      *
      * @param delFlag 删除标志
      */
-    public void setDelFlag(Byte delFlag) {
+    public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
     }
 

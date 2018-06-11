@@ -23,7 +23,6 @@ public interface DeptService extends BaseService<Dept> {
      */
     Dept selectDeptTreeHierarchy(Integer branchId);
 
-
     /**
      * 获取指定单位ID下的所有列表(如果指定了单位类型则值返回指定的类型)
      *
@@ -40,4 +39,26 @@ public interface DeptService extends BaseService<Dept> {
      * @param dept
      */
     void saveDept(Dept dept);
+
+    /**
+     * 获取所有的单位（已删除的除外）
+     *
+     * @return
+     */
+    List<Dept> selectAll();
+
+    /**
+     * 根据单位ID获取单位信息
+     *
+     * @param deptId 单位ID
+     * @return
+     */
+    Dept selectDeptById(Integer deptId);
+
+    /**
+     * 获取该单位的分局单位
+     * @param param
+     * @return
+     */
+    Dept selectTopDept(Dept param);
 }

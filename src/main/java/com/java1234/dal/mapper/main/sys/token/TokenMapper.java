@@ -38,4 +38,12 @@ public interface TokenMapper extends Mapper<Token> {
      * @return
      */
     Token selectToken(String token);
+
+
+    /**
+     * 删除Token
+     *
+     * @param token
+     */
+    int deleteToken(String token);
 }
