@@ -223,6 +223,54 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     /**
+     * 修改用户密码
+     *
+     * @param userId 用户ID
+     * @param oldPwd 旧密码
+     * @param newPwd 新密码
+     */
+    @Override
+    public void alterPassword(Long userId, String oldPwd, String newPwd) {
+        Assert.notNull(userId, "userId can not be null");
+        Assert.notNull(oldPwd, "oldPwd can not be null");
+        Assert.notNull(newPwd, "newPwd can not be null");
+
+        // 获取用户
+        final User user = userDAO.selectUserById(userId);
+
+        // 旧密码校验
+        if (!user.getPwd().equals(MD5.md5(oldPwd))) {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, UserMessage.PASSWORD_MISS);
+        }
+        //新密码不能与旧密码相同
+        if (user.getPwd().equals(MD5.md5(newPwd))) {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, UserMessage.PASSWORD_MISS);
+        }
+
+        User resetPwdUser = new User();
+        resetPwdUser.setUserId(user.getUserId());
+        resetPwdUser.setPwd(MD5.md5(newPwd));
+
+        // 更新密码
+        userDAO.updateByPrimaryKeySelective(resetPwdUser);
+    }
+
+    /**
+     * 重置密码
+     *
+     * @param userId
+     */
+    @Override
+    public void resetPassword(Long userId) {
+        Assert.notNull(userId, "userId can not be null");
+
+        User resetPwdUser = new User();
+        resetPwdUser.setUserId(userId);
+        resetPwdUser.setPwd(MD5.md5(Config.getString("user.default.password")));
+        userDAO.updateByPrimaryKeySelective(resetPwdUser);
+    }
+
+    /**
      * 添加用户
      */
     public User insertUser(User param) {

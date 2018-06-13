@@ -16,9 +16,9 @@ import java.util.regex.Pattern;
 
 
 /**
- * Controller基类<br>
+ * Controller基类
  *
- * @author xinfeng.hu 2013-3-13下午12:15:34
+ * @author lt 2018-06-13
  * @version 1.0.0
  */
 @Controller

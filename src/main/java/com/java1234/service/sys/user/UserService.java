@@ -77,4 +77,20 @@ public interface UserService extends BaseService<User> {
      * @return
      */
     void deleteUsers(Long[] userIds, Long userId);
+
+    /**
+     * 修改用户密码
+     *
+     * @param userId 用户ID
+     * @param oldPwd 旧密码
+     * @param newPwd 新密码
+     */
+    void alterPassword(Long userId, String oldPwd, String newPwd);
+
+    /**
+     * 重置密码
+     *
+     * @param userId
+     */
+    void resetPassword(Long userId);
 }

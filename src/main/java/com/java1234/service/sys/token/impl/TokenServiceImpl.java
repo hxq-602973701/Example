@@ -36,7 +36,6 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public Token getToken(Long userId, DeviceTypeEnum deviceType) {
 
-
         Assert.notNull(userId, "userId cannot be null");
 
         // 查看数据库中是否有Token

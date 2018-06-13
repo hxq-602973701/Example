@@ -10,14 +10,16 @@
     <meta charset="utf-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link href="/assets/images/favicon.ico?${RES_TIMESTAMP}" rel="Bookmark">
     <link href="/assets/images/favicon.ico?${RES_TIMESTAMP}" rel="Shortcut Icon"/>
 
     <link href="/assets/css/bootstrap.min.css?${RES_TIMESTAMP}" rel="stylesheet">
     <link href="/assets/font-awesome/css/font-awesome.min.css?${RES_TIMESTAMP}" rel="stylesheet">
-    <link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css?${RES_TIMESTAMP}" rel="stylesheet">
+    <link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css?${RES_TIMESTAMP}"
+          rel="stylesheet">
     <link href="/assets/css/plugins/tagsinput/bootstrap-tagsinput.css?${RES_TIMESTAMP}" rel="stylesheet">
     <link href="/assets/css/animate.css?${RES_TIMESTAMP}" rel="stylesheet">
 
@@ -125,7 +127,8 @@
                             <i class="fa fa-bell" style="color: white;"></i>
                             <span class="label label-danger msg_count">0</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-alerts animated fadeInDown" id="div_msg"  style="overflow-y: scroll; max-height: 500px;">
+                        <ul class="dropdown-menu dropdown-alerts animated fadeInDown" id="div_msg"
+                            style="overflow-y: scroll; max-height: 500px;">
                             暂无消息
                         </ul>
                     </li>
@@ -151,11 +154,12 @@
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-list custom-bgcolor-menu">
-                <#list utils.navbar(pageId) as menu>
-                    <li title="${menu.menuTitle!}" class="<#if menu.menuActive??>${menu.menuActive?string('open','')}</#if>">
-                        <a href="${menu.menuUrl!}"><span class="custom-font-white">${menu.menuName!}</span></a>
-                    </li>
-                </#list>
+            <#list utils.navbar(pageId) as menu>
+                <li title="${menu.menuTitle!}"
+                    class="<#if menu.menuActive??>${menu.menuActive?string('open','')}</#if>">
+                    <a href="${menu.menuUrl!}"><span class="custom-font-white">${menu.menuName!}</span></a>
+                </li>
+            </#list>
             </ul>
         </nav>
     </div>
@@ -166,16 +170,18 @@
 
 
     <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: calc(100% - 56px);">
+        <div class="slimScrollDiv"
+             style="position: relative; overflow: hidden; width: auto; height: calc(100% - 56px);">
             <div class="sidebar-collapse" style="overflow: hidden; width: auto; height: calc(100% - 56px);">
                 <ul class="nav" id="side-menu">
-                    <#list utils.sidebar(pageId) as menu>
-                        <li title="${menu.menuTitle!}" class="<#if menu.menuActive??>${menu.menuActive?string('active','')}</#if>">
-                            <a href="${menu.menuUrl!}">
-                                <i class="${menu.menuIcon!}"></i>${menu.menuName!}
-                            </a>
-                        </li>
-                    </#list>
+                <#list utils.sidebar(pageId) as menu>
+                    <li title="${menu.menuTitle!}"
+                        class="<#if menu.menuActive??>${menu.menuActive?string('active','')}</#if>">
+                        <a href="${menu.menuUrl!}">
+                            <i class="${menu.menuIcon!}"></i>${menu.menuName!}
+                        </a>
+                    </li>
+                </#list>
                 </ul>
             </div>
         </div>
@@ -190,25 +196,25 @@
         <div class="row wrapper border-bottom white-bg page-location">
             <div class="col-lg-10">
                 <ol class="breadcrumb"><span class="custom-font-grey">当前位置：</span>
-                    <#--<#list utils.breadcrumbBar(pageId) as menu>-->
-                        <#--<li>-->
-                            <#--<#if menu_has_next>-->
-                              <#--<a class="custom-font-localmenu" href="${menu.menuUrl}">${menu.menuName}</a>-->
-                            <#--<#else>-->
-                              <#--<span>${menu.menuName}</span>-->
-                            <#--</#if>-->
-                        <#--</li>-->
-                    <#--</#list>-->
+                <#--<#list utils.breadcrumbBar(pageId) as menu>-->
+                <#--<li>-->
+                <#--<#if menu_has_next>-->
+                <#--<a class="custom-font-localmenu" href="${menu.menuUrl}">${menu.menuName}</a>-->
+                <#--<#else>-->
+                <#--<span>${menu.menuName}</span>-->
+                <#--</#if>-->
+                <#--</li>-->
+                <#--</#list>-->
 
-                    <#list utils.breadcrumbBar(pageId) as menu>
-                        <li>
-                            <#if menu_has_next>
-                                <a>${menu.menuName}</a>
-                            <#else>
-                                <span>${menu.menuName}</span>
-                            </#if>
-                        </li>
-                    </#list>
+                <#list utils.breadcrumbBar(pageId) as menu>
+                    <li>
+                        <#if menu_has_next>
+                            <a>${menu.menuName}</a>
+                        <#else>
+                            <span>${menu.menuName}</span>
+                        </#if>
+                    </li>
+                </#list>
                 </ol>
             </div>
         </div>
@@ -223,18 +229,18 @@
 </div>
 
 <script id="msg_tpl" type="text/html">
-  {{# for(var i = 0, len = d.length; i < len; i++){ }}
-  <li>
-    <a href="{{d[i]['url']}}">
-      <div>
-        <i class="fa fa-envelope fa-fw" style="color: #1AB394"></i>
-        {{d[i]['title']}}
-        <br>
-        <span class="pull-right text-muted small">{{ kirin.dataFormat(d[i]['gmtCreate'],'YYYY-MM-DD HH:mm:ss')}}</span>
-      </div>
-    </a>
-  </li>
-  {{# } }}
+    {{# for(var i = 0, len = d.length; i < len; i++){ }}
+    <li>
+        <a href="{{d[i]['url']}}">
+            <div>
+                <i class="fa fa-envelope fa-fw" style="color: #1AB394"></i>
+                {{d[i]['title']}}
+                <br>
+                <span class="pull-right text-muted small">{{ kirin.dataFormat(d[i]['gmtCreate'],'YYYY-MM-DD HH:mm:ss')}}</span>
+            </div>
+        </a>
+    </li>
+    {{# } }}
 </script>
 
 <script type="text/javascript">
@@ -244,8 +250,8 @@
 //        console.log("cookies",msg_val);
 
         //10秒钟ping一次，获取铃铛消息
-			  getMsgCount();
-			  setTimeout(getMsgCount,1000*10);
+        getMsgCount();
+        setTimeout(getMsgCount, 1000 * 10);
 
         // 设置左侧滚动条样式
         $('.sidebar-collapse').slimScroll({
@@ -270,23 +276,24 @@
         });
 
     });
-    function editProfile(){
-      kirin.popup.open({
-        title  : '信息',
-        width  : 850,
-        height : 450,
-        maxmin : false,
-        content: '/user/profile'
-      });
-    };
-    $('.changePassword').click(function() {
+    function editProfile() {
+        kirin.popup.open({
+            title: '信息',
+            width: 850,
+            height: 450,
+            maxmin: false,
+            content: '/user/profile'
+        });
+    }
+    ;
+    $('.changePassword').click(function () {
         kirin.popup.open({
             title: '密码修改',
-            width : 860,
-            height : 450,
-            maxmin : false,
-            content: '/user/password'
-        }).done(function(data) {
+            width: 860,
+            height: 450,
+            maxmin: false,
+            content: '/user/pwd'
+        }).done(function (data) {
             if (data == "success") {
                 window.location.href = "/login";
             }
@@ -294,36 +301,36 @@
     });
 
     //获取待签收的指令和条数
-    function getMsgCount(){
-      $.ajax({
-        type: 'GET',
-        url : '/intelligence/index_ping_online_intelligence.json',
-        traditional: true,
-        dataType: 'json',
-        cache: false,
-        data: {
-            ids:90
-        },
-        success:function (data) {
-          console.log(data);
-          var meta = data.meta;
-          if (meta && meta.code === 200) {
-            var list = data.response;
-            console.log("获取消息条数"+list.length);
-            $('.msg_count').text(list.length);
-            $.cookie('msg',JSON.stringify(list));
-            if(list.length>0){
-               var gettpl = document.getElementById('msg_tpl').innerHTML;
-               laytpl(gettpl).render(list, function (html) {
-                   document.getElementById('div_msg').innerHTML = html;
-               });
+    function getMsgCount() {
+        $.ajax({
+            type: 'GET',
+            url: '/intelligence/index_ping_online_intelligence.json',
+            traditional: true,
+            dataType: 'json',
+            cache: false,
+            data: {
+                ids: 90
+            },
+            success: function (data) {
+                console.log(data);
+                var meta = data.meta;
+                if (meta && meta.code === 200) {
+                    var list = data.response;
+                    console.log("获取消息条数" + list.length);
+                    $('.msg_count').text(list.length);
+                    $.cookie('msg', JSON.stringify(list));
+                    if (list.length > 0) {
+                        var gettpl = document.getElementById('msg_tpl').innerHTML;
+                        laytpl(gettpl).render(list, function (html) {
+                            document.getElementById('div_msg').innerHTML = html;
+                        });
+                    }
+                }
+            },
+            error: function () {
+                console.log("消息获取失败");
             }
-          }
-        },
-        error:function(){
-          console.log("消息获取失败");
-        }
-      });
+        });
     }
 </script>
 <#-- 脚本部分 -->

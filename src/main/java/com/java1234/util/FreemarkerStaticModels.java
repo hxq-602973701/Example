@@ -1,57 +1,76 @@
-package com.java1234.util;//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
+package com.java1234.util;
 
 import freemarker.ext.beans.BeansWrapper;
+import freemarker.ext.beans.BeansWrapperBuilder;
+import freemarker.template.Configuration;
 import freemarker.template.TemplateHashModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
 
 public class FreemarkerStaticModels extends HashMap<String, Object> {
-    private static FreemarkerStaticModels FREEMARKER_STATIC_MODELS;
+
+    /**
+     * 序列化版本号
+     */
+    private static final long serialVersionUID = -980045483290784020L;
+
+    /**
+     * 日志记录器
+     */
+    private static final Logger logger = LoggerFactory.getLogger(FreemarkerStaticModels.class);
+
+    private final static FreemarkerStaticModels FREEMARKER_STATIC_MODELS = new FreemarkerStaticModels();
+
     private Properties staticModels;
 
-    private FreemarkerStaticModels(){
-
+    /**
+     * 私有化构造函数
+     */
+    private FreemarkerStaticModels() {
+        // 系统名称
+        put("SYSTEM_NAME", Config.getString("config.system.name"));
+        // 资源时间戳
+        put("RES_TIMESTAMP", Config.getString("config.resource.timestamp", Long.toString(System.currentTimeMillis())));
     }
 
-    public static FreemarkerStaticModels getInstance(){
-        if(FREEMARKER_STATIC_MODELS==null){
-            FREEMARKER_STATIC_MODELS=new FreemarkerStaticModels();
-        }
+    /**
+     * 获取实例
+     *
+     * @return
+     */
+    public static FreemarkerStaticModels getInstance() {
         return FREEMARKER_STATIC_MODELS;
     }
 
-    public Properties getStaticModels() {
-        return staticModels;
+    private static TemplateHashModel useStaticPackage(String packageName) {
+        try {
+            BeansWrapperBuilder builder = new BeansWrapperBuilder(Configuration.VERSION_2_3_19);
+            BeansWrapper wrapper = builder.build();
+            TemplateHashModel staticModels = wrapper.getStaticModels();
+            TemplateHashModel fileStatics = (TemplateHashModel) staticModels.get(packageName);
+            return fileStatics;
+        } catch (Exception e) {
+            logger.error("packageName:" + packageName, e);
+        }
+        return null;
     }
 
+    /**
+     * 设置工具方法
+     *
+     * @param staticModels
+     */
     public void setStaticModels(Properties staticModels) {
-        if(this.staticModels==null&&staticModels!=null){
+        if (this.staticModels == null && staticModels != null) {
             this.staticModels = staticModels;
-            Set<String> keys=this.staticModels.stringPropertyNames();
+            Set<String> keys = this.staticModels.stringPropertyNames();
             for (String key : keys) {
                 FREEMARKER_STATIC_MODELS.put(key, useStaticPackage(this.staticModels.getProperty(key)));
             }
         }
-    }
-
-    public static TemplateHashModel useStaticPackage(String packageName){
-        try
-        {
-            BeansWrapper wrapper = BeansWrapper.getDefaultInstance();
-            TemplateHashModel staticModels = wrapper.getStaticModels();
-            TemplateHashModel fileStatics = (TemplateHashModel) staticModels.get(packageName);
-            return fileStatics;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

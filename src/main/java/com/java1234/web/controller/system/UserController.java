@@ -2,6 +2,7 @@ package com.java1234.web.controller.system;
 
 import com.java1234.dal.annotation.AuthCheck;
 import com.java1234.dal.constant.page.SystemPageID;
+import com.java1234.dal.entity.main.sys.config.Config;
 import com.java1234.dal.entity.main.sys.dept.Dept;
 import com.java1234.dal.entity.main.sys.role.Role;
 import com.java1234.dal.entity.main.sys.user.User;
@@ -17,9 +18,11 @@ import com.java1234.service.sys.dept.DeptService;
 import com.java1234.service.sys.role.RoleService;
 import com.java1234.service.sys.token.TokenService;
 import com.java1234.service.sys.user.UserService;
+import com.java1234.util.CommonMessage;
 import com.java1234.util.RequestUtil;
 import com.java1234.util.ResponseCode;
 import com.java1234.web.base.BaseController;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -230,7 +233,7 @@ public class UserController extends BaseController {
     @AuthCheck(page = SystemPageID.USER_LIST)
     @RequestMapping(value = "/system/reset-password", method = RequestMethod.POST)
     public void resetUserPassword(final Model model, User user) {
-        String pwd = "123456";
+        String pwd = com.java1234.util.Config.getString("user.default.password");
         user.setPwd(MD5.md5(pwd));
         user.setModifiedUid(LoginContext.getUserId());
         user.setModifiedTime(new Date());
@@ -277,6 +280,95 @@ public class UserController extends BaseController {
 
         //跳转到主页
         return redirectTo("/login");
-        //return "/login";
+    }
+
+    /**
+     * 我的基本信息页面
+     *
+     * @return
+     */
+    @AuthCheck(page = SystemPageID.USER_LIST)
+    @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
+    public String showProfileView(final Model model) {
+
+        // 用户信息
+        User user = LoginContext.getUser();
+        //单位列表...过滤分局单位不显示
+        //（如果是市局的话，不显示分局县局单位；如果是分局县局及以下的话，本身查找的List就不存在分局县局单位，所以直接过滤分局县局单位）
+        final List<Dept> deptList = deptService.selectSubList(user.getBranchId(), true).stream()
+                .filter(d -> (d.getDeptType() & 128) == 0)
+                .filter(x -> (x.getDeptType() & 1024) == 0)
+                .collect(Collectors.toList());
+        //角色列表
+        final List<Role> roleList = roleService.selectAll();
+
+        model.addAttribute("deptId", user.getDeptId());
+        model.addAttribute("user", user);
+        model.addAttribute("deptList", deptList);
+        model.addAttribute("roleList", roleList);
+
+        Dept dept = deptService.selectDeptById(user.getDeptId());
+        //无下级单位直接显示所属单位名称
+        if (deptList.size() == 0 || null == deptList) {
+            model.addAttribute("deptName", dept.getDeptName());
+        }
+
+        //个人信息查看
+        String type = "view";
+        //根据传递的分局ID，显示分局名
+        Dept branch = deptService.selectDeptById(user.getBranchId());
+        model.addAttribute("branchId", branch.getDeptId());
+        model.addAttribute("branchName", branch.getDeptName());
+        model.addAttribute("type", type);
+        model.addAttribute("flag", true);
+        return "/system/user/user-edit";
+    }
+
+    /**
+     * 修改密码页面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/user/pwd", method = RequestMethod.GET)
+    public String changePwdView(final Model model) {
+        return "/system/user/user-password";
+    }
+
+    /**
+     * 修改密码接口
+     *
+     * @param model
+     * @param oldPwd
+     * @param newPwd
+     */
+    @AuthCheck(page = SystemPageID.USER_LIST)
+    @RequestMapping(value = "/user/password/alter", method = RequestMethod.POST)
+    public void alterPassword(final Model model, final String oldPwd, final String newPwd) {
+
+        if (StringUtils.isBlank(oldPwd)) {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, UserMessage.PASSWORD_REQUIRED);
+        }
+
+        if (StringUtils.isBlank(newPwd)) {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, UserMessage.PASSWORD_REQUIRED);
+        }
+
+        if (oldPwd.equals(newPwd)) {
+            throw new DataErrorException(ResponseCode.SC_BAD_REQUEST, CommonMessage.PASSWORD_EQUAL);
+        }
+
+        // 更新用户密码
+        userService.alterPassword(LoginContext.getUserId(), oldPwd, newPwd);
+
+    }
+
+    /**
+     * 重置密码
+     */
+    @AuthCheck(page = SystemPageID.USER_LIST)
+    @RequestMapping(value = "/user/password/reset", method = RequestMethod.POST)
+    public void resetPassword(Long uid) {
+        userService.resetPassword(uid);
     }
 }
