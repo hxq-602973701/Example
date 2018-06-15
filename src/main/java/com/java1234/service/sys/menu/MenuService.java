@@ -86,4 +86,11 @@ public interface MenuService extends BaseService<Menu> {
      * @return
      */
     Menu selectMenuByPageId(String pageId);
+
+    /**
+     * 获取所有的菜单（已删除的除外）
+     *
+     * @return
+     */
+    List<Menu> selectAll();
 }

@@ -53,4 +53,14 @@
       </if>
     </where>
   </select>
+
+  <!--根据条件获取业务参数列表-->
+  <select id="selectAreaList" resultMap="BaseResultMap">
+    SELECT * FROM s_property t
+    WHERE t.del_flag = 0
+    <if test="propParentId != null">
+      AND t.prop_parent_id = #{propParentId}
+    </if>
+    ORDER BY t.ranking
+  </select>
 </mapper>

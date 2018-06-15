@@ -90,7 +90,7 @@ public class DeptController {
     public String deptDetailView(final Model model, Integer deptId, Integer deptParentId) {
 
         Property property = new Property();
-        property.setPropParentId(Integer.valueOf(PropertyEnum.DEPT_CONTROL.getValue()));
+        property.setPropParentId(Long.valueOf(PropertyEnum.DEPT_CONTROL.getValue()));
         List<Property> propertyList = propertyService.getSubPropByParentId(property);
 
         model.addAttribute("property", propertyList);

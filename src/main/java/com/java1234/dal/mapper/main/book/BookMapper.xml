@@ -8,5 +8,6 @@
     <id column="book_id" property="bookId" jdbcType="BIGINT" />
     <result column="book_name" property="bookName" jdbcType="VARCHAR" />
     <result column="book_author" property="bookAuthor" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" />
   </resultMap>
 </mapper>

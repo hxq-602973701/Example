@@ -67,4 +67,9 @@ public class SystemPageID {
      * 系统维护 / 链接管理
      */
     public static final String HOME_URL_LIST = "XT_LJ_01";
+
+    /**
+     * 消息提示 / 系统通知消息（铃铛）
+     */
+    public static final String SYSTEM_NOTIFY_MESSAGE = "XT_TZ_01";
 }

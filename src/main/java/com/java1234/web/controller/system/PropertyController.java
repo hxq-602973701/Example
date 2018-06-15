@@ -9,11 +9,13 @@ import com.java1234.service.sys.property.PropertyService;
 import com.java1234.util.Ids;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/6/11.
@@ -115,5 +117,18 @@ public class PropertyController {
         propertyService.deleteProp(param);
     }
 
+    /**
+     * 根据父节点获取业务参数列表json格式
+     *
+     * @return
+     */
+    @RequestMapping(value = "/system/property-get-sub", method = RequestMethod.GET)
+    public void getPropertyJsonByParentId(final Model model, Long parentId) {
+        Property param = new Property();
+        param.setPropParentId(parentId);
+        param.setDelFlag(false);
+        List<Map> listMap = propertyService.getAllSubMapByParentId(parentId);
+        DataPipe.in(model).response(listMap);
+    }
 
 }

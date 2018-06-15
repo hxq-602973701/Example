@@ -31,6 +31,11 @@ public class PropertyDAOImpl extends BaseDAOImpl<Property> implements PropertyDA
     private PropertyMapper propertyMapper;
 
     /**
+     * 系统参数缓存
+     */
+    public static List<Property> cacheList = null;
+
+    /**
      * Mapper初始化
      *
      * @return
@@ -53,5 +58,29 @@ public class PropertyDAOImpl extends BaseDAOImpl<Property> implements PropertyDA
         List<Property> propertyList = propertyMapper.selectBySetMemberVariable(param);
         PageInfo<Property> pageInfo = new PageInfo<>(propertyList);
         return pageInfo;
+    }
+
+    /**
+     * 获取缓存列表
+     *
+     * @return
+     */
+    @Override
+    public List<Property> getCacheList() {
+        if (PropertyDAOImpl.cacheList == null) {
+            refreshCacheList();
+        }
+        return PropertyDAOImpl.cacheList;
+    }
+
+    /**
+     * 更新缓存信息
+     *
+     * @return
+     */
+    public void refreshCacheList() {
+        Property param = new Property();
+        param.setDelFlag(false);
+        PropertyDAOImpl.cacheList = propertyMapper.selectAreaList(param);
     }
 }

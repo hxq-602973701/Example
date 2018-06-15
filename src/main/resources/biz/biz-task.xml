@@ -6,14 +6,19 @@
         http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task-4.1.xsd">
 
-
     <!--每隔3秒执行一次【获取天气】 -->
     <bean id="getWeather" class="com.java1234.service.task.impl.GetWeatherTaskServiceImpl"/>
+    <!--多数据源-->
     <bean id="commonTest" class="com.java1234.service.task.impl.CommonTestTaskServiceImpl"/>
+    <!--http发送请求-->
+    <bean id="httpTest" class="com.java1234.service.task.impl.HttpTestTaskServiceImpl"/>
     <!-- 任务调度 -->
     <task:scheduled-tasks>
         <!--每隔3秒执行一次【获取天气】  cron="0 0 0 1/1 * ? " cron="0/3 * * * * ?" -->
         <!--<task:scheduled ref="getWeather" method="run" cron="0/3 * * * * ?"/>-->
+        <!--多数据源-->
+        <task:scheduled ref="commonTest" method="run" cron="0/3 * * * * ?"/>
+        <!--http发送请求-->
         <task:scheduled ref="commonTest" method="run" cron="0/3 * * * * ?"/>
     </task:scheduled-tasks>
 </beans>

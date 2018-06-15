@@ -14,4 +14,12 @@ public interface PropertyMapper extends Mapper<Property> {
      * @return
      */
     List<Property> selectBySetMemberVariable(Property param);
+
+    /**
+     * 根据条件获取业务参数
+     *
+     * @param param
+     * @return
+     */
+    List<Property> selectAreaList(Property param);
 }

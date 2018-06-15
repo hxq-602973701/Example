@@ -36,10 +36,18 @@
         <property name="password" value="${jdbc.main.password}"/>
     </bean>
 
-    <bean id="sdDataSource" parent="parentDataSource">
+    <!--其它mysql数据源-->
+    <bean id="mysqlDataSource" parent="parentDataSource">
         <property name="url" value="${jdbc.sd.url}"/>
         <property name="username" value="${jdbc.sd.userName}"/>
         <property name="password" value="${jdbc.sd.password}"/>
+    </bean>
+
+    <!--其它oracle数据源-->
+    <bean id="sjDataSource" parent="parentDataSource">
+        <property name="url" value="${jdbc.sj.url}"/>
+        <property name="username" value="${jdbc.sj.userName}"/>
+        <property name="password" value="${jdbc.sj.password}"/>
     </bean>
 
     <!-- 多数据源 -->
@@ -48,7 +56,7 @@
         <property name="targetDataSources">
             <map>
                 <entry key="MAIN" value-ref="mainDataSource"/>
-                <entry key="SD" value-ref="sdDataSource"/>
+                <entry key="SD" value-ref="mysqlDataSource"/>
             </map>
         </property>
     </bean>

@@ -145,4 +145,38 @@ public class PropertyServiceImpl extends BaseServiceImpl<Property> implements Pr
         }
 
     }
+
+    /**
+     * 根据父节点获取业务参数列表json格式
+     *
+     * @param parentId
+     * @return
+     */
+    @Override
+    public List<Map> getAllSubMapByParentId(Long parentId) {
+        List<Property> list = propertyDAO.getCacheList();
+        List<Map> result = this.getSubMapByParentId(list, parentId);
+        return result;
+    }
+
+    /**
+     * 获取所有子节点
+     *
+     * @param list
+     * @param parentId
+     * @return
+     */
+    private List<Map> getSubMapByParentId(List<Property> list, Long parentId) {
+        List<Map> result = Lists.newArrayList();
+        list.stream().filter(node1 -> node1.getDelFlag() == false).forEach(node -> {
+            if (parentId.equals(node.getPropParentId())) {
+                Map map = Maps.newHashMap();
+                map.put("id", node.getPropId());
+                map.put("name", node.getPropValue());
+                map.put("sub", this.getSubMapByParentId(list, node.getPropId()));
+                result.add(map);
+            }
+        });
+        return result;
+    }
 }

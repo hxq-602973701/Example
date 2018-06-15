@@ -1,37 +1,32 @@
-package com.java1234.dal.entity.main.sys.property;
+package com.java1234.dal.entity.main.sys.open;
 
 import com.java1234.dal.entity.base.BaseEntity;
-import com.java1234.dal.utils.SequenceRule;
-
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "s_property")
-@SequenceRule
-public class Property extends BaseEntity {
+@Table(name = "o_open_third_in")
+public class OpenThirdIn extends BaseEntity {
     @Id
-    @Column(name = "prop_id")
-    private Long propId;
+    @Column(name = "open_id")
+    private Integer openId;
 
-    @Column(name = "prop_parent_id")
-    private Long propParentId;
+    @Column(name = "app_key")
+    private String appKey;
 
-    @Column(name = "prop_type")
-    private Integer propType;
+    @Column(name = "app_secrety")
+    private String appSecrety;
 
-    @Column(name = "prop_key")
-    private String propKey;
+    @Column(name = "app_name")
+    private String appName;
 
-    @Column(name = "prop_value")
-    private String propValue;
+    @Column(name = "app_memo")
+    private String appMemo;
 
-    @Column(name = "prop_icon")
-    private String propIcon;
+    @Column(name = "dept_code")
+    private String deptCode;
 
-    @Column(name = "prop_memo")
-    private String propMemo;
-
-    private Integer ranking;
+    @Column(name = "dept_name")
+    private String deptName;
 
     /**
      * 删除标志
@@ -64,115 +59,101 @@ public class Property extends BaseEntity {
     private Date modifiedTime;
 
     /**
-     * @return prop_id
+     * @return open_id
      */
-    public Long getPropId() {
-        return propId;
+    public Integer getOpenId() {
+        return openId;
     }
 
     /**
-     * @param propId
+     * @param openId
      */
-    public void setPropId(Long propId) {
-        this.propId = propId;
+    public void setOpenId(Integer openId) {
+        this.openId = openId;
     }
 
     /**
-     * @return prop_parent_id
+     * @return app_key
      */
-    public Long getPropParentId() {
-        return propParentId;
+    public String getAppKey() {
+        return appKey;
     }
 
     /**
-     * @param propParentId
+     * @param appKey
      */
-    public void setPropParentId(Long propParentId) {
-        this.propParentId = propParentId;
+    public void setAppKey(String appKey) {
+        this.appKey = appKey;
     }
 
     /**
-     * @return prop_type
+     * @return app_secrety
      */
-    public Integer getPropType() {
-        return propType;
+    public String getAppSecrety() {
+        return appSecrety;
     }
 
     /**
-     * @param propType
+     * @param appSecrety
      */
-    public void setPropType(Integer propType) {
-        this.propType = propType;
+    public void setAppSecrety(String appSecrety) {
+        this.appSecrety = appSecrety;
     }
 
     /**
-     * @return prop_key
+     * @return app_name
      */
-    public String getPropKey() {
-        return propKey;
+    public String getAppName() {
+        return appName;
     }
 
     /**
-     * @param propKey
+     * @param appName
      */
-    public void setPropKey(String propKey) {
-        this.propKey = propKey;
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 
     /**
-     * @return prop_value
+     * @return app_memo
      */
-    public String getPropValue() {
-        return propValue;
+    public String getAppMemo() {
+        return appMemo;
     }
 
     /**
-     * @param propValue
+     * @param appMemo
      */
-    public void setPropValue(String propValue) {
-        this.propValue = propValue;
+    public void setAppMemo(String appMemo) {
+        this.appMemo = appMemo;
     }
 
     /**
-     * @return prop_icon
+     * @return dept_code
      */
-    public String getPropIcon() {
-        return propIcon;
+    public String getDeptCode() {
+        return deptCode;
     }
 
     /**
-     * @param propIcon
+     * @param deptCode
      */
-    public void setPropIcon(String propIcon) {
-        this.propIcon = propIcon;
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
     }
 
     /**
-     * @return prop_memo
+     * @return dept_name
      */
-    public String getPropMemo() {
-        return propMemo;
+    public String getDeptName() {
+        return deptName;
     }
 
     /**
-     * @param propMemo
+     * @param deptName
      */
-    public void setPropMemo(String propMemo) {
-        this.propMemo = propMemo;
-    }
-
-    /**
-     * @return ranking
-     */
-    public Integer getRanking() {
-        return ranking;
-    }
-
-    /**
-     * @param ranking
-     */
-    public void setRanking(Integer ranking) {
-        this.ranking = ranking;
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     /**

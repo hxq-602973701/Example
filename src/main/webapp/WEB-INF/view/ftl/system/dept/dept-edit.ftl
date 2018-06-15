@@ -18,7 +18,8 @@
                             <select class="form-control dept-parent-id v-req">
                                 <option value="">--请选择--</option>
                                 <#list deptList as item>
-                                    <option <#if item.deptId == deptParentId>selected</#if> value="${item.deptId}">${item.deptName?html}</option>
+                                    <option <#if item.deptId == deptParentId>selected</#if>
+                                            value="${item.deptId}">${item.deptName?html}</option>
                                 </#list>
                             </select>
                         </td>
@@ -55,13 +56,15 @@
                     <tr>
                         <th class="required-input" style="width: 100px;">单位类型</th>
                         <td>
-                            <select class="form-control dept-type v-req">
+                            <select class="form-control dept-type v-req" placeholder="请选择单位类型">
                                 <option value="">--请选择--</option>
                                 <#list property as prop>
                                     <#if isCity == true && prop.propKey?number <= 1024>
-                                      <option <#if dept.deptType == prop.propKey>selected</#if> value="${prop.propKey}">${prop.propValue}</option>
+                                        <option <#if dept.deptType == prop.propKey>selected</#if>
+                                                value="${prop.propKey}">${prop.propValue}</option>
                                     <#elseif 2048 <= prop.propKey?number>
-                                      <option <#if dept.deptType == prop.propKey>selected</#if> value="${prop.propKey}">${prop.propValue}</option>
+                                        <option <#if dept.deptType == prop.propKey>selected</#if>
+                                                value="${prop.propKey}">${prop.propValue}</option>
                                     </#if>
                                 </#list>
                             </select>
@@ -96,14 +99,19 @@
         //初始化验证
         var validate = $('.form-control').uloveValidate();
 
+
         // 保存按钮
         $('.btn-save').on('click', function () {
 
             //验证
             if (!validate.verify()) {
                 return false;
-            }
+            };
 
+//            if (!kirin.checkError(('.dept-type'))) {
+//                return;
+//            }
+//            ;
             var deptId = $('.dept-id').val(),
                     deptParentId = $.trim($('.dept-parent-id').val()),
                     deptCode = $.trim($('.dept-code').val()),
@@ -119,19 +127,16 @@
                 data: {
                     deptId: deptId,
                     deptParentId: deptParentId,
-                    deptCode:deptCode,
+                    deptCode: deptCode,
                     deptName: deptName,
                     deptShortName: deptShortName,
-                    deptType:deptType,
-                    deptArea:deptArea
+                    deptType: deptType,
+                    deptArea: deptArea
                 }
             }).done(function () {
-                layer.msg('单位保存成功。', {icon: 1,time:1500}, function () {
+                layer.msg('单位保存成功。', {icon: 1, time: 1500}, function () {
                     kirin.popup.success(isUpdate ? 'update' : 'insert');
                 });
-//                layer.alert('单位保存成功。', {icon: 1}, function () {
-//                    kirin.popup.success(isUpdate ? 'update' : 'insert');
-//                });
             });
 
         });

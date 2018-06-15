@@ -2,7 +2,6 @@ package com.java1234.web.controller.system;
 
 import com.java1234.dal.annotation.AuthCheck;
 import com.java1234.dal.constant.page.SystemPageID;
-import com.java1234.dal.entity.main.sys.config.Config;
 import com.java1234.dal.entity.main.sys.dept.Dept;
 import com.java1234.dal.entity.main.sys.role.Role;
 import com.java1234.dal.entity.main.sys.user.User;

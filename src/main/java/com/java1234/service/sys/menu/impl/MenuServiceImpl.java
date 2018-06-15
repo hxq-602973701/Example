@@ -371,6 +371,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
      *
      * @return
      */
+    @Override
     public List<Menu> selectAll() {
 
         final Menu param = new Menu();

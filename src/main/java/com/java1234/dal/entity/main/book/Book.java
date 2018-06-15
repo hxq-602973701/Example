@@ -4,6 +4,7 @@ import com.java1234.dal.entity.base.BaseEntity;
 import com.java1234.dal.utils.SequenceRule;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "t_book")
 @SequenceRule
@@ -17,6 +18,9 @@ public class Book extends BaseEntity {
 
     @Column(name = "book_author")
     private String bookAuthor;
+
+    @Column(name = "create_time")
+    private Date createTime;
 
     /**
      * @return book_id
@@ -58,5 +62,13 @@ public class Book extends BaseEntity {
      */
     public void setBookAuthor(String bookAuthor) {
         this.bookAuthor = bookAuthor;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

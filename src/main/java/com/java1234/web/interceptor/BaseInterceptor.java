@@ -168,6 +168,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             // 清除本地线程缓存(最后的机会了)
             SLOW_REQUEST_THREAD_LOCAL.remove();
             LoginContext.remove();
+            LoginContext.removeOpenThirdIn();
         }
 
     }

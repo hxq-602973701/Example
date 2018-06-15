@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
 
+/**
+ * 数据模板初始化
+ */
 public class FreemarkerStaticModels extends HashMap<String, Object> {
 
     /**

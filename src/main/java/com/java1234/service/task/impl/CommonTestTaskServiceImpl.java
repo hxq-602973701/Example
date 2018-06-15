@@ -18,7 +18,6 @@ import java.util.Map;
  */
 public class CommonTestTaskServiceImpl extends BaseTaskService {
 
-
     /**
      * 日志记录器
      */
@@ -49,7 +48,6 @@ public class CommonTestTaskServiceImpl extends BaseTaskService {
         logger.info("common多数据源配置成功...");
 
     }
-
 
     @Override
     protected Class<?> getSubClass() {

@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.java1234.dal.dao.base.BaseDAO;
 import com.java1234.dal.entity.main.sys.property.Property;
 
+import java.util.List;
+
 /**
  * PropertyDAO
  *
@@ -20,4 +22,11 @@ public interface PropertyDAO extends BaseDAO<Property> {
      * @return
      */
     PageInfo<Property> selectPageByProperty(Property param);
+
+    /**
+     * 获取缓存列表
+     *
+     * @return
+     */
+    List<Property> getCacheList();
 }

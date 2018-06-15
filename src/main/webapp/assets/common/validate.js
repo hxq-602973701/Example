@@ -192,7 +192,7 @@
                 for (var rule in rules) {
                     if (val && element.hasClass(rule)) {
                         var errorResult;
-                        if(rules[rule].regex){
+                        if (rules[rule].regex) {
                             errorResult = !(rules[rule].regex.test(val));
                         } else if (rules[rule].rule) {
                             errorResult = !(rules[rule].rule(element));
@@ -240,15 +240,15 @@
             };
         }
     });
-
+    
     //默认参数
     var defaults = {
         isFormGroup: true,
         isTableGroup: false,
         _rules: {
             'v-phone': {
-               /* regex: /^(((13[0-9])|(14[0-9])|(17[07])|(15[^4])|(18[0-9]))+\d{8})$/,*/
-                regex:/^1[3|4|5|7|8][0-9]{9}$/,
+                /* regex: /^(((13[0-9])|(14[0-9])|(17[07])|(15[^4])|(18[0-9]))+\d{8})$/,*/
+                regex: /^1[3|4|5|7|8][0-9]{9}$/,
                 msg: "手机号码格式错误。"
             },
             'v-email': {
@@ -259,7 +259,7 @@
                 regex: /^[0-9]+$/,
                 msg: "只允许输入数字。"
             },
-            'v-max':{
+            'v-max': {
                 regex: /^[0-9]{0,3}$/,
                 msg: "不能超过三位数。"
             },
@@ -309,23 +309,23 @@
             },
             'v-number-english': {
                 regex: /^[A-Za-z0-9]+$/,
-                msg  : "只允许输入数字和英文。"
+                msg: "只允许输入数字和英文。"
             },
-            'v-symbol-debule' : {
+            'v-symbol-debule': {
                 rule: function (element) {
                     var result;
-                    var callback        = function (res) {
+                    var callback = function (res) {
                         result = res;
                     };
-                    var informer        = {};
+                    var informer = {};
                     informer.informerId = $("#informerId").val();
-                    informer.symbol     = element.val();
+                    informer.symbol = element.val();
                     $.ajax({
-                        type    : 'POST',
-                        url     : '/informer/informer-serach.json',
-                        async   : false,
-                        data    : informer,
-                        success : function (result) {
+                        type: 'POST',
+                        url: '/informer/informer-serach.json',
+                        async: false,
+                        data: informer,
+                        success: function (result) {
                             var meta = result.meta;
                             if (meta.code == 200) {
                                 callback(result.response);
@@ -338,23 +338,23 @@
                     });
                     return result;
                 },
-                msg : "代号重复。"
+                msg: "代号重复。"
             },
-            'v-phone-debule'  : {
+            'v-phone-debule': {
                 rule: function (element) {
                     var result;
-                    var callback        = function (res) {
+                    var callback = function (res) {
                         result = res;
                     };
-                    var informer        = {};
+                    var informer = {};
                     informer.informerId = $("#informerId").val();
-                    informer.phone      = $("#phone").val();
+                    informer.phone = $("#phone").val();
                     $.ajax({
-                        type    : 'POST',
-                        url     : '/informer/informer-serach.json',
-                        async   : false,
-                        data    : informer,
-                        success : function (result) {
+                        type: 'POST',
+                        url: '/informer/informer-serach.json',
+                        async: false,
+                        data: informer,
+                        success: function (result) {
                             var meta = result.meta;
                             if (meta.code == 200) {
                                 callback(result.response);
@@ -367,23 +367,23 @@
                     });
                     return result;
                 },
-                msg : "电话号码重复。"
+                msg: "电话号码重复。"
             },
             'v-id-card-debule': {
                 rule: function (element) {
                     var result;
-                    var callback        = function (res) {
+                    var callback = function (res) {
                         result = res;
                     };
-                    var informer        = {};
+                    var informer = {};
                     informer.informerId = $("#informerId").val();
-                    informer.idCardNum  = $("#idCardNum").val();
+                    informer.idCardNum = $("#idCardNum").val();
                     $.ajax({
-                        type    : 'POST',
-                        url     : '/informer/informer-serach.json',
-                        async   : false,
-                        data    : informer,
-                        success : function (result) {
+                        type: 'POST',
+                        url: '/informer/informer-serach.json',
+                        async: false,
+                        data: informer,
+                        success: function (result) {
                             var meta = result.meta;
                             if (meta.code == 200) {
                                 callback(result.response);
@@ -396,7 +396,7 @@
                     });
                     return result;
                 },
-                msg : "身份证号码重复。"
+                msg: "身份证号码重复。"
             },
             //验证用户帐号是否重复
             'v-account-double': {
@@ -410,9 +410,9 @@
                     user.account = $("#account").val();
                     kirin.ajax({
                         //type   : 'POST',
-                        url    : '/user/verify.json',
-                        async  : false,
-                        data   : user
+                        url: '/user/verify.json',
+                        async: false,
+                        data: user
                     }).done(function (data) {
                         result = data.exist;
                     });
@@ -431,9 +431,9 @@
                     user.phone = $("#phone").val();
                     kirin.ajax({
                         //type   : 'POST',
-                        url    : '/user/verify.json',
-                        async  : false,
-                        data   : user
+                        url: '/user/verify.json',
+                        async: false,
+                        data: user
                     }).done(function (data) {
                         result = data.exist;
                     });
@@ -452,9 +452,9 @@
                     user.idCardNum = $("#idCardNum").val();
                     kirin.ajax({
                         //type   : 'POST',
-                        url    : '/user/verify.json',
-                        async  : false,
-                        data   : user
+                        url: '/user/verify.json',
+                        async: false,
+                        data: user
                     }).done(function (data) {
                         result = data.exist;
                     });
@@ -467,5 +467,6 @@
     //私有方法，检测参数是否合法
     function isValid(options) {
         return !options || (options && typeof options === "object") ? true : false;
-    }
+    };
+
 })(window.jQuery);

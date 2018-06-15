@@ -67,6 +67,18 @@
                             <textarea class="form-control memo">${prop.propMemo?html}</textarea>
                         </td>
                     </tr>
+                    <div class="input-group">
+                        <span class="input-group-addon">情报来源</span>
+                        <select id="intelligenceOrigin" name="intelligenceOrigin" class="form-control">
+                            <option value="">--请选择--</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">来源细类</span>
+                        <select id="intelligenceOriginSub" name="intelligenceOriginSub" class="form-control">
+                            <option value="">--请选择--</option>
+                        </select>
+                    </div>
                     </tbody>
                 </table>
             </div>
@@ -84,12 +96,27 @@
 
 <#-- 脚本部分 -->
 <@override name="scripts">
+<script>
+    // 情报来源
+    kirin.buildSelectOptions('#intelligenceOrigin', kirin.getPropJsonByParentId(3704), "--请选择--");
+    $("#intelligenceOrigin").change(function () {
+        var origin = $("#intelligenceOrigin").val();
+        if (origin != "" && origin != null && origin > 0) {
+            // 来源细类
+            kirin.buildSelectOptions('#intelligenceOriginSub', kirin.getPropJsonByParentId(origin), "--请选择--");
+        } else {
+            kirin.buildSelectOptions('#intelligenceOriginSub', {}, "--请选择--");
+        }
+    });
+</script>
 <script type="text/javascript">
-    $(document).ready(function () {
+
+    $(function () {
 
         //初始化验证
         var validate = $('.form-control').uloveValidate();
         $('.bootstrap-tagsinput').css({'border': '1px solid #ccc', 'height': '100%'}).addClass("form-control");
+
 
         //当前新增的节点
         $('.parent').val('${parent}');

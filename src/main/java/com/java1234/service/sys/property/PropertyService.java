@@ -5,6 +5,7 @@ import com.java1234.dal.entity.main.sys.property.Property;
 import com.java1234.service.base.BaseService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * PropertyService
@@ -52,4 +53,12 @@ public interface PropertyService extends BaseService<Property> {
      * @param param
      */
     void deleteProp(Long[] param);
+
+    /**
+     * 根据父节点获取业务参数列表json格式
+     *
+     * @param parentId
+     * @return
+     */
+    List<Map> getAllSubMapByParentId(Long parentId);
 }

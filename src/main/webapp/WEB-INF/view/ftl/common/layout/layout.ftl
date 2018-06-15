@@ -115,7 +115,8 @@
         <nav class="navbar navbar-fixed-top custom-bgcolor" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <div class="system-name welcome-message custom-font-white">
-                    <img class="headpic" src="/assets/img/police_emblem.png">${SYSTEM_NAME}
+                    <img class="headpic" src="/assets/img/police_emblem.png"><a href="/"
+                                                                                class="custom-font-white clearMouse">${SYSTEM_NAME}</a>
                 </div>
             </div>
             <div style="margin-left: 450px;height: 68px;background: url('/assets/img/inner_top_banner.png') no-repeat left bottom;">
@@ -196,16 +197,6 @@
         <div class="row wrapper border-bottom white-bg page-location">
             <div class="col-lg-10">
                 <ol class="breadcrumb"><span class="custom-font-grey">当前位置：</span>
-                <#--<#list utils.breadcrumbBar(pageId) as menu>-->
-                <#--<li>-->
-                <#--<#if menu_has_next>-->
-                <#--<a class="custom-font-localmenu" href="${menu.menuUrl}">${menu.menuName}</a>-->
-                <#--<#else>-->
-                <#--<span>${menu.menuName}</span>-->
-                <#--</#if>-->
-                <#--</li>-->
-                <#--</#list>-->
-
                 <#list utils.breadcrumbBar(pageId) as menu>
                     <li>
                         <#if menu_has_next>
@@ -246,8 +237,8 @@
 <script type="text/javascript">
     $(function () {
 
-//        var msg_val = $.cookie('msg');
-//        console.log("cookies",msg_val);
+        var msg_val = $.cookie('msg');
+        console.log("cookies", msg_val);
 
         //10秒钟ping一次，获取铃铛消息
         getMsgCount();
@@ -276,6 +267,7 @@
         });
 
     });
+
     function editProfile() {
         kirin.popup.open({
             title: '信息',
@@ -286,6 +278,7 @@
         });
     }
     ;
+
     $('.changePassword').click(function () {
         kirin.popup.open({
             title: '密码修改',
@@ -300,11 +293,11 @@
         });
     });
 
-    //获取待签收的指令和条数
+    //获取右上角铃铛通知消息(系统的通知消息)
     function getMsgCount() {
         $.ajax({
             type: 'GET',
-            url: '/intelligence/index_ping_online_intelligence.json',
+            url: '/project/system/notify-message.json',
             traditional: true,
             dataType: 'json',
             cache: false,
@@ -316,7 +309,7 @@
                 var meta = data.meta;
                 if (meta && meta.code === 200) {
                     var list = data.response;
-                    console.log("获取消息条数" + list.length);
+                    console.log("获取系统消息条数" + list.length);
                     $('.msg_count').text(list.length);
                     $.cookie('msg', JSON.stringify(list));
                     if (list.length > 0) {
