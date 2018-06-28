@@ -36,13 +36,13 @@ public class CommonTestTaskServiceImpl extends BaseTaskService {
     protected void execute() throws Throwable {
 
         logger.info("执行common多数据源...");
-        Map<String,Object> conditionMap = Maps.newHashMap();
-        conditionMap.put("post_id",23);
+        Map<String, Object> conditionMap = Maps.newHashMap();
+        conditionMap.put("post_id", 23);
         String tableName = "post";
-        List<HashMap> mapList = commonDAO.selectByCondition(DataSourceEnum.SD,tableName,conditionMap,1);
+        List<HashMap> mapList = commonDAO.selectByCondition(DataSourceEnum.SD, tableName, conditionMap, 1);
 
-        mapList.parallelStream().forEach(map->{
-           logger.info(map.get("DEL_FLAG").toString());
+        mapList.parallelStream().forEach(map -> {
+            logger.info(map.get("DEL_FLAG").toString());
         });
 
         logger.info("common多数据源配置成功...");

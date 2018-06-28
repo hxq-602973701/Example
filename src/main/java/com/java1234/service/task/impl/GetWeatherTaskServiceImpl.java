@@ -30,8 +30,8 @@ public class GetWeatherTaskServiceImpl extends BaseTaskService {
         logger.debug("开始爬取天气数据...");
 
         Document doc = Jsoup.connect("")
-        .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31")
-        .get();
+                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31")
+                .get();
 
         logger.info("url连接错误...");
 

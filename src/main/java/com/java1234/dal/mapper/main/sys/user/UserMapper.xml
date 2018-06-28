@@ -34,35 +34,35 @@
     </resultMap>
 
     <sql id="userColumns">
-    SELECT
-    t.user_id,
-    t.account,
-    t.user_name,
-    t.phone,
-    t.id_card_num,
-    t.email,
-    t.avatar,
-    t.signature,
-    t.auth_type,
-    t.dept_id,
-    t.login_way,
-    t.title,
-    t.pwd,
-    t.device_type,
-    t.push_token,
-    t.device_name,
-    t.mac,
-    t.reg_ip,
-    t.last_ip,
-    t.login_sum,
-    t.branch_id,
-    t.del_flag,
-    t.create_time,
-    t.create_uid,
-    t.modified_time,
-    t.modified_uid
+        SELECT
+        t.user_id,
+        t.account,
+        t.user_name,
+        t.phone,
+        t.id_card_num,
+        t.email,
+        t.avatar,
+        t.signature,
+        t.auth_type,
+        t.dept_id,
+        t.login_way,
+        t.title,
+        t.pwd,
+        t.device_type,
+        t.push_token,
+        t.device_name,
+        t.mac,
+        t.reg_ip,
+        t.last_ip,
+        t.login_sum,
+        t.branch_id,
+        t.del_flag,
+        t.create_time,
+        t.create_uid,
+        t.modified_time,
+        t.modified_uid
 
-    FROM s_user t
+        FROM s_user t
     </sql>
 
     <!-- 根据用户账户获取用户信息 -->

@@ -3,11 +3,13 @@ package com.java1234.util;
 /**
  * Created by Administrator on 2018/1/30.
  */
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -64,12 +66,12 @@ public final class Config {
     }
 
     public static String getString(String key) {
-        return getString(key, (String)null);
+        return getString(key, (String) null);
     }
 
     public static String getString(String key, String defaultValue) {
         String value = props.getProperty(key);
-        if(value == null) {
+        if (value == null) {
             value = defaultValue;
         }
 
@@ -78,9 +80,9 @@ public final class Config {
 
     public static boolean isDebugMode() {
         String value = props.getProperty("config.run_mode");
-        if("debug".equalsIgnoreCase(value)) {
+        if ("debug".equalsIgnoreCase(value)) {
             return true;
-        } else if("online".equalsIgnoreCase(value)) {
+        } else if ("online".equalsIgnoreCase(value)) {
             return false;
         } else {
             logger.error("config.run_mode config file error.");
@@ -95,9 +97,9 @@ public final class Config {
 
     private static boolean converToBoolean(String value) {
         String tmp = value.toLowerCase();
-        if(tmp.equals("true")) {
+        if (tmp.equals("true")) {
             return true;
-        } else if(tmp.equals("false")) {
+        } else if (tmp.equals("false")) {
             return false;
         } else {
             throw new RuntimeException("class not matching.");
@@ -117,7 +119,7 @@ public final class Config {
             File e = ResourceUtils.getFile("classpath:config/config.properties");
             props.load(new FileInputStream(e));
             Matcher matcher = Pattern.compile("tomcat-node[0-9]").matcher(e.getCanonicalPath());
-            if(matcher.find()) {
+            if (matcher.find()) {
                 RUN_INSTANCE_NAME = matcher.group();
             }
 

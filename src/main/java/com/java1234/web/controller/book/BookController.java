@@ -50,19 +50,19 @@ public class BookController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/hello",method = RequestMethod.GET)
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String showFtl(Model model) {
         model.addAttribute("username", "ftl");
         return "/book/book_list";
     }
 
-    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String testFtl(Model model) {
         model.addAttribute("username", "ftl");
         return "base";
     }
 
-    @RequestMapping(value = "/test1",method = RequestMethod.GET)
+    @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public String testFtl1(Model model) {
         model.addAttribute("username", "ftl");
         return "base1";
@@ -75,7 +75,7 @@ public class BookController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/world",method = RequestMethod.GET)
+    @RequestMapping(value = "/world", method = RequestMethod.GET)
     public String showJsp(Model model) {
         model.addAttribute("username", "jsp");
         return "world";
@@ -152,7 +152,7 @@ public class BookController {
             bookService.insert(book);
         }
         return null;
-       /* return objectMapper.writeValueAsString(book);*/
+        /* return objectMapper.writeValueAsString(book);*/
     }
 
     /**

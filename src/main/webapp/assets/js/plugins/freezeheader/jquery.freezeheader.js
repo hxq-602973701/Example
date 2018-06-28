@@ -44,8 +44,8 @@ Version: 1.0.6
                 }
 
                 obj.scroller = params && params.height !== undefined
-                   ? $('#hdScroll' + obj.id)
-                   : $(window);
+                    ? $('#hdScroll' + obj.id)
+                    : $(window);
 
                 if (params && params.scrollListenerEl !== undefined) {
                     obj.scroller = params.scrollListenerEl;
@@ -118,7 +118,7 @@ Version: 1.0.6
 
             if (params && params.height !== undefined) {
                 obj.container.css("position", "absolute");
-            } else if (params && params.scrollListenerEl!== undefined) { 
+            } else if (params && params.scrollListenerEl !== undefined) {
                 obj.container.css("top", obj.scroller.find("thead > tr").innerHeight() + "px");
                 obj.container.css("position", "absolute");
                 obj.container.css("z-index", "2");

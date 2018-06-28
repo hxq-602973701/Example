@@ -86,7 +86,7 @@
 
         //构建树结构
         kirin.ajax({
-            url: '/system/menu-tree.json?show='+1,
+            url: '/system/menu-tree.json?show=' + 1,
 
         }).done(function (data) {
             $('#tree-menu').jstree({
@@ -161,7 +161,7 @@
                             delete delAuthType[pageId];
                         } else {
                             delete addAuthType[pageId];
-                            delAuthType[pageId]=node.data.menuName;
+                            delAuthType[pageId] = node.data.menuName;
                         }
                     }
                 };

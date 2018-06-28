@@ -53,7 +53,7 @@ public class Ids {
         if (Strings.isNullOrEmpty(ids)) {
             return false;
         }
-        return transformIds(ids).stream().allMatch(id->verifyId(id));
+        return transformIds(ids).stream().allMatch(id -> verifyId(id));
     }
 
     /**
@@ -200,7 +200,7 @@ public class Ids {
         if (enums == null || enums.length == 0) {
             return false;
         }
-        return Lists.newArrayList(enums).parallelStream().anyMatch(e->list.contains(e));
+        return Lists.newArrayList(enums).parallelStream().anyMatch(e -> list.contains(e));
     }
 
     /**

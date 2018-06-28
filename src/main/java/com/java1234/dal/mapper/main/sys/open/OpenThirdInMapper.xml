@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.java1234.dal.mapper.main.sys.open.OpenThirdInMapper" >
-  <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.open.OpenThirdIn" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="open_id" property="openId" jdbcType="INTEGER" />
-    <result column="app_key" property="appKey" jdbcType="VARCHAR" />
-    <result column="app_secrety" property="appSecrety" jdbcType="VARCHAR" />
-    <result column="app_name" property="appName" jdbcType="VARCHAR" />
-    <result column="app_memo" property="appMemo" jdbcType="VARCHAR" />
-    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
-    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
-    <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
-    <result column="create_uid" property="createUid" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT" />
-    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
-  </resultMap>
+<mapper namespace="com.java1234.dal.mapper.main.sys.open.OpenThirdInMapper">
+    <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.open.OpenThirdIn">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="open_id" property="openId" jdbcType="INTEGER"/>
+        <result column="app_key" property="appKey" jdbcType="VARCHAR"/>
+        <result column="app_secrety" property="appSecrety" jdbcType="VARCHAR"/>
+        <result column="app_name" property="appName" jdbcType="VARCHAR"/>
+        <result column="app_memo" property="appMemo" jdbcType="VARCHAR"/>
+        <result column="dept_code" property="deptCode" jdbcType="VARCHAR"/>
+        <result column="dept_name" property="deptName" jdbcType="VARCHAR"/>
+        <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
+        <result column="create_uid" property="createUid" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT"/>
+        <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
 </mapper>

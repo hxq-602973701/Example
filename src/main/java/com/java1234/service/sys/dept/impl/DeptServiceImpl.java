@@ -215,7 +215,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     public Dept selectTopDept(Dept dept) {
 
         //如果传入是科所队单位
-        if (dept.getDeptType() != DeptTypeEnum.DISTRICT_BUREAU.getValue() && dept.getDeptType() != DeptTypeEnum.COUNTY_BUREAU.getValue()&&dept.getDeptType() != DeptTypeEnum.CITY_BUREAU.getValue()){
+        if (dept.getDeptType() != DeptTypeEnum.DISTRICT_BUREAU.getValue() && dept.getDeptType() != DeptTypeEnum.COUNTY_BUREAU.getValue() && dept.getDeptType() != DeptTypeEnum.CITY_BUREAU.getValue()) {
             dept = deptDAO.selectByPrimaryKey(dept.getDeptParentId());
             selectTopDept(dept);
         }

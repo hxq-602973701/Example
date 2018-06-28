@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <#--css 导入-->
-    <#--<link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css?${RES_TIMESTAMP}" rel="stylesheet">-->
-    <#--js导入-->
+<#--css 导入-->
+<#--<link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css?${RES_TIMESTAMP}" rel="stylesheet">-->
+<#--js导入-->
     <script src="/assets/js/jquery-2.1.1.min.js?${RES_TIMESTAMP}"></script>
     <!-- layer -->
     <script src="/assets/layui/layer/layer.js?${RES_TIMESTAMP}"></script>

@@ -6,6 +6,7 @@
 package com.java1234.dal.utils;
 
 import com.google.common.collect.Lists;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -58,7 +59,7 @@ public class DataPipe {
     }
 
     public DataPipe meta(int code) {
-        DataPipe.Meta meta = (DataPipe.Meta)this.model.get("meta");
+        DataPipe.Meta meta = (DataPipe.Meta) this.model.get("meta");
         if (meta == null) {
             this.model.put("meta", new DataPipe.Meta(code));
         } else {
@@ -69,7 +70,7 @@ public class DataPipe {
     }
 
     public DataPipe meta(long timestamp) {
-        DataPipe.Meta meta = (DataPipe.Meta)this.model.get("meta");
+        DataPipe.Meta meta = (DataPipe.Meta) this.model.get("meta");
         if (meta == null) {
             this.model.put("meta", new DataPipe.Meta(timestamp));
         } else {
@@ -80,7 +81,7 @@ public class DataPipe {
     }
 
     public DataPipe meta(int code, BaseMessage messageCode, String message) {
-        DataPipe.Meta meta = (DataPipe.Meta)this.model.get("meta");
+        DataPipe.Meta meta = (DataPipe.Meta) this.model.get("meta");
         if (meta == null) {
             this.model.put("meta", new DataPipe.Meta(code, messageCode, message));
         } else {
@@ -96,7 +97,7 @@ public class DataPipe {
     }
 
     public DataPipe meta(int code, String message, long timestamp) {
-        DataPipe.Meta meta = (DataPipe.Meta)this.model.get("meta");
+        DataPipe.Meta meta = (DataPipe.Meta) this.model.get("meta");
         if (meta == null) {
             this.model.put("meta", new DataPipe.Meta(code, message));
         } else {
@@ -150,17 +151,17 @@ public class DataPipe {
     }
 
     public List<Cookie> cookies() {
-        return (List)this.model.get("cookies");
+        return (List) this.model.get("cookies");
     }
 
     private List<Cookie> initCookieList() {
-        List<Cookie> cookies = (List)this.model.get("cookies");
+        List<Cookie> cookies = (List) this.model.get("cookies");
         if (cookies == null) {
             cookies = Lists.newLinkedList();
             this.model.put("cookies", cookies);
         }
 
-        return (List)cookies;
+        return (List) cookies;
     }
 
     class Meta {

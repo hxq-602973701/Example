@@ -106,19 +106,19 @@
                     $.each($fileList, function (idx, file) {
                         //构建li结构
                         var $li = $('<li data-id="' + file.id + '" title="' + file.originalFilename + '">' +
-                                '    <a class="file-icon" href="' + file.url + '" download="' + file.originalFilename + '" target="_blank">' +
-                                '        <p>' + initItem(file) + '</p>' +
-                                '    </a>' +
-                                '    <p class="title">' +
-                                '        <span>' + file.originalFilename + '</span>' +
-                                '    </p>' +
-                                '    <p class="progress">' +
-                                '        <span></span>' +
-                                '    </p>' +
-                                '    <div class="file-panel">' +
-                                '        <span class="delete"></span>' +
-                                '    </div>' +
-                                '</li>'),
+                            '    <a class="file-icon" href="' + file.url + '" download="' + file.originalFilename + '" target="_blank">' +
+                            '        <p>' + initItem(file) + '</p>' +
+                            '    </a>' +
+                            '    <p class="title">' +
+                            '        <span>' + file.originalFilename + '</span>' +
+                            '    </p>' +
+                            '    <p class="progress">' +
+                            '        <span></span>' +
+                            '    </p>' +
+                            '    <div class="file-panel">' +
+                            '        <span class="delete"></span>' +
+                            '    </div>' +
+                            '</li>'),
                             $item = $li.find("div.file-panel"),
                             $delete = $li.find("span.delete");
 
@@ -196,19 +196,19 @@
                     uploader.on('fileQueued', function (file) {
                         //构建li结构
                         var $li = $('<li data-id="' + file.id + '" title="' + file.name + '">' +
-                                '    <a class="file-icon" target="_blank">' +
-                                '        <p>' + initItem(file) + '</p>' +
-                                '    </a>' +
-                                '    <p class="title">' +
-                                '        <span>' + file.name + '</span>' +
-                                '    </p>' +
-                                '    <p class="progress">' +
-                                '        <span></span>' +
-                                '    </p>' +
-                                '    <div class="file-panel">' +
-                                '        <span class="delete"></span>' +
-                                '    </div>' +
-                                '</li>'),
+                            '    <a class="file-icon" target="_blank">' +
+                            '        <p>' + initItem(file) + '</p>' +
+                            '    </a>' +
+                            '    <p class="title">' +
+                            '        <span>' + file.name + '</span>' +
+                            '    </p>' +
+                            '    <p class="progress">' +
+                            '        <span></span>' +
+                            '    </p>' +
+                            '    <div class="file-panel">' +
+                            '        <span class="delete"></span>' +
+                            '    </div>' +
+                            '</li>'),
                             $item = $li.find("div.file-panel"),
                             $delete = $li.find("span.delete");
 

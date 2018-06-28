@@ -48,7 +48,7 @@ public class RequestUtil extends ServletRequestUtils {
     }
 
     public static HttpServletRequest getRequest() {
-        return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
     public static String getRemoteIp() {

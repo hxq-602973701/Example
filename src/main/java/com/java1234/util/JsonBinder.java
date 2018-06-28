@@ -3,14 +3,17 @@ package com.java1234.util;
 /**
  * Created by Administrator on 2018/1/30.
  */
+
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.base.Strings;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +25,7 @@ public class JsonBinder {
     }
 
     public static ObjectMapper createMapper() {
-        if(mapper != null) {
+        if (mapper != null) {
             return mapper;
         } else {
             mapper = new ObjectMapper();
@@ -34,7 +37,7 @@ public class JsonBinder {
     }
 
     public static <T> T fromJson(String jsonString, Class<T> clazz) {
-        if(Strings.isNullOrEmpty(jsonString)) {
+        if (Strings.isNullOrEmpty(jsonString)) {
             return null;
         } else {
             try {
@@ -46,10 +49,12 @@ public class JsonBinder {
         }
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public static <T> T fromJson(String jsonString, TypeReference<?> valueTypeRef) {
-        if(Strings.isNullOrEmpty(jsonString)) {
+        if (Strings.isNullOrEmpty(jsonString)) {
             return null;
         } else {
             try {
@@ -61,10 +66,12 @@ public class JsonBinder {
         }
     }
 
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     public static String toJson(Object object) {
-        if(object == null) {
+        if (object == null) {
             return null;
         } else {
             try {
@@ -77,7 +84,7 @@ public class JsonBinder {
     }
 
     public static void setDateFormat(String pattern) {
-        if(!Strings.isNullOrEmpty(pattern)) {
+        if (!Strings.isNullOrEmpty(pattern)) {
             SimpleDateFormat df = new SimpleDateFormat(pattern);
             mapper.setDateFormat(df);
         }

@@ -17,7 +17,7 @@ public class MD5 {
         byte[] h = DigestUtils.md5(s);
         StringBuilder resultSb = new StringBuilder();
 
-        for(int i = 0; i < h.length; ++i) {
+        for (int i = 0; i < h.length; ++i) {
             int t = h[i] & 255;
             resultSb.append(hexDigits[t >> 4 & 15]);
             resultSb.append(hexDigits[t & 15]);
@@ -30,7 +30,7 @@ public class MD5 {
         byte[] h = DigestUtils.md5(s);
         StringBuilder resultSb = new StringBuilder();
 
-        for(int i = 0; i < h.length; ++i) {
+        for (int i = 0; i < h.length; ++i) {
             int t = h[i] & 255;
             resultSb.append(hexDigits[t >> 4 & 15]);
             resultSb.append(hexDigits[t & 15]);

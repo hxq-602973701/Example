@@ -50,7 +50,7 @@
                 <div class="bars pull-right col-sm-6" style="margin-bottom: 10px;padding-right:0px;">
                     <div class="input-group">
                         <input type="text" id="txt-query" placeholder="用户账户、姓名、联系方式。。。" class="form-control">
-						<span class="input-group-btn">
+                        <span class="input-group-btn">
                             <button type="button" class="btn btn-outline btn-success btn-query"
                                     style="margin-left: 0"><i class="fa fa-search"></i> 搜索</button>
                         </span>

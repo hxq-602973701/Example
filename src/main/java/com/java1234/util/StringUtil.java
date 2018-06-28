@@ -56,7 +56,7 @@ public class StringUtil {
     public static String trimLCR(String str) {
         StringBuffer sb = new StringBuffer();
         if (str != null && !str.equals("")) {
-            for(int i = 0; i < str.length(); ++i) {
+            for (int i = 0; i < str.length(); ++i) {
                 if (str.charAt(i) != ' ' && str.charAt(i) != 12288) {
                     sb.append(str.charAt(i));
                 }
@@ -83,7 +83,7 @@ public class StringUtil {
             Assert.isTrue(end <= value.length(), "start can not be less than value length");
             StringBuilder sb = new StringBuilder(value);
 
-            for(int i = start; i <= end; ++i) {
+            for (int i = start; i <= end; ++i) {
                 sb.replace(i - 1, i, "*");
             }
 
@@ -97,7 +97,7 @@ public class StringUtil {
         } else {
             byte[] asc = str.getBytes();
 
-            for(int i = 0; i < asc.length; ++i) {
+            for (int i = 0; i < asc.length; ++i) {
                 if (!isVisibleChar(asc[i])) {
                     return false;
                 }
@@ -123,7 +123,7 @@ public class StringUtil {
                 int count = 0;
                 int i = 0;
 
-                while(true) {
+                while (true) {
                     if (i >= str.length()) {
                         return true;
                     }
@@ -237,7 +237,7 @@ public class StringUtil {
     }
 
     public static String idToPath(String code) {
-        return idToPath((long)Math.abs(code.hashCode()));
+        return idToPath((long) Math.abs(code.hashCode()));
     }
 
     public static String idToPath(long newId) {
@@ -245,7 +245,7 @@ public class StringUtil {
             return "";
         } else {
             StringBuffer result;
-            for(result = new StringBuffer(""); newId > 0L; newId /= 100L) {
+            for (result = new StringBuffer(""); newId > 0L; newId /= 100L) {
                 result.insert(0, "" + newId % 100L + "/");
             }
 
@@ -257,7 +257,7 @@ public class StringUtil {
         if (str == null) {
             return false;
         } else {
-            for(int i = 0; i < strArray.length; ++i) {
+            for (int i = 0; i < strArray.length; ++i) {
                 if (strArray[i].equals(str)) {
                     return true;
                 }
@@ -286,7 +286,7 @@ public class StringUtil {
                 byte[] b = sub.getBytes();
                 int count = 0;
 
-                for(int index = 0; index < b.length; ++index) {
+                for (int index = 0; index < b.length; ++index) {
                     if (b[index] < 0) {
                         ++count;
                     }
@@ -328,7 +328,7 @@ public class StringUtil {
     }
 
     public static String getQuarterName(Integer quarter) {
-        switch(quarter) {
+        switch (quarter) {
             case 1:
                 return "一季度";
             case 2:
@@ -402,7 +402,7 @@ public class StringUtil {
                 int length = str.length();
                 StringBuilder buffer = new StringBuilder(length);
 
-                for(int index = 0; index < length; ++index) {
+                for (int index = 0; index < length; ++index) {
                     char ch = str.charAt(index);
                     if (!Character.isWhitespace(ch)) {
                         if (!Character.isUpperCase(ch)) {
@@ -415,7 +415,7 @@ public class StringUtil {
                             }
                         } else {
                             int wordIndex;
-                            for(wordIndex = index + 1; wordIndex < length; ++wordIndex) {
+                            for (wordIndex = index + 1; wordIndex < length; ++wordIndex) {
                                 char wordChar = str.charAt(wordIndex);
                                 if (!Character.isUpperCase(wordChar)) {
                                     if (Character.isLowerCase(wordChar)) {
@@ -446,7 +446,7 @@ public class StringUtil {
                 this.startWord(buffer, ch);
             }
 
-            while(index < length) {
+            while (index < length) {
                 ch = str.charAt(index);
                 this.inWord(buffer, ch);
                 ++index;
@@ -463,7 +463,7 @@ public class StringUtil {
                 this.startWord(buffer, ch);
             }
 
-            for(int length = str.length(); index < length; ++index) {
+            for (int length = str.length(); index < length; ++index) {
                 ch = str.charAt(index);
                 if (!Character.isLowerCase(ch)) {
                     break;
@@ -483,7 +483,7 @@ public class StringUtil {
                 this.startWord(buffer, ch);
             }
 
-            for(int length = str.length(); index < length; ++index) {
+            for (int length = str.length(); index < length; ++index) {
                 ch = str.charAt(index);
                 if (!Character.isLowerCase(ch)) {
                     break;
@@ -503,7 +503,7 @@ public class StringUtil {
                 this.startDigitWord(buffer, ch);
             }
 
-            for(int length = str.length(); index < length; ++index) {
+            for (int length = str.length(); index < length; ++index) {
                 ch = str.charAt(index);
                 if (!Character.isDigit(ch)) {
                     break;

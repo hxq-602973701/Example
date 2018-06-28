@@ -14,7 +14,8 @@
 <div class="nav">
     <div class="logo">
         <a href="index.html">
-            <img src="/assets/img/jinghui.png" width="70" height="70" style="vertical-align:text-bottom; margin-right:15px">
+            <img src="/assets/img/jinghui.png" width="70" height="70"
+                 style="vertical-align:text-bottom; margin-right:15px">
         </a>
     </div>
     <hgroup>
@@ -39,12 +40,13 @@
                     <a href="${menu.menuUrl?html}" target="_blank">
                         <div class="module-item">
                             <img src="${menu.menuImage?html}" alt="${menu.menuName?html}">
-                            <#--<span class="label label-success count-info">18</span>-->
+                        <#--<span class="label label-success count-info">18</span>-->
                         </div>
                         <div class="typemask"><img src="/assets/img/typemask-03.png" width="250" height="250"></div>
                         <h3>${menu.menuName?html}</h3>
                     </a>
-                    <#if !utils.isAuthCheck(userProfile.authType,menu.menuRoles)><div class="no-authType"></div></#if>
+                    <#if !utils.isAuthCheck(userProfile.authType,menu.menuRoles)>
+                        <div class="no-authType"></div></#if>
                 </li>
             </#list>
         </ul>
@@ -64,7 +66,7 @@
 <script src="/assets/layui/laytpl/laytpl.js?${RES_TIMESTAMP}"></script>
 <script>
     $(function () {
-        $('.qrcode').on('click',function(){
+        $('.qrcode').on('click', function () {
 
             //弹出技术支持内容
             kirin.popup.open({

@@ -109,7 +109,7 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
      * @return
      */
     @Override
-    public boolean selectUserDuplicate(User param){
+    public boolean selectUserDuplicate(User param) {
         int count = userMapper.selectUserDuplicate(param);
         return count == 0;
     }

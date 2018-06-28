@@ -240,7 +240,7 @@
             };
         }
     });
-    
+
     //默认参数
     var defaults = {
         isFormGroup: true,

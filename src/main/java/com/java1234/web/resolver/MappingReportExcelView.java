@@ -3,6 +3,7 @@ package com.java1234.web.resolver;
 /**
  * Created by Administrator on 2018/1/30.
  */
+
 import java.io.ByteArrayOutputStream;
 import java.net.URLEncoder;
 import java.util.Map;
@@ -25,9 +26,9 @@ public class MappingReportExcelView extends AbstractView {
 
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String excelContent = model.getOrDefault("excelContent", "").toString();
-        if(StringUtils.isNotBlank(excelContent)) {
+        if (StringUtils.isNotBlank(excelContent)) {
             String excelStream = model.getOrDefault("fileName", "").toString();
-            if(StringUtils.isNotBlank(excelStream)) {
+            if (StringUtils.isNotBlank(excelStream)) {
                 excelStream = URLEncoder.encode(excelStream, "UTF-8") + "_" + DateUtil.format(Long.valueOf(System.currentTimeMillis()), "yyyyMMddHHmm") + ".xls";
                 response.addHeader("Content-Disposition", "attachment;filename=" + excelStream);
             }
@@ -36,8 +37,8 @@ public class MappingReportExcelView extends AbstractView {
             bao.write(excelContent.getBytes());
             this.writeToResponse(response, bao);
         } else {
-            ByteArrayOutputStream excelStream1 = (ByteArrayOutputStream)model.get("excelStream");
-            if(excelStream1 != null) {
+            ByteArrayOutputStream excelStream1 = (ByteArrayOutputStream) model.get("excelStream");
+            if (excelStream1 != null) {
                 this.writeToResponse(response, excelStream1);
             }
         }

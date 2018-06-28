@@ -99,7 +99,7 @@ public class MenuController {
             final List<Menu> menuList = JSON.parseArray(menuListJson, Menu.class);
             final Long uid = LoginContext.getUserId();
 
-            menuList.stream().forEach(m->m.setModifiedUid(uid));
+            menuList.stream().forEach(m -> m.setModifiedUid(uid));
 
             //保存菜单树的层级结构与顺序
             menuService.saveMenuTreeHierarchy(menuList);

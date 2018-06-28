@@ -23,7 +23,7 @@ public interface CommonMapper {
      * @param limit        最多返回条数
      * @return
      */
-    List<HashMap> selectByCondition(@Param("database") String database,@Param("tableName") String tableName, @Param("conditionMap") Map conditionMap, @Param("limit") Integer limit);
+    List<HashMap> selectByCondition(@Param("database") String database, @Param("tableName") String tableName, @Param("conditionMap") Map conditionMap, @Param("limit") Integer limit);
 
     /**
      * 根据条件更新指定表的记录

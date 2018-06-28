@@ -33,6 +33,7 @@
     <option value="">--请选择--</option>
     </#if>
     <#list roleList as role>
-    <option <#if utils.isAuthCheck(value, role.authType)>selected</#if> value="${role.authType}">${role.roleName}</option>
+    <option <#if utils.isAuthCheck(value, role.authType)>selected</#if>
+            value="${role.authType}">${role.roleName}</option>
     </#list>
 </#macro>

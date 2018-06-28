@@ -19,7 +19,7 @@
      */
     $(function () {
         var parent = kirin.popup.shareData();
-       $("#shareData").val(parent);
+        $("#shareData").val(parent);
     })
 </script>
 </@override>

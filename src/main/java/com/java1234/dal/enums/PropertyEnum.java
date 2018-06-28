@@ -26,7 +26,6 @@ public enum PropertyEnum {
     INTELLIGENCE_SOURCE("4200"),
 
 
-
     /**
      * 情报采集来源：电脑上报
      */
@@ -204,7 +203,6 @@ public enum PropertyEnum {
      * 短信管理-短信提醒内容
      */
     SMS_REMIND_CONTENT("3850");
-
 
 
     private final String code;

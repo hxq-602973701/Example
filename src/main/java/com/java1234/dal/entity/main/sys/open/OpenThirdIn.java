@@ -1,6 +1,7 @@
 package com.java1234.dal.entity.main.sys.open;
 
 import com.java1234.dal.entity.base.BaseEntity;
+
 import java.util.Date;
 import javax.persistence.*;
 

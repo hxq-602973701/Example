@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.java1234.dal.mapper.main.sys.property.PropertyMapper" >
-  <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.property.Property" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <id column="prop_id" property="propId" jdbcType="INTEGER" />
-    <result column="prop_parent_id" property="propParentId" jdbcType="INTEGER" />
-    <result column="prop_type" property="propType" jdbcType="INTEGER" />
-    <result column="prop_key" property="propKey" jdbcType="VARCHAR" />
-    <result column="prop_value" property="propValue" jdbcType="VARCHAR" />
-    <result column="prop_icon" property="propIcon" jdbcType="VARCHAR" />
-    <result column="prop_memo" property="propMemo" jdbcType="VARCHAR" />
-    <result column="ranking" property="ranking" jdbcType="INTEGER" />
-    <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
-    <result column="create_uid" property="createUid" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT" />
-    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
-  </resultMap>
+<mapper namespace="com.java1234.dal.mapper.main.sys.property.PropertyMapper">
+    <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.property.Property">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="prop_id" property="propId" jdbcType="INTEGER"/>
+        <result column="prop_parent_id" property="propParentId" jdbcType="INTEGER"/>
+        <result column="prop_type" property="propType" jdbcType="INTEGER"/>
+        <result column="prop_key" property="propKey" jdbcType="VARCHAR"/>
+        <result column="prop_value" property="propValue" jdbcType="VARCHAR"/>
+        <result column="prop_icon" property="propIcon" jdbcType="VARCHAR"/>
+        <result column="prop_memo" property="propMemo" jdbcType="VARCHAR"/>
+        <result column="ranking" property="ranking" jdbcType="INTEGER"/>
+        <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
+        <result column="create_uid" property="createUid" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT"/>
+        <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
 
-  <sql id="BaseColumns">
-    select
-    t.prop_id,
-    t.prop_parent_id,
-    t.prop_type,
-    t.prop_key,
-    t.prop_value,
-    t.prop_icon,
-    t.ranking,
-    t.del_flag,
-    t.create_time,
-    t.create_uid,
-    t.modified_time,
-    t.modified_uid
-    from s_property t
-  </sql>
+    <sql id="BaseColumns">
+        select
+        t.prop_id,
+        t.prop_parent_id,
+        t.prop_type,
+        t.prop_key,
+        t.prop_value,
+        t.prop_icon,
+        t.ranking,
+        t.del_flag,
+        t.create_time,
+        t.create_uid,
+        t.modified_time,
+        t.modified_uid
+        from s_property t
+    </sql>
 
-  <!--根据param获取出所有的分页列表-->
-  <select id="selectBySetMemberVariable" resultMap="BaseResultMap">
-    <include refid="BaseColumns" />
-    <where>
-      t.del_flag = 0
-      <if test="propKey != null">
-        and t.prop_key = #{propKey}
-      </if>
-      <if test="propParentId != null">
-        and t.prop_parent_id = #{propParentId}
-      </if>
-      <if test="query != null">
-        and t.prop_key LIKE '%' || #{query} || '%'
-      </if>
-    </where>
-  </select>
+    <!--根据param获取出所有的分页列表-->
+    <select id="selectBySetMemberVariable" resultMap="BaseResultMap">
+        <include refid="BaseColumns"/>
+        <where>
+            t.del_flag = 0
+            <if test="propKey != null">
+                and t.prop_key = #{propKey}
+            </if>
+            <if test="propParentId != null">
+                and t.prop_parent_id = #{propParentId}
+            </if>
+            <if test="query != null">
+                and t.prop_key LIKE '%' || #{query} || '%'
+            </if>
+        </where>
+    </select>
 
-  <!--根据条件获取业务参数列表-->
-  <select id="selectAreaList" resultMap="BaseResultMap">
-    SELECT * FROM s_property t
-    WHERE t.del_flag = 0
-    <if test="propParentId != null">
-      AND t.prop_parent_id = #{propParentId}
-    </if>
-    ORDER BY t.ranking
-  </select>
+    <!--根据条件获取业务参数列表-->
+    <select id="selectAreaList" resultMap="BaseResultMap">
+        SELECT * FROM s_property t
+        WHERE t.del_flag = 0
+        <if test="propParentId != null">
+            AND t.prop_parent_id = #{propParentId}
+        </if>
+        ORDER BY t.ranking
+    </select>
 </mapper>

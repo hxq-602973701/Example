@@ -5,7 +5,9 @@ import com.java1234.dal.dao.sys.open.OpenThirdInDAO;
 import com.java1234.dal.entity.main.sys.open.OpenThirdIn;
 import com.java1234.service.base.impl.BaseServiceImpl;
 import com.java1234.service.sys.open.OpenThirdInService;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OpenThirdInServiceImpl extends BaseServiceImpl<OpenThirdIn> implements OpenThirdInService {
-    
+
     /**
      * OpenThirdInDAO
      */

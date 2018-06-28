@@ -32,7 +32,7 @@ final class SpringUtil implements ApplicationContextAware {
     }
 
     public static void registerBean(String id, Class<?> beanClass) {
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry)((ConfigurableApplicationContext)appContext).getBeanFactory();
+        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) ((ConfigurableApplicationContext) appContext).getBeanFactory();
         registry.registerBeanDefinition(id, new AnnotatedGenericBeanDefinition(beanClass));
     }
 

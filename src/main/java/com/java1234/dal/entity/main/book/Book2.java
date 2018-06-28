@@ -1,6 +1,7 @@
 package com.java1234.dal.entity.main.book;
 
 import com.java1234.dal.entity.base.BaseEntity;
+
 import javax.persistence.*;
 
 @Table(name = "t_book")

@@ -228,6 +228,7 @@
          */
         var curPage = 1;
         refresh();
+
         function refresh() {
             pageing.init(curPage);
             console.log("定时刷新..");

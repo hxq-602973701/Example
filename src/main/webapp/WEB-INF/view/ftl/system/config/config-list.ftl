@@ -67,8 +67,12 @@
         <td>{{= d[i]['configModule'] }}</td>
         <td>{{= d[i]['configMemo'] }}</td>
         <td class="u-table-center">
-            <button type="button" data-id="{{= d[i]['configId'] }}" class="btn btn-sm btn-outline btn-primary btn-edit">编辑</button>
-            <button type="button" data-id="{{= d[i]['configId'] }}" class="btn btn-sm btn-outline btn-danger btn-del">删除</button>
+            <button type="button" data-id="{{= d[i]['configId'] }}" class="btn btn-sm btn-outline btn-primary btn-edit">
+                编辑
+            </button>
+            <button type="button" data-id="{{= d[i]['configId'] }}" class="btn btn-sm btn-outline btn-danger btn-del">
+                删除
+            </button>
         </td>
     </tr>
     {{# } }}
@@ -78,25 +82,25 @@
 
         // 分页
         var pageing = kirin.pageing(
-            {
-                view: '#tbl-config',
-                tpl : '#tpl-config-row'
-            },
-            function (data) {
-                return kirin.ajax({
-                    url : '/system/config-page.json',
-                    data: data
-                });
-            }
+                {
+                    view: '#tbl-config',
+                    tpl: '#tpl-config-row'
+                },
+                function (data) {
+                    return kirin.ajax({
+                        url: '/system/config-page.json',
+                        data: data
+                    });
+                }
         );
 
         // 新增按钮
         $('.btn-insert').on('click', function () {
             kirin.popup.open({
-                title  : '新增系统参数',
-                width  : 600,
-                height : 390,
-                maxmin : false,
+                title: '新增系统参数',
+                width: 600,
+                height: 390,
+                maxmin: false,
                 content: '/system/config.html',
             }).done(function (data) {
                 if (data === 'update') {
@@ -112,35 +116,35 @@
 
             //询问框
             layer.confirm('删除此系统参数可能导致系统<br>运行异常，请谨慎操作？',
-                {
-                    icon : 0,
-                    title: '删除系统参数'
-                },
-                function () {
-                    var configIds = [];
+                    {
+                        icon: 0,
+                        title: '删除系统参数'
+                    },
+                    function () {
+                        var configIds = [];
 
-                    //获取所有选中的角色ID
-                    $('.chk-row:checked').each(function () {
-                        configIds.push(Number($(this).val()));
-                    });
+                        //获取所有选中的角色ID
+                        $('.chk-row:checked').each(function () {
+                            configIds.push(Number($(this).val()));
+                        });
 
-                    if (configIds.length == 0) {
-                        layer.alert('请选择待删除的行。');
-                        return false;
-                    }
-
-                    // 删除
-                    kirin.ajax({
-                        type: 'DELETE',
-                        url : '/system/config.json',
-                        data: {
-                            configIds: configIds
+                        if (configIds.length == 0) {
+                            layer.alert('请选择待删除的行。');
+                            return false;
                         }
-                    }).done(function () {
-                        pageing.reload();
-                        layer.alert('系统参数删除成功。', {icon: 1});
-                    });
-                }
+
+                        // 删除
+                        kirin.ajax({
+                            type: 'DELETE',
+                            url: '/system/config.json',
+                            data: {
+                                configIds: configIds
+                            }
+                        }).done(function () {
+                            pageing.reload();
+                            layer.alert('系统参数删除成功。', {icon: 1});
+                        });
+                    }
             );
         });
 
@@ -154,10 +158,10 @@
         $('#tbl-config').on('click', '.btn-edit', function () {
             var configId = $(this).data('id');
             kirin.popup.open({
-                title  : '编辑系统参数',
-                width  : 600,
-                height : 410,
-                maxmin : false,
+                title: '编辑系统参数',
+                width: 600,
+                height: 410,
+                maxmin: false,
                 content: ['/system/config.html?configId=', configId].join(''),
             }).done(function (data) {
                 if (data === 'update') {

@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServicePlugin
-        extends BasePluginAdapter
-{
-    public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(IntrospectedTable introspectedTable)
-    {
+        extends BasePluginAdapter {
+    public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(IntrospectedTable introspectedTable) {
         if (!"true".equalsIgnoreCase(getProperties().getProperty("isCreate", "false"))) {
             return null;
         }

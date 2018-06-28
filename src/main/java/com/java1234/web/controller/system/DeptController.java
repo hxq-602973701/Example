@@ -111,8 +111,7 @@ public class DeptController {
         }
 
         //如果父级单位是市局，则显示区分局和县局选项
-        if(deptService.selectByPrimaryKey(deptParentId).getDeptType() < 128)
-        {
+        if (deptService.selectByPrimaryKey(deptParentId).getDeptType() < 128) {
             model.addAttribute("isCity", true);
         }
 
@@ -132,6 +131,7 @@ public class DeptController {
         //批量删除角色
         deptService.deleteWithLogicByPrimaryKeys(deptIds, LoginContext.getUserId());
     }
+
     /**
      * 保存单位信息
      *

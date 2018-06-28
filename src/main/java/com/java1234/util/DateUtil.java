@@ -3,10 +3,12 @@ package com.java1234.util;
 /**
  * Created by Administrator on 2018/1/30.
  */
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +31,7 @@ public class DateUtil {
     }
 
     public static Long date2Long(Date date) {
-        return date == null?null:Long.valueOf(date.getTime());
+        return date == null ? null : Long.valueOf(date.getTime());
     }
 
     public static Date toDate(String dataStr, String format) {

@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
-PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-config.dtd">
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<!-- 别名 -->
-	<typeAliases>
-		<!--实体包-->
-		<package name="com.java1234.dal.entity"/>
-		<!-- 自定义类型转换包 -->
-		<package name="com.java1234.dal.handler"/>
-	</typeAliases>
+    <!-- 别名 -->
+    <typeAliases>
+        <!--实体包-->
+        <package name="com.java1234.dal.entity"/>
+        <!-- 自定义类型转换包 -->
+        <package name="com.java1234.dal.handler"/>
+    </typeAliases>
 
-	<!-- 配置分页插件 -->
-	<plugins>
-		<!-- 主键生成策略 -->
-		<plugin interceptor="com.java1234.dal.utils.MySequenceGenerator"/>
-		<!-- 记录SQL执行时间拦截器 -->
-		<plugin interceptor="com.java1234.util.MySqlCostInterceptor">
-			<!-- 慢查询阈值（毫秒） -->
-			<property name="slowThreshold" value="1000"/>
-		</plugin>
-		<plugin interceptor="com.github.pagehelper.PageHelper">
-			<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
-			<property name="dialect" value="mysql"/>
-		</plugin>
-		<!-- 分页插件【数据库类型根据数据源类型自动判断】 -->
-		<!--<plugin interceptor="com.java1234.dal.utils.MyPageHelper">-->
-			<!--&lt;!&ndash; 该参数默认为false &ndash;&gt;-->
-			<!--&lt;!&ndash; 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 &ndash;&gt;-->
-			<!--&lt;!&ndash; 和startPage中的pageNum效果一样&ndash;&gt;-->
-			<!--<property name="offsetAsPageNum" value="true"/>-->
-			<!--&lt;!&ndash; 该参数默认为false &ndash;&gt;-->
-			<!--&lt;!&ndash; 设置为true时，使用RowBounds分页会进行count查询 &ndash;&gt;-->
-			<!--<property name="rowBoundsWithCount" value="true"/>-->
-			<!--&lt;!&ndash; 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 &ndash;&gt;-->
-			<!--&lt;!&ndash; （相当于没有执行分页查询，但是返回结果仍然是Page类型）&ndash;&gt;-->
-			<!--<property name="pageSizeZero" value="true"/>-->
-			<!--&lt;!&ndash; 3.3.0版本可用 - 分页参数合理化，默认false禁用 &ndash;&gt;-->
-			<!--&lt;!&ndash; 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 &ndash;&gt;-->
-			<!--&lt;!&ndash; 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 &ndash;&gt;-->
-			<!--<property name="reasonable" value="true"/>-->
-		<!--</plugin>-->
-	</plugins>
+    <!-- 配置分页插件 -->
+    <plugins>
+        <!-- 主键生成策略 -->
+        <plugin interceptor="com.java1234.dal.utils.MySequenceGenerator"/>
+        <!-- 记录SQL执行时间拦截器 -->
+        <plugin interceptor="com.java1234.util.MySqlCostInterceptor">
+            <!-- 慢查询阈值（毫秒） -->
+            <property name="slowThreshold" value="1000"/>
+        </plugin>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
+            <property name="dialect" value="mysql"/>
+        </plugin>
+        <!-- 分页插件【数据库类型根据数据源类型自动判断】 -->
+        <!--<plugin interceptor="com.java1234.dal.utils.MyPageHelper">-->
+        <!--&lt;!&ndash; 该参数默认为false &ndash;&gt;-->
+        <!--&lt;!&ndash; 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 &ndash;&gt;-->
+        <!--&lt;!&ndash; 和startPage中的pageNum效果一样&ndash;&gt;-->
+        <!--<property name="offsetAsPageNum" value="true"/>-->
+        <!--&lt;!&ndash; 该参数默认为false &ndash;&gt;-->
+        <!--&lt;!&ndash; 设置为true时，使用RowBounds分页会进行count查询 &ndash;&gt;-->
+        <!--<property name="rowBoundsWithCount" value="true"/>-->
+        <!--&lt;!&ndash; 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 &ndash;&gt;-->
+        <!--&lt;!&ndash; （相当于没有执行分页查询，但是返回结果仍然是Page类型）&ndash;&gt;-->
+        <!--<property name="pageSizeZero" value="true"/>-->
+        <!--&lt;!&ndash; 3.3.0版本可用 - 分页参数合理化，默认false禁用 &ndash;&gt;-->
+        <!--&lt;!&ndash; 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 &ndash;&gt;-->
+        <!--&lt;!&ndash; 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 &ndash;&gt;-->
+        <!--<property name="reasonable" value="true"/>-->
+        <!--</plugin>-->
+    </plugins>
 </configuration>

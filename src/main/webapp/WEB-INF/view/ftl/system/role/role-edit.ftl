@@ -33,8 +33,8 @@
                     <tr>
                         <th class="required-input" style="width: 100px;">序号</th>
                         <td>
-                          <input type="text" class="form-control role-ranking v-req v-int" placeholder="请输入先后序号"
-                                value="${role.ranking?html}">
+                            <input type="text" class="form-control role-ranking v-req v-int" placeholder="请输入先后序号"
+                                   value="${role.ranking?html}">
 
                         </td>
                     </tr>
@@ -80,7 +80,7 @@
                     roleId: roleId,
                     roleName: roleName,
                     roleMemo: roleMemo,
-                    ranking : ranking
+                    ranking: ranking
                 }
             }).done(function () {
                 layer.msg('系统角色保存成功。', {icon: 1}, function () {

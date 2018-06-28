@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.java1234.dal.mapper.main.sys.menu.MenuMapper" >
-  <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.menu.Menu" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <id column="menu_id" property="menuId" jdbcType="BIGINT" />
-    <result column="menu_parent_id" property="menuParentId" jdbcType="BIGINT" />
-    <result column="page_id" property="pageId" jdbcType="VARCHAR" />
-    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
-    <result column="menu_pinyin" property="menuPinyin" jdbcType="VARCHAR" />
-    <result column="menu_title" property="menuTitle" jdbcType="VARCHAR" />
-    <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
-    <result column="menu_image" property="menuImage" jdbcType="VARCHAR" />
-    <result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
-    <result column="menu_roles" property="menuRoles" jdbcType="BIGINT" />
-    <result column="menu_memo" property="menuMemo" jdbcType="VARCHAR" />
-    <result column="ranking" property="ranking" jdbcType="VARCHAR" />
-    <result column="menu_show" property="menuShow" jdbcType="INTEGER" />
-    <result column="smart_link" property="smartLink" jdbcType="INTEGER" />
-    <result column="del_flag" property="delFlag" jdbcType="TINYINT" />
-    <result column="create_uid" property="createUid" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT" />
-    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
-  </resultMap>
+<mapper namespace="com.java1234.dal.mapper.main.sys.menu.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.java1234.dal.entity.main.sys.menu.Menu">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="menu_id" property="menuId" jdbcType="BIGINT"/>
+        <result column="menu_parent_id" property="menuParentId" jdbcType="BIGINT"/>
+        <result column="page_id" property="pageId" jdbcType="VARCHAR"/>
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="menu_pinyin" property="menuPinyin" jdbcType="VARCHAR"/>
+        <result column="menu_title" property="menuTitle" jdbcType="VARCHAR"/>
+        <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR"/>
+        <result column="menu_image" property="menuImage" jdbcType="VARCHAR"/>
+        <result column="menu_url" property="menuUrl" jdbcType="VARCHAR"/>
+        <result column="menu_roles" property="menuRoles" jdbcType="BIGINT"/>
+        <result column="menu_memo" property="menuMemo" jdbcType="VARCHAR"/>
+        <result column="ranking" property="ranking" jdbcType="VARCHAR"/>
+        <result column="menu_show" property="menuShow" jdbcType="INTEGER"/>
+        <result column="smart_link" property="smartLink" jdbcType="INTEGER"/>
+        <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
+        <result column="create_uid" property="createUid" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modified_uid" property="modifiedUid" jdbcType="BIGINT"/>
+        <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
 </mapper>

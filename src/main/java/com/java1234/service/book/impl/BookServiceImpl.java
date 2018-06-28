@@ -5,7 +5,9 @@ import com.java1234.dal.dao.book.BookDAO;
 import com.java1234.dal.entity.main.book.Book;
 import com.java1234.service.base.impl.BaseServiceImpl;
 import com.java1234.service.book.BookService;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BookServiceImpl extends BaseServiceImpl<Book> implements BookService {
-    
+
     /**
      * BookDAO
      */

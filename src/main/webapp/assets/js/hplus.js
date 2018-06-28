@@ -6,8 +6,8 @@ $(document).ready(function () {
 
     // Collapse ibox function
     $('.collapse-link').click(function () {
-        var ibox    = $(this).closest('div.ibox');
-        var button  = $(this).find('i');
+        var ibox = $(this).closest('div.ibox');
+        var button = $(this).find('i');
         var content = ibox.find('div.ibox-content');
         content.slideToggle(200);
         button.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
@@ -27,7 +27,7 @@ $(document).ready(function () {
     // Small todo handler
     $('.check-link').click(function () {
         var button = $(this).find('i');
-        var label  = $(this).next('span');
+        var label = $(this).next('span');
         button.toggleClass('fa-check-square').toggleClass('fa-square-o');
         label.toggleClass('todo-completed');
         return false;
@@ -41,7 +41,7 @@ $(document).ready(function () {
 
     // tooltips
     $('.tooltip-demo').tooltip({
-        selector : "[data-toggle=tooltip]",
+        selector: "[data-toggle=tooltip]",
         container: "body"
     })
 
@@ -129,15 +129,15 @@ function SmoothlyMenu() {
 // Dragable panels
 function WinMove() {
     var element = "[class*=col]";
-    var handle  = ".ibox-title";
+    var handle = ".ibox-title";
     var connect = "[class*=col]";
     $(element).sortable(
         {
-            handle              : handle,
-            connectWith         : connect,
-            tolerance           : 'pointer',
+            handle: handle,
+            connectWith: connect,
+            tolerance: 'pointer',
             forcePlaceholderSize: true,
-            opacity             : 0.8,
+            opacity: 0.8,
         })
         .disableSelection();
 };

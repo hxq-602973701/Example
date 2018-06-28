@@ -4,7 +4,9 @@ import com.java1234.dal.dao.base.impl.BaseDAOImpl;
 import com.java1234.dal.dao.sys.role.RoleDAO;
 import com.java1234.dal.entity.main.sys.role.Role;
 import com.java1234.dal.mapper.main.sys.role.RoleMapper;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -17,7 +19,7 @@ import tk.mybatis.mapper.common.Mapper;
  */
 @Service
 public class RoleDAOImpl extends BaseDAOImpl<Role> implements RoleDAO {
-    
+
     /**
      * RoleMapper
      */

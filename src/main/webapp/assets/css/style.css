@@ -8364,7 +8364,7 @@ body.skin-3 {
 
 .u-time-line-container .labelbox,
 .u-time-line-container .discribbox {
-    border-radius:10px;
+    border-radius: 10px;
     background-color: #f3f4f5;
     height: 100px;
     position: relative;
@@ -8384,7 +8384,6 @@ body.skin-3 {
     line-height: 1.7;
 }
 
-
 .u-time-line-container .status_logo_container:after {
     content: '';
     background: url(../img/line.png);
@@ -8401,7 +8400,7 @@ body.skin-3 {
     position: absolute;
     top: 0;
     left: -40px;
-    border: 6px solid rgba(255,255,255,0.6);
+    border: 6px solid rgba(255, 255, 255, 0.6);
     border-radius: 40px;
     text-indent: 0;
     text-align: center;
@@ -8498,15 +8497,15 @@ body.skin-3 {
 
 /*table-hover表格tr灰色背景*/
 tr.u-recent {
-    background-color: rgba(50,50,50,.3) !important;
+    background-color: rgba(50, 50, 50, .3) !important;
 }
 
 tr.u-recent:hover {
-    background-color: rgba(50,50,50,.3) !important;
+    background-color: rgba(50, 50, 50, .3) !important;
 }
 
 tr.u-recent:hover td {
-    background-color: rgba(50,50,50,.3) !important;
+    background-color: rgba(50, 50, 50, .3) !important;
 }
 
 tr.u-recent .btn-danger {
@@ -8579,6 +8578,7 @@ tr.u-recent .btn-danger {
     display: flex;
     flex-wrap: wrap;
 }
+
 .u-dept-container1 {
     margin: 1em 1.37em;
     font-size: 14px;
@@ -8595,6 +8595,7 @@ tr.u-recent .btn-danger {
     padding: 8px;
     width: 150px;
 }
+
 /*框架样式*/
 body {
     /*height: -webkit-calc(100% - 110px);*/
@@ -8756,26 +8757,28 @@ body {
     }
 }
 
-
-
 /*   lyt  */
-.display-none{
-    display:none;
+.display-none {
+    display: none;
 }
+
 /*   树图修改    */
-.jstree-container-ul>li>i,
-.jstree-container-ul>li>a{
-    display:none !important;
+.jstree-container-ul > li > i,
+.jstree-container-ul > li > a {
+    display: none !important;
 }
-.jstree-children>li{
-    margin-left:-8px !important;
+
+.jstree-children > li {
+    margin-left: -8px !important;
 }
-.tree-div{
-    padding-left:0;
-    padding-right:0;
-    position:relative;
+
+.tree-div {
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
     z-index: 100;
 }
-.breadcrumb > li a{
-    cursor:default !important;
+
+.breadcrumb > li a {
+    cursor: default !important;
 }

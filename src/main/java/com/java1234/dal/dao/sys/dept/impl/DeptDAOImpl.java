@@ -4,7 +4,9 @@ import com.java1234.dal.dao.base.impl.BaseDAOImpl;
 import com.java1234.dal.dao.sys.dept.DeptDAO;
 import com.java1234.dal.entity.main.sys.dept.Dept;
 import com.java1234.dal.mapper.main.sys.dept.DeptMapper;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -17,7 +19,7 @@ import tk.mybatis.mapper.common.Mapper;
  */
 @Service
 public class DeptDAOImpl extends BaseDAOImpl<Dept> implements DeptDAO {
-    
+
     /**
      * DeptMapper
      */

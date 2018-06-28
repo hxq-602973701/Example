@@ -12,12 +12,12 @@
     </resultMap>
 
     <sql id="tokenColumns">
-    SELECT
-    T.USER_ID,
-    T.TOKEN,
-    T.DEVICE_TYPE,
-    T.PUSH_TOKEN
-    FROM S_TOKEN T
+        SELECT
+        T.USER_ID,
+        T.TOKEN,
+        T.DEVICE_TYPE,
+        T.PUSH_TOKEN
+        FROM S_TOKEN T
     </sql>
 
     <!-- 根据userId获取Token实体 -->

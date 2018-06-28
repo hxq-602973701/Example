@@ -3,6 +3,7 @@ package com.java1234.web.filter;
 /**
  * Created by Administrator on 2018/1/30.
  */
+
 import java.io.IOException;
 import java.util.Locale;
 import javax.servlet.FilterChain;
@@ -23,10 +24,10 @@ public class HiddenHttpMethodFilter extends OncePerRequestFilter {
         String putValue = request.getParameter("PUT");
         String deleteValue = request.getParameter("DELETE");
         String postValue = request.getParameter("POST");
-        if(putValue == null && deleteValue == null && postValue == null) {
+        if (putValue == null && deleteValue == null && postValue == null) {
             filterChain.doFilter(request, response);
         } else {
-            String paramValue = putValue != null?"PUT":(deleteValue != null?"DELETE":(postValue != null?"POST":"GET"));
+            String paramValue = putValue != null ? "PUT" : (deleteValue != null ? "DELETE" : (postValue != null ? "POST" : "GET"));
             String method = paramValue.toUpperCase(Locale.ENGLISH);
             HiddenHttpMethodFilter.HttpMethodRequestWrapper wrapper = new HiddenHttpMethodFilter.HttpMethodRequestWrapper(request, method);
             filterChain.doFilter(wrapper, response);

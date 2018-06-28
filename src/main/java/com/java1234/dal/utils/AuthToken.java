@@ -1,7 +1,6 @@
 package com.java1234.dal.utils;
 
 
-
 import com.java1234.dal.entity.main.sys.user.User;
 
 import java.io.Serializable;

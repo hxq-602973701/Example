@@ -106,7 +106,8 @@
             //验证
             if (!validate.verify()) {
                 return false;
-            };
+            }
+            ;
 
 //            if (!kirin.checkError(('.dept-type'))) {
 //                return;

@@ -10,14 +10,16 @@
     <meta charset="utf-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link href="/assets/images/favicon.ico?${RES_TIMESTAMP}" rel="Bookmark">
     <link href="/assets/images/favicon.ico?${RES_TIMESTAMP}" rel="Shortcut Icon"/>
 
     <link href="/assets/css/bootstrap.min.css?${RES_TIMESTAMP}" rel="stylesheet">
     <link href="/assets/font-awesome/css/font-awesome.min.css?${RES_TIMESTAMP}" rel="stylesheet">
-    <link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css?${RES_TIMESTAMP}" rel="stylesheet">
+    <link href="/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css?${RES_TIMESTAMP}"
+          rel="stylesheet">
     <link href="/assets/css/plugins/tagsinput/bootstrap-tagsinput.css?${RES_TIMESTAMP}" rel="stylesheet">
     <link href="/assets/css/animate.css?${RES_TIMESTAMP}" rel="stylesheet">
 
@@ -100,24 +102,24 @@
 <body class="gray-bg" style="height: 100%;">
 <div id="wrapper" style="margin: 0px;min-height: 0px">
     <!-- main content start -->
-    <#-- 主界面 -->
+<#-- 主界面 -->
         <@block name="main"></@block>
     <!-- main content end -->
 </div>
 <#-- 脚本部分 -->
 <script>
-  $(function () {
-    //收起
-    $('.ibox-handle').click(function () {
-      var cl = $(this);
-      cl.next('.ibox-content').slideToggle(600, function () {
-        $('span.u-caret',cl).toggleClass('u-back-90')
-      })
-    });
+    $(function () {
+        //收起
+        $('.ibox-handle').click(function () {
+            var cl = $(this);
+            cl.next('.ibox-content').slideToggle(600, function () {
+                $('span.u-caret', cl).toggleClass('u-back-90')
+            })
+        });
 
-    //弹出窗口最后一个ibox距离下方按钮距离50px(防止按钮把内容挡住)
-    $('.ibox:last').css('margin-bottom','42px')
-  })
+        //弹出窗口最后一个ibox距离下方按钮距离50px(防止按钮把内容挡住)
+        $('.ibox:last').css('margin-bottom', '42px')
+    })
 </script>
 <@block name="scripts">
 </@block>
