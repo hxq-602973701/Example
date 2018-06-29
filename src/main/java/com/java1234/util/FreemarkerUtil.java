@@ -37,7 +37,7 @@ public class FreemarkerUtil {
     public static Book getBook() {
         BookService bookService = SpringUtil.getBean(BookService.class);
         Book book = new Book();
-        book.setBookId(9L);
+        book.setBookId(4L);
         return bookService.selectOne(book);
     }
 

@@ -3,7 +3,6 @@ package com.java1234.web.controller.book;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.java1234.dal.entity.main.book.Book;
-import com.java1234.dal.utils.DataPipe;
 import com.java1234.service.book.BookService;
 import com.java1234.util.ResponseUtil;
 import org.springframework.stereotype.Controller;
@@ -142,8 +141,7 @@ public class BookController {
      * @throws Exception
      */
     @RequestMapping(value = "/book/saveOrUpdate", method = RequestMethod.POST)
-    @ResponseBody
-    public String saveOrUpdateBookApi(final Model model, String bookBaseStr) throws Exception {
+    public void saveOrUpdateBookApi(final Model model, String bookBaseStr) throws Exception {
 
         Book book = objectMapper.readValue(bookBaseStr, Book.class);
         if (book.getBookId() != null) {
@@ -151,7 +149,6 @@ public class BookController {
         } else {
             bookService.insert(book);
         }
-        return null;
         /* return objectMapper.writeValueAsString(book);*/
     }
 

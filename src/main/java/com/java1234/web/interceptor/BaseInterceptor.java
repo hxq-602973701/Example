@@ -10,6 +10,7 @@ import com.java1234.util.ResponseCode;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -27,6 +28,7 @@ import java.util.List;
  * @author lt 2018-06-01
  * @version 1.0.0
  */
+
 public class BaseInterceptor extends HandlerInterceptorAdapter {
 
     /**

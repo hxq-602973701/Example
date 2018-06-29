@@ -47,17 +47,17 @@
             var bookBaseStr = JSON.stringify(bookBase);
             console.log(bookBaseStr);
             layer.confirm("确定要保存么", {
-                btn: ['确定1', '取消']
+                btn: ['确定', '取消']
             }, function (index) {
                 $.ajax({
-                    url: '/book/saveOrUpdate.html',
+                    url: '/book/saveOrUpdate.json',
                     type: "post",
                     dataType: "json",
                     async: true,
                     timeout: 5000,
                     data: {bookBaseStr: bookBaseStr},
                     success: function (data, textStatus, jqXHR) {
-                        layer.alert("保存成功!", function (index2) {
+                        layer.alert("保存成功", function (index2) {
                             kirin.popup.success("update")
                             // layer.close(index2);
                             //  refreshParent();

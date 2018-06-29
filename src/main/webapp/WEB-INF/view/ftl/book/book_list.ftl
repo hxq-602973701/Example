@@ -8,7 +8,7 @@
 <#-- 主体部分 -->
 <@override name="main">
     <#assign user = utils.getBook()>
-<button id="freeMakerUtil">${user.bookName!}${username}</button>
+<button id="freeMakerUtil">${user.bookName}${username}</button>
 <button id="add" type="button" class="btn btn-sm btn-danger">添加</button>
 <button id="del" type="button" class="btn btn-sm btn-danger">删除</button>
 <button id="export" type="button" class="btn btn-sm btn-danger">导出</button>
@@ -128,7 +128,7 @@
 //                scrollbar: false,
 //                content: "/book/show.html?bookId=" + bookId
 //            });
-            kirin.popup.open({
+             kirin.popup.open({
                 title: '编辑图书',
                 width: 600,
                 height: 350,

@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "t_book")
-@SequenceRule
 public class Book extends BaseEntity {
     @Id
     @Column(name = "book_id")
