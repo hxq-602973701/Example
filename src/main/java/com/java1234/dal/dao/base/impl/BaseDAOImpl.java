@@ -184,6 +184,67 @@ public abstract class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
     }
 
     /**
+     * 根据关键字逻辑删除记录（批量）(只支持主数据源、且必需只有一个关键字)
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     * @param column      要更改的字段
+     */
+    private int _deleteWithLogicByPrimaryKeys(Number[] ids, Long modifiedUid, String ...column) {
+        Assert.notNull(ids, "ids can not be null");
+        Assert.notNull(modifiedUid, "modifiedUid can not be null");
+
+        // 设定数据源
+        MultipleDataSource.setDataSourceKey(DataSourceEnum.MAIN);
+
+        // 获取泛型类Class
+        final Class<T> clazz = genericType();
+        final EntityTable entityTable = EntityHelper.getEntityTable(clazz);
+
+        // 获取泛型主键与PK
+        final String table = entityTable.getName();
+        final Set<EntityColumn> pkSet = entityTable.getEntityClassPKColumns();
+        final int pkCount = pkSet.size();
+
+        // 只支持单个主键的实体
+        if (pkCount == 0) {
+            throw new RuntimeException(String.format("实体[%s]中不存在主键字段。", clazz.getName()));
+        } else if (pkCount != 1) {
+            throw new RuntimeException(String.format("实体[%s]中存在多个主键字段。", clazz.getName()));
+        }
+
+        // 主键名
+        final String pkName = pkSet.stream().findFirst().get().getColumn();
+
+        // 更新字段
+        final Map updateMap = Maps.newHashMap();
+        for(int i = 0;i<column.length;i++){
+            updateMap.put(column[i], true);
+        }
+        updateMap.put("MODIFIED_UID", modifiedUid);
+        updateMap.put("MODIFIED_TIME", new Date());
+
+        // 条件字段
+        final Map conditionMap = Maps.newHashMap();
+        conditionMap.put(pkName, ids);
+
+        // 更新
+        return commonMapper.updateWithInByCondition(table, updateMap, conditionMap);
+    }
+
+    /**
+     * 根据关键字逻辑更改记录（批量）(只支持主数据源、且必需只有一个关键字)
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     * @param column      要更改的字段
+     */
+    @Override
+    public int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid, String ...column) {
+        return _deleteWithLogicByPrimaryKeys(ids, modifiedUid, column);
+    }
+
+    /**
      * 根据条件查询返回数据列表
      *
      * @param record

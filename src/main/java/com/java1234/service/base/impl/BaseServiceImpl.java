@@ -165,4 +165,17 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
     public int deleteWithLogicByPrimaryKeys(Integer[] ids, Long modifiedUid) {
         return getDAO().deleteWithLogicByPrimaryKeys(ids, modifiedUid);
     }
+
+    /**
+     * 根据关键字逻辑更改记录（批量）
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     * @param column       要更新字段
+     */
+    @Override
+    public int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid, String ...column) {
+        return getDAO().deleteWithLogicByPrimaryKeys(ids, modifiedUid, column);
+    }
+
 }

@@ -120,6 +120,15 @@ public interface BaseDAO<T extends BaseEntity> {
     int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid);
 
     /**
+     * 根据关键字逻辑更改记录（批量）
+     *
+     * @param ids         关键字ID数组
+     * @param modifiedUid 修改者用户ID
+     * @param column      要更新字段
+     */
+    int deleteWithLogicByPrimaryKeys(Long[] ids, Long modifiedUid, String ...column);
+
+    /**
      * 根据主键修改，空值条件会修改成null
      *
      * @param record
