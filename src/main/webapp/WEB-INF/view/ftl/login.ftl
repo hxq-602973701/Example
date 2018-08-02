@@ -616,6 +616,8 @@
 
         $('.font-container').css("top", ($(window).height() - $('.font-container').height()) / 2);
 
+
+
         /**
          * 切换登录方式
          */

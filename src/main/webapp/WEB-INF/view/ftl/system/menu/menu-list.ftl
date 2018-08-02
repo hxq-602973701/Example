@@ -155,12 +155,44 @@
         </div>
     </div>
 </div>
-
+<div>
+    <input type="submit" value="Start" onclick="start()" />
+</div>
+<div id="messages"></div>
 </@override>
 
 <#-- 脚本部分 -->
 <@override name="scripts">
 <script type="text/javascript">
+
+
+    var webSocket =
+            new WebSocket('ws://localhost:8092/websocket');
+    webSocket.onerror = function (event) {//发生异常的处理
+        alert(event.data);
+    };
+
+    webSocket.onclose = function (event) {
+        var code = event.code;
+        var reason = event.reason;
+        var wasClean = event.wasClean;
+        // handle close event
+        console.log("dsadas");
+    };
+
+    webSocket.onopen = function (event) {//建立连接的处理
+        document.getElementById('messages').innerHTML = 'Connection established';
+    };
+
+    webSocket.onmessage = function (event) {//接收到消息的处理
+        document.getElementById('messages').innerHTML += '<br/>' + event.data;
+    };
+
+    function start() {//页面发送消息给服务器
+        webSocket.send('hello');
+        return false;
+    }
+
     $(function () {
 
         //初始化选择控件

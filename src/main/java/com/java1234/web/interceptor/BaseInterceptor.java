@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.socket.server.support.WebSocketHttpRequestHandler;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -87,6 +88,10 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
         // 请求处理后的处理(子类的处理方式)
         postHandleBase(request, response, handler, mv);
 
+        //如果是webSocket则返回
+        if(handler instanceof WebSocketHttpRequestHandler){
+            return;
+        }
         final HandlerMethod handlerMethod = (HandlerMethod) handler;
         final Method method = handlerMethod.getMethod();
 

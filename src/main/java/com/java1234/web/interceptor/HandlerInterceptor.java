@@ -93,7 +93,7 @@ public final class HandlerInterceptor extends BaseInterceptor {
                 }
             }
         }
-
+        request.getSession().setAttribute("uid",LoginContext.getUserId());
         return true;
     }
 

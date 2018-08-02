@@ -19,6 +19,9 @@
     <!-- Common -->
     <script src="/assets/common/common-v2.js?${RES_TIMESTAMP}"></script>
 
+    <#--webSocket-->
+    <script src="/assets/js/websocket/sockjs.min.js?${RES_TIMESTAMP}"></script>
+
 </head>
 <body>
 <@block name="main" >

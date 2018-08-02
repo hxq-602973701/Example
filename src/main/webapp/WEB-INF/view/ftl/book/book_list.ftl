@@ -50,6 +50,34 @@
 </script>
 <script>
     $(function () {
+        //
+        // var webSocket = new WebSocket("ws://192.168.1.188:8096/ws");
+        // webSocket.onopen = function(event){
+        //     console.log("连接成功");
+        //     console.log(event);
+        // };
+        // webSocket.onerror = function(event){
+        //     console.log("连接失败");
+        //     console.log(event);
+        // };
+        // webSocket.onclose = function(event){
+        //     console.log("Socket连接断开");
+        //     console.log(event);
+        // };
+        // webSocket.onmessage = function(event){
+        //     //接受来自服务器的消息
+        //     //...
+        // };
+        //
+        // var data = {};//新建data对象，并规定属性名与相应的值
+        // data['fromId'] = sendUid;
+        // data['fromName'] = sendName;
+        // data['toId'] = to;
+        // data['messageText'] = $(".contactDivTrue_right_input").val();
+        // webSocket.send(JSON.stringify(data));//将对象封装成JSON后发送至服务器
+
+
+
 
         $('#freeMakerUtil').on('click', function () {
             layer.msg('Hello layer', {icon: 0});
@@ -234,7 +262,7 @@
             console.log("定时刷新..");
             setTimeout(function () {
                 refresh()
-            }, 5000);
+            }, 5000000);
         }
     })
 </script>

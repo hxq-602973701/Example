@@ -237,6 +237,51 @@
 <script type="text/javascript">
     $(function () {
 
+        var  ws;
+        window.onload=connect;
+        function connect(){
+            var ws;
+            if ('WebSocket' in window) {
+                ws = new WebSocket("ws://192.168.1.188:8092/webSocketServer");
+            } else if ('MozWebSocket' in window) {
+                ws = new MozWebSocket("ws://192.168.1.188:8092/webSocketServer");
+            } else {
+                //如果是低版本的浏览器，则用SockJS这个对象，对应了后台“sockjs/webSocketServer”这个注册器，
+                //它就是用来兼容低版本浏览器的
+                ws = new SockJS("http://192.168.1.188:8092/sockjs/webSocketServer");
+            }
+            ws.onopen = function (evnt) {
+
+            };
+            ws.onmessage = function (evnt) {
+                eval("var dataObj="+event.data);
+                if(dataObj != undefined){
+                    $(dataObj.data).each(function(i,o){
+                        $("#msgName").text(o.msgName);
+                        $("#amount").text(o.amount);
+                        $("#msg a:first").attr("_href",core.getRootPath()+o.toUrl).text(o.taskName);
+                        $("#msgId").val(o.id);
+                        setTimeout("tips_pop()",1000);
+                    });
+                }
+
+            };
+            ws.onerror = function (evnt) {
+            };
+            ws.onclose = function (evnt) {
+            }
+        }
+
+        function  send(){
+            var value= $("#msg").val();
+            ws.send(value);
+        }
+
+
+
+
+
+
         var msg_val = $.cookie('msg');
         console.log("cookies", msg_val);
 
