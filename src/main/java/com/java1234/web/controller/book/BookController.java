@@ -10,13 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
-import org.springframework.web.socket.WebSocketSession;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -155,12 +151,6 @@ public class BookController {
         }
         /* return objectMapper.writeValueAsString(book);*/
     }
-
-    @RequestMapping(value = "/book/saveOrUpdate11", method = RequestMethod.GET)
-    public void sendMessageToUser(TextMessage message) {
-        System.out.println(message);
-    }
-
 
     /**
      * 删除图书

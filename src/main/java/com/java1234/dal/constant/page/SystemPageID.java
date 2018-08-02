@@ -72,4 +72,9 @@ public class SystemPageID {
      * 消息提示 / 系统通知消息（铃铛）
      */
     public static final String SYSTEM_NOTIFY_MESSAGE = "XT_TZ_01";
+
+    /**
+     * 系统维护 / 定时任务列表
+     */
+    public static final String TASK_LIST = "XT_RW_01";
 }
