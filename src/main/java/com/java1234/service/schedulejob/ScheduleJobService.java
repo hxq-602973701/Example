@@ -14,7 +14,6 @@ import java.util.List;
  * @category 南阳理工学院
  */
 public interface ScheduleJobService extends BaseService<ScheduleJob> {
-
     /**
      * 从数据库中取 区别于getAllJob
      *
