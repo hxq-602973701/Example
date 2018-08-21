@@ -57,14 +57,23 @@
     <bean id="queueMessageListener" class="com.java1234.service.activemq.QueueMessageListener"/>
     <!-- 显示注入消息监听容器（Queue），配置连接工厂，监听的目标是demoQueueDestination，监听器是上面定义的监听器 -->
     <bean id="queueListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-    <property name="connectionFactory" ref="connectionFactory" />
-    <property name="destination" ref="queueDestination" />
-    <property name="messageListener" ref="queueMessageListener" />
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="queueDestination"/>
+        <property name="messageListener" ref="queueMessageListener"/>
+    </bean>
+    <!-- 配置消息队列监听者（topic） -->
+    <bean id="topicMessageListener" class="com.java1234.service.activemq.GoodsESMessageLister"/>
+
+    <!-- 显示注入消息监听容器（topic），配置连接工厂，监听的目标是demoQueueDestination，监听器是上面定义的监听器 -->
+    <bean id="topicListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="topicDestination"/>
+        <property name="messageListener" ref="topicMessageListener"/>
     </bean>
 
     <!--队列监听-->
     <!--<jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">-->
-        <!--<jms:listener destination="queue" ref="queueMessageListener"/>-->
+    <!--<jms:listener destination="queue" ref="queueMessageListener"/>-->
     <!--</jms:listener-container>-->
 
     <!-- 定义Topic监听器 -->

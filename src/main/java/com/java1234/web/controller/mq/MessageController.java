@@ -23,6 +23,9 @@ public class MessageController {
     @Resource(name = "queueDestination")
     private Destination destination;
 
+    @Resource(name = "topicDestination")
+    private Destination topicDestination;
+
     /***
      *  队列消息生产者
      */
@@ -35,6 +38,11 @@ public class MessageController {
     @Resource
     private ConsumerService consumerService;
 
+    /**
+     * 发送队列消息
+     *
+     * @param msg
+     */
     @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
     @ResponseBody
     public void send(String msg) {
@@ -43,6 +51,25 @@ public class MessageController {
         logger.info(Thread.currentThread().getName() + "------------send to jms End");
     }
 
+    /**
+     * 发送订阅消息
+     *
+     * @param topic
+     * @param msg
+     */
+    @RequestMapping(value = "/sendMessageTopic", method = RequestMethod.POST)
+    @ResponseBody
+    public void sendTopic(String topic, String msg) {
+        logger.info(Thread.currentThread().getName() + "------------send to jms Start");
+        producerService.sendMessage(topic, msg);
+        logger.info(Thread.currentThread().getName() + "------------send to jms End");
+    }
+
+    /**
+     * 手动接收消息
+     *
+     * @return
+     */
     @RequestMapping(value = "/receiveMessage", method = RequestMethod.GET)
     @ResponseBody
     public Object receive() {
