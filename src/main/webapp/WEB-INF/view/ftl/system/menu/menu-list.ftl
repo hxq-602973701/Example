@@ -165,32 +165,110 @@
 <@override name="scripts">
 <script type="text/javascript">
 
+    var lockReconnect = false;  //避免ws重复连接
+    var ws = null;          // 判断当前浏览器是否支持WebSocket
+    var wsUrl = "ws://192.168.0.100:8096/websocket";
+    createWebSocket(wsUrl);   //连接ws
 
-    var webSocket =
-            new WebSocket('ws://localhost:8092/websocket');
-    webSocket.onerror = function (event) {//发生异常的处理
-        alert(event.data);
-    };
+    function createWebSocket(url) {
+        //x]alert("line83");
+        try {
+            if ('WebSocket' in window) {
+                //x]alert("line85");
+                ws = new WebSocket(url);
+            } else if ('MozWebSocket' in window) {
+                //x]alert("line88");
+                ws = new MozWebSocket(url);
+            } else {
+                //x]alert("line91");
 
-    webSocket.onclose = function (event) {
-        var code = event.code;
-        var reason = event.reason;
-        var wasClean = event.wasClean;
-        // handle close event
-        console.log("dsadas");
-    };
+            }
+            initEventHandle();
+        } catch (e) {
+            //x]alert("line98");
+            reconnect(url);
+            console.log(e);
+        }
+    }
 
-    webSocket.onopen = function (event) {//建立连接的处理
-        document.getElementById('messages').innerHTML = 'Connection established';
-    };
+    function initEventHandle() {
+        ws.onclose = function () {
+            console.log("llws连接关闭!" + new Date().toUTCString());
+            reconnect(wsUrl);
+        };
+        ws.onerror = function () {
+            console.log("llws连接错误!");
+            reconnect(wsUrl);
+        };
+        ws.onopen = function () {
+            heartCheck.reset().start();      //心跳检测重置
+            console.log("llws连接成功!" + new Date().toUTCString());
+            //x]alert("llws连接成功!" + new Date().toUTCString());
+        };
+        ws.onmessage = function (event) {    //如果获取到消息，心跳检测重置
+            heartCheck.reset().start();      //拿到任何消息都说明当前连接是正常的
+            /*iconsole.log("llws收到消息啦:" + event.data);
+            f(event.data!='pong'){
+                var obj=eval("("+event.data+")");
+                layui.use(['layim'], function(layim){
+                    if(obj.type=="onlineStatus"){
+                        layim.setFriendStatus(obj.id, obj.content);
+                    }else if(obj.type=="friend" || obj.type=="group"){
+                        layim.getMessage(obj);
+                    }
+                };
+            }*/
 
-    webSocket.onmessage = function (event) {//接收到消息的处理
-        document.getElementById('messages').innerHTML += '<br/>' + event.data;
-    };
+            var eventData = event.data;
+            handMsg(eventData);
+        };
+    }
 
-    function start() {//页面发送消息给服务器
-        webSocket.send('hello');
-        return false;
+    // 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+
+        ws.close();
+    }
+
+    function reconnect(url) {
+        if (lockReconnect) return;
+        lockReconnect = true;
+        setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多
+            createWebSocket(url);
+            lockReconnect = false;
+        }, 2000);
+    }
+
+    //心跳检测
+    var heartCheck = {
+        //timeout: 540000,        //9分钟发一次心跳
+        //timeout: 3600,        //1分钟发一次心跳
+        timeout: 10800,        //3分钟发一次心跳
+        timeoutObj: null,
+        serverTimeoutObj: null,
+        reset: function () {
+            clearTimeout(this.timeoutObj);
+            clearTimeout(this.serverTimeoutObj);
+            return this;
+        },
+        start: function () {
+            var self = this;
+            this.timeoutObj = setTimeout(function () {
+                //这里发送一个心跳，后端收到后，返回一个心跳消息，
+                //onmessage拿到返回的心跳就说明连接正常
+                ws.send("ping");
+                console.log("ping!");
+                self.serverTimeoutObj = setTimeout(function () {
+                    //如果超过一定时间还没重置，说明后端主动断开了
+                    //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                    ws.close();
+                }, self.timeout)
+            }, this.timeout)
+        }
+    }
+    //处理消息
+    function handMsg(evtdata) {
+        console.log(evtdata);
     }
 
     $(function () {

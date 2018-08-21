@@ -29,7 +29,8 @@
             <param-value>
                 /WEB-INF/spring/servlet-context.xml,
                 classpath:biz/**/biz-*.xml,
-                classpath:springMVC/spring-mvc.xml
+                classpath:springMVC/spring-mvc.xml,
+                classpath:biz/biz-mq.xml
             </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>

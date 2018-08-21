@@ -173,7 +173,7 @@
     </logger>
 
     <!-- 日志输出级别 OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL -->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="stdout"/>
         <appender-ref ref="file-debug"/>
         <appender-ref ref="file-error"/>

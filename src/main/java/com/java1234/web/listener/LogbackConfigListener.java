@@ -22,6 +22,7 @@ public class LogbackConfigListener implements ServletContextListener {
     public LogbackConfigListener() {
     }
 
+    @Override
     public void contextInitialized(ServletContextEvent event) {
         String logbackConfigLocation = event.getServletContext().getInitParameter("logbackConfigLocation");
         String contextPath = event.getServletContext().getRealPath("WEB-INF");
@@ -43,7 +44,7 @@ public class LogbackConfigListener implements ServletContextListener {
         }
 
     }
-
+    @Override
     public void contextDestroyed(ServletContextEvent event) {
     }
 }
