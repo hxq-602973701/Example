@@ -7,35 +7,25 @@ import org.mybatis.generator.api.dom.java.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoPlugin
-        extends BasePluginAdapter {
-    public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(IntrospectedTable introspectedTable) {
-        if (!"true".equalsIgnoreCase(getProperties().getProperty("isCreate", "false"))) {
+public class DaoPlugin extends BasePluginAdapter {
+    @Override
+    public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(final IntrospectedTable introspectedTable) {
+        if (!"true".equalsIgnoreCase(this.getProperties().getProperty("isCreate", "false"))) {
             return null;
         }
-        List<GeneratedJavaFile> daoList = new ArrayList();
-
-        String entityName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
-
-        String tableComment = entityName;
-
-        String interfaceName = this.targetPackage + "." + entityName + "DAO";
-        Interface interfaceClass = new Interface(interfaceName);
+        final List<GeneratedJavaFile> daoList = new ArrayList<GeneratedJavaFile>();
+        final String tableComment;
+        final String entityName = tableComment = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
+        final String interfaceName = this.targetPackage + "." + entityName + "DAO";
+        final Interface interfaceClass = new Interface(interfaceName);
         interfaceClass.setVisibility(JavaVisibility.PUBLIC);
         interfaceClass.addImportedType(new FullyQualifiedJavaType(this.baseDao));
         interfaceClass.addImportedType(new FullyQualifiedJavaType(this.entityPackage + "." + entityName));
         interfaceClass.addSuperInterface(super.buildFullyQualifiedJavaType(this.baseDao, entityName));
-        interfaceClass.addJavaDocLine("/**");
-        interfaceClass.addJavaDocLine(" * " + tableComment + "DAO");
-        interfaceClass.addJavaDocLine(" *");
-        interfaceClass.addJavaDocLine(" * @author lt " + getDateByYYYYMD());
-        interfaceClass.addJavaDocLine(" * @version 1.0.0");
-        interfaceClass.addJavaDocLine(" * @category 南阳理工学院");
-        interfaceClass.addJavaDocLine(" */");
-        daoList.add(super.buildGeneratedJavaFile(interfaceClass));
-
-        String implementsName = this.targetPackage + ".impl." + entityName + "DAOImpl";
-        TopLevelClass implementsClass = new TopLevelClass(implementsName);
+        GeneratorUtil.fillJavaDocLine((JavaElement) interfaceClass, tableComment, ClassType.DAO);
+        daoList.add(super.buildGeneratedJavaFile((CompilationUnit) interfaceClass));
+        final String implementsName = this.targetPackage + ".impl." + entityName + "DAOImpl";
+        final TopLevelClass implementsClass = new TopLevelClass(implementsName);
         implementsClass.setVisibility(JavaVisibility.PUBLIC);
         implementsClass.addImportedType(this.baseDaoImpl);
         implementsClass.addImportedType(this.entityPackage + "." + entityName);
@@ -46,17 +36,10 @@ public class DaoPlugin
         implementsClass.addImportedType(interfaceName);
         implementsClass.addSuperInterface(new FullyQualifiedJavaType(interfaceName));
         implementsClass.setSuperClass(super.buildFullyQualifiedJavaType(this.baseDaoImpl, entityName));
-        implementsClass.addJavaDocLine("/**");
-        implementsClass.addJavaDocLine(" * " + tableComment + "DAO");
-        implementsClass.addJavaDocLine(" *");
-        implementsClass.addJavaDocLine(" * @author lt " + getDateByYYYYMD());
-        implementsClass.addJavaDocLine(" * @version 1.0.0");
-        implementsClass.addJavaDocLine(" * @category 南阳理工学院");
-        implementsClass.addJavaDocLine(" */");
+        GeneratorUtil.fillJavaDocLine((JavaElement) implementsClass, tableComment, ClassType.DAO);
         implementsClass.addAnnotation("@Service");
-
-        String filedName = toLowerFirstChar(entityName) + "Mapper";
-        Field mapperField = new Field(filedName, new FullyQualifiedJavaType(this.mapperPackage + "." + entityName + "Mapper"));
+        final String filedName = this.toLowerFirstChar(entityName) + "Mapper";
+        final Field mapperField = new Field(filedName, new FullyQualifiedJavaType(this.mapperPackage + "." + entityName + "Mapper"));
         mapperField.setVisibility(JavaVisibility.PRIVATE);
         mapperField.addAnnotation("@Resource");
         mapperField.addJavaDocLine("");
@@ -64,8 +47,7 @@ public class DaoPlugin
         mapperField.addJavaDocLine(" * " + tableComment + "Mapper");
         mapperField.addJavaDocLine(" */");
         implementsClass.addField(mapperField);
-
-        Method getMapperMethod = new Method("getMapper");
+        final Method getMapperMethod = new Method("getMapper");
         getMapperMethod.setVisibility(JavaVisibility.PROTECTED);
         getMapperMethod.setReturnType(super.buildFullyQualifiedJavaType(this.baseMapper, entityName));
         getMapperMethod.addBodyLine("return " + filedName + ";");
@@ -76,9 +58,7 @@ public class DaoPlugin
         getMapperMethod.addJavaDocLine(" * @return");
         getMapperMethod.addJavaDocLine(" */");
         implementsClass.addMethod(getMapperMethod);
-
-        daoList.add(super.buildGeneratedJavaFile(implementsClass));
-
+        daoList.add(super.buildGeneratedJavaFile((CompilationUnit) implementsClass));
         return daoList;
     }
 }

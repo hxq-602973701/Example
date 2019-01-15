@@ -115,6 +115,14 @@ public class User extends BaseEntity {
     @Transient
     private Dept dept;
 
+    public User() {
+    }
+
+    public User(Long userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
+
     /**
      * @return user_id
      */
